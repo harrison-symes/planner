@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments('id')
     table.string('name')
     table.text('description')
-    table.boolean('private').defaultTo(true)
+    table.boolean('is_private').defaultTo(false)
   })
 };
 

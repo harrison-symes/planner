@@ -1,18 +1,18 @@
 import {connect} from 'react-redux'
 import FindCohort from '../components/FindCohort'
 
-import {getCohortsRequest} from '../actions/cohorts'
+import {getUnjoinedCohortsRequest} from '../actions/cohorts'
 
-const mapStateToProps = ({auth, cohorts}) => {
+const mapStateToProps = ({auth, unjoinedCohorts}) => {
   return {
     auth,
-    cohorts
+    cohorts: unjoinedCohorts
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCohorts: () => dispatch(getCohortsRequest())
+    getCohorts: () => dispatch(getUnjoinedCohortsRequest())
   }
 }
 

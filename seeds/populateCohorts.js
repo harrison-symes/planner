@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('cohorts').insert([
-        {id: 1, name: 'Tech_Gym', description: 'Dummy'},
+        {id: 1, name: 'Tech_Gym', description: 'Dummy', is_private: true},
         {id: 2, name: 'Miromiro-2017', description: 'Dummy'},
         {id: 3, name: 'Kahu-2018', description: 'Dummy'},
         {id: 4, name: 'Harakeke-2018', description: 'Dummy'},

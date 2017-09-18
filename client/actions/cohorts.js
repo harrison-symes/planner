@@ -39,10 +39,12 @@ export function getUnjoinedCohortsRequest () {
   }
 }
 
-export function joinCohortRequest (cohort_id) {
+export function joinCohortRequest (cohort_id, cb) {
   return (dispatch) => {
     request('post', `cohorts/${cohort_id}`)
-      .then(res => dispatch(joinCohortAction(res.body)))
+      .then(res => {
+        dispatch(joinCohortAction(res.body))
+      })
       .catch(err => console.log({err}))
   }
 }

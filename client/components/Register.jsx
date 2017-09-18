@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {registerUserRequest} from '../actions/register'
 
-class Register extends React.Component {
+export default class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,7 +19,7 @@ class Register extends React.Component {
     e.preventDefault()
     e.target.reset()
     let {user_name, password, confirm_password} = this.state
-    if (password == confirm_password) this.props.dispatch(registerUserRequest({user_name, password}))
+    if (password == confirm_password) this.props.registerUser({user_name, password})
   }
   render() {
     return (
@@ -39,5 +38,3 @@ class Register extends React.Component {
     )
   }
 }
-
-export default connect()(Register)

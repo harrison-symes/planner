@@ -6,11 +6,11 @@ function createUser (user_name, password, db) {
       if (err) reject(err)
       db('users')
         .insert({user_name, hash})
-        .then(user_id => resolve(user_id))
+        .then(id => resolve(id))
     })
-
   })
 }
+
 function userExists (user_name, db) {
   console.log({user_name});
   return db('users')

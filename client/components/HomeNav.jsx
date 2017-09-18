@@ -5,6 +5,8 @@ export default function HomeNav () {
   return (
     <div>
       <Link to="/cohorts/new/find">Find a Cohort</Link>
+      {" | "}
+
       <Link to="/cohorts">My Cohorts</Link>
     </div>
   )

@@ -1,8 +1,8 @@
-import React from 'react'
 import {connect} from 'react-redux'
 
-import Login from '../components/Login'
 import {loginUser} from '../actions/login'
+
+import Login from '../components/Login'
 
 
 const mapDispatchToProps = (dispatch) => {

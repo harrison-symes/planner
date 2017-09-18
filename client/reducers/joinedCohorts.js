@@ -1,6 +1,9 @@
 export default function joinedCohortsRedcuer (state = [], action) {
   let newState = [...state]
+  console.log({action});
   switch(action.type) {
+    case 'RECEIVE_COHORTS':
+      return [...action.cohorts]
     case 'JOIN_COHORT':
       return [...state, action.cohort]
     default:

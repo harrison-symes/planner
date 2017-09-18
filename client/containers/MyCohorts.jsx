@@ -11,10 +11,9 @@ const mapStateToProps = ({joinedCohorts}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log("dispatch map");
   return {
     getCohorts: () => dispatch(getCohortsRequest())
   }
 }
 
-export default connect(mapStateToProps)(MyCohorts)
+export default connect(mapStateToProps, mapDispatchToProps)(MyCohorts)

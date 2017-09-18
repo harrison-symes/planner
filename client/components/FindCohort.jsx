@@ -24,12 +24,9 @@ export default class findCohort extends React.Component {
     return (
       <div>
         <h1>Find a cohort</h1>
-        {auth.user.cohort_id
-          ? <h1>You are in a cohort (Congratulations, by the way), You will need to leave it before you can join another</h1>
-          : <div>
-            {cohorts.map(renderCohort)}
-          </div>
-        }
+        <div>
+          {cohorts.map(renderCohort)}
+        </div>
       </div>
     )
   }

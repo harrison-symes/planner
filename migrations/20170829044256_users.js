@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
     table.increments('id')
     table.string('user_name')
     table.string('hash')
-    table.integer('cohort_id').defaultTo(null)
     table.boolean('is_admin').defaultTo(false)
   })
 };

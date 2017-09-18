@@ -1,5 +1,5 @@
 var router = require('express').Router()
-var {getCohorts, getCohort, joinCohort, getUserCohorts} = require('../db/cohorts')
+var {getCohorts, getCohort, joinCohort, getUserCohorts, usersInCohorts} = require('../db/cohorts')
 var {decode} = require('../auth/token')
 
 const getDb = (req) => req.app.get('db')
@@ -26,13 +26,18 @@ router.get('/', decode, (req, res) => {
   .catch(err => console.error(err))
 })
 
-router.post('/:id', decode, (req, res) => {
-  getCohort(getDb(req), req.params.id)
+router.post('/:cohort_id', decode, (req, res) => {
+  getCohort(getDb(req), req.params.cohort_id)
     .then(cohort => {
       if (cohort.is_private) res.status('201').json({message: 'cohort is private, functionality not added yet'})
-      else joinCohort(getDb(req), req.params.id, req.user.id)
+      else joinCohort(getDb(req), req.params.cohort_id, req.user.id)
         .then(() => res.status(201).json(cohort))
     })
+})
+
+router.get('/:cohort_id/users', (req, res) => {
+  usersInCohorts(getDb(req), req.params.cohort_id)
+    .then(users => res.json(users))
 })
 
 module.exports = router

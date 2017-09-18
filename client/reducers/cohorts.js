@@ -1,7 +1,7 @@
 export default function cohortsReducer (state = [], action) {
   let newState = [...state]
   switch(action.type) {
-    case 'RECEIVE_COHORTS':
+    case 'RECEIVE_UNJOINED_COHORTS':
       return [...action.cohorts]
     case 'JOIN_COHORT':
       let joined = newState.find(({id}) => id== action.cohort.id)

@@ -2,6 +2,7 @@ import React from 'react'
 
 import HomeNav from '../containers/HomeNav'
 import FindCohort from '../containers/FindCohort'
+import MyCohorts from '../containers/MyCohorts'
 
 import {HashRouter as Router, Route} from 'react-router-dom'
 
@@ -22,6 +23,7 @@ export default class Home extends React.Component {
       <Router>
         <div>
           <Route path="/find/cohort" component={FindCohort} />
+          <Route path="/cohorts" component={MyCohorts} />
         </div>
       </Router>
     </div>

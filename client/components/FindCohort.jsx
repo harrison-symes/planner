@@ -14,12 +14,11 @@ export default class findCohort extends React.Component {
     //list of cohorts to request a join tot
   }
   selectCohort(selectedCohort) {
-    console.log("clicked", selectedCohort);
+    if (this.state.selectedCohort === selectedCohort) selectedCohort = null
     this.setState({selectedCohort})
   }
   render() {
     let {selectedCohort} = this.state
-    console.log({selectedCohort});
     let {auth, cohorts} = this.props
     const renderCohort = (cohort, i) => <FindCohortSingle selected={cohort === selectedCohort} select={this.selectCohort} cohort={cohort} key={i} />
     return (

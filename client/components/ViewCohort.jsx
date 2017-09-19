@@ -21,18 +21,18 @@ export default class ViewCohort extends React.Component {
     this.setState({showUsers: !this.state.showUsers})
   }
   render() {
-    console.log(this.props);
     let {cohort} = this.props
+    console.log({cohort});
     let {showUsers} = this.state
     if (!cohort) {
-      this.props.history.push('/cohorts')
+      this.props.history.push('/my/cohorts')
       // document.location = '/#/cohorts'
       return <div>No Cohort Found</div>
     }
     return (
       <div>
-        <h1>{cohort.name}</h1>
-        <Link to="/cohorts">Back to Cohorts</Link>
+        <h1>{cohort.is_admin ? "Admin" : "Member"} of {cohort.name}</h1>
+        <Link to="/my/cohorts">Back to Cohorts</Link>
         <p>{cohort.description}</p>
         <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
         {showUsers && <UsersInCohort />}

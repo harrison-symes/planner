@@ -51,6 +51,11 @@ export default function auth (state = initialState, action) {
         isAuthenticated: false,
         errorMessage: action.message
       }
+    case 'REGISTER_ERROR':
+      return {
+        ...state,
+        errorMessage: action.errorMessage
+      }
     default:
       return state
   }

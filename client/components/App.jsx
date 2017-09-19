@@ -9,7 +9,6 @@ export default function ({auth}) {
   return (
     <Router>
       <div className='app-container'>
-        <h1>Hello World</h1>
         <Route path='/' component={Home} />
         {!auth.isAuthenticated && <h1>Login to see more information</h1>}
         <Route path="/login" component={Login} />

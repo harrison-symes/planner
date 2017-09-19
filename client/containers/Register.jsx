@@ -1,13 +1,21 @@
 import {connect} from 'react-redux'
 
-import {registerUserRequest} from '../actions/register'
+import {registerUserRequest, registerErrorAction} from '../actions/register'
 
 import Register from '../components/Register'
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = ({auth}) => {
+  console.log({auth});
   return {
-    registerUser: (creds) => dispatch(registerUserRequest(creds))
+    auth
   }
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerUser: (creds) => dispatch(registerUserRequest(creds)),
+    error: (message) => dispatch(registerErrorAction(message))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

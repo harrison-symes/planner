@@ -1,7 +1,6 @@
 import request from '../utils/api'
 
 export function receiveUsersInCohortAction (users) {
-  console.log({users});
   return {
     type: 'RECEIVE_USERS_IN_COHORT',
     users

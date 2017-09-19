@@ -20,7 +20,6 @@ router.get('/find', decode, (req, res) => {
 router.get('/', decode, (req, res) => {
   getUserCohorts(getDb(req), req.user.id)
   .then(userCohorts => {
-    console.log({userCohorts});
     res.status(200).json(userCohorts)
   })
   .catch(err => console.error(err))
@@ -36,7 +35,6 @@ router.post('/:cohort_id', decode, (req, res) => {
 })
 
 router.get('/:cohort_id/users', (req, res) => {
-  console.log(req.params);
   usersInCohorts(getDb(req), req.params.cohort_id)
     .then(users => res.json(users))
 })

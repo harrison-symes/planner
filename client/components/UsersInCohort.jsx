@@ -2,9 +2,9 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const renderUser = ({user_name, is_admin, user_id}, i) => (
-  <div>
+  <div key={i}>
     <p>{user_name} {is_admin ? 'A' : ""}</p>
-    <Link to={`/users/profile/${user_id}`}>View Profile</Link>
+    <Link to={`/users/${user_id}/profile`}>View Profile</Link>
   </div>
 )
 

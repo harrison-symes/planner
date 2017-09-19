@@ -1,7 +1,6 @@
 import request from '../utils/api'
 
 export function receiveCohortsAction (cohorts) {
-  console.log({cohorts});
   return {
     type: 'RECEIVE_COHORTS',
     cohorts
@@ -16,7 +15,6 @@ export function receiveUnjoinedCohortsAction (cohorts) {
 }
 
 export function joinCohortAction (cohort) {
-  console.log("joined", {cohort});
   return {
     type: 'JOIN_COHORT',
     cohort

@@ -5,10 +5,8 @@ import {getUsersInCohortRequest} from '../actions/cohort'
 import ViewCohort from '../components/ViewCohort'
 
 const mapStateToProps = ({joinedCohorts}, props) => {
-  let cohort = joinedCohorts.find(cohort => cohort.id==props.id)
-  console.log({props});
   return {
-    cohort
+    cohort: joinedCohorts.find(cohort => cohort.id==props.id)
   }
 }
 

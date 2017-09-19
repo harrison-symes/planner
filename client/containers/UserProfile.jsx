@@ -9,4 +9,11 @@ const mapStateToProps = ({usersInCohort}, {match}) => {
   }
 }
 
-export default connect(mapStateToProps)(UserProfile)
+const mapDispatchToProps = (dispatch, props) => {
+  console.log({props});
+  return {
+    getUser: () => console.log("getting user stand in")
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)

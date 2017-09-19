@@ -19,7 +19,7 @@ export default class HomeNav extends React.Component {
       <div>
         {auth.isAuthenticated
           ? <div>
-            <Link to="/find/cohorts">Find</Link>
+            <Link to="/my/conversations">Conversations</Link>
             {" | "}
             <Link to="/my/cohorts">Cohorts</Link>
             {" | "}

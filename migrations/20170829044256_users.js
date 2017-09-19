@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('last_name').defaultTo('doe')
     table.text('about').defaultTo('This user has no bio yet')
     table.string('hash')
+    table.boolean('is_private').defaultTo(false)
     table.boolean('is_admin').defaultTo(false)
   })
 };

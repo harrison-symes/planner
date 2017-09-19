@@ -1,16 +1,21 @@
 import {connect} from 'react-redux'
 
+import {getUsersInCohortRequest} from '../actions/cohort'
+
 import ViewCohort from '../components/ViewCohort'
 
-const mapStateToProps = ({joinedCohorts}, {id}) => {
-  let cohort = joinedCohorts.find(cohort => cohort.id==id)
-  if (!cohort) {
-    document.location = '/#/cohorts'
-    return
-  }
+const mapStateToProps = ({joinedCohorts}, props) => {
+  let cohort = joinedCohorts.find(cohort => cohort.id==props.id)
+  console.log({props});
   return {
     cohort
   }
 }
 
-export default connect(mapStateToProps)(ViewCohort)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: (cohort_id) => dispatch(getUsersInCohortRequest(cohort_id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewCohort)

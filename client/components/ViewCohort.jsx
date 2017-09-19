@@ -8,10 +8,6 @@ export default class ViewCohort extends React.Component {
     this.state = {
       showUsers: false
     }
-    if (!props.cohort) {
-      props.history.push('/cohorts')
-      // document.location = '/#/cohorts'
-    }
     this.toggleUsers = this.toggleUsers.bind(this)
   }
   componentDidMount() {
@@ -22,11 +18,9 @@ export default class ViewCohort extends React.Component {
   }
   render() {
     let {cohort} = this.props
-    console.log({cohort});
     let {showUsers} = this.state
     if (!cohort) {
       this.props.history.push('/my/cohorts')
-      // document.location = '/#/cohorts'
       return <div>No Cohort Found</div>
     }
     return (

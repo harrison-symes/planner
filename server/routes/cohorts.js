@@ -36,6 +36,7 @@ router.post('/:cohort_id', decode, (req, res) => {
 })
 
 router.get('/:cohort_id/users', (req, res) => {
+  console.log(req.params);
   usersInCohorts(getDb(req), req.params.cohort_id)
     .then(users => res.json(users))
 })

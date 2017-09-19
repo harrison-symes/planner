@@ -6,6 +6,7 @@ import MyCohorts from '../containers/MyCohorts'
 import ViewCohort from '../containers/ViewCohort'
 import MyProfile from '../containers/MyProfile'
 import MyLearning from '../containers/MyLearning'
+import UserProfile from '../containers/UserProfile'
 
 import {HashRouter as Router, Route} from 'react-router-dom'
 
@@ -25,11 +26,12 @@ export default class Home extends React.Component {
       <HomeNav />
       <Router>
         <div>
-          <Route exact path="/cohorts" component={MyCohorts} />
-          <Route exact path="/cohorts/new/find" component={FindCohort} />
-          <Route exact path="/cohorts/:cohort_id" component={(props) => <ViewCohort id={props.match.params.cohort_id} {...props} />} />
-          <Route exact path="/profile" component={MyProfile}/>
-          <Route exact path="/learning" component={MyLearning}/>
+          <Route exact path="/my/cohorts" component={MyCohorts} />
+          <Route exact path="/my/profile" component={MyProfile}/>
+          <Route exact path="/my/learning" component={MyLearning}/>
+          <Route exact path="/my/cohorts/:cohort_id" component={(props) => <ViewCohort id={props.match.params.cohort_id} {...props} />} />
+          <Route exact path="/find/cohorts" component={FindCohort} />
+          <Route path="/users/:id/profile" component={(props) => <UserProfile {...props} /> } />
         </div>
       </Router>
     </div>

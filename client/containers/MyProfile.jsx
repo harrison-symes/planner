@@ -5,7 +5,7 @@ import MyProfile from '../components/MyProfile'
 const mapStateToProps = ({auth, joinedCohorts}) => {
   return {
     auth,
-    joinedCohorts
+    cohorts: joinedCohorts
   }
 }
 

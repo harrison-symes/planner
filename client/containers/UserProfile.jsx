@@ -2,6 +2,8 @@ import {connect} from 'react-redux'
 
 import UserProfile from '../components/UserProfile'
 
+import {getUserRequest} from '../actions/users'
+
 const mapStateToProps = ({usersInCohort}, {match}) => {
   console.log({match});
   return {
@@ -12,7 +14,7 @@ const mapStateToProps = ({usersInCohort}, {match}) => {
 const mapDispatchToProps = (dispatch, props) => {
   console.log({props});
   return {
-    getUser: () => console.log("getting user stand in")
+    getUser: () => dispatch(getUserRequest(props.match.params.id))
   }
 }
 

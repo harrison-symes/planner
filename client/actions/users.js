@@ -10,7 +10,6 @@ export function recieveUserAction (user) {
 
 export function getUserRequest (user_id) {
   return (dispatch) => {
-    console.log("making request", user_id);
     request('get', `users/${user_id}`)
       .then(res => dispatch(recieveUserAction(res.body)))
       .catch(err => console.log(err))

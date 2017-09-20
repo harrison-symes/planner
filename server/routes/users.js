@@ -8,9 +8,7 @@ var {decode} = require('../auth/token')
 
 const getDb = (req) => req.app.get('db')
 
-router.get('/inviteable/:conversation_id', (req, res) => {
-  //get users that logged in user can view
-  console.log(req.params);
+router.get('/inviteable/:conversation_id', decode, (req, res) => {
   const mapId = (cohort) => cohort.id
   const mapIds = (cohorts) => cohorts.map(mapId)
   const purgeDuplicate = (users) => {
@@ -25,7 +23,7 @@ router.get('/inviteable/:conversation_id', (req, res) => {
     console.log({users, usersInConversation});
     return users.filter(user => !usersInConversation.find(convoUser => user.user_id == convoUser.user_id))
   }
-  getUserCohorts(getDb(req), 1)
+  getUserCohorts(getDb(req), req.user.id)
     .then(userCohorts => {
       let cohort_ids = mapIds(userCohorts)
       getUsersToInvite(getDb(req), cohort_ids)

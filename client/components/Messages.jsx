@@ -4,7 +4,6 @@ import CreateMessage from '../containers/CreateMessage'
 
 export default function Messages ({messages, conversation_id}) {
   const renderSingleMessage = (message, i) => <MessageSingle key={i} message={message} />
-  console.log({messages});
   return (
     <div>
       <h3>Messages:</h3>

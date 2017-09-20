@@ -13,7 +13,6 @@ export default class CreateMessage extends React.Component {
   }
   submitMessage (e) {
     e.preventDefault()
-    console.log(this.props);
     this.props.sendMessage(this.state.message, this.props.conversation_id)
     e.target.reset()
     this.setState({message: {content: ''}})

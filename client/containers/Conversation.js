@@ -5,7 +5,6 @@ import Conversation from '../components/Conversation'
 import {getUsersInConversationRequest, getMessagesByConversationRequest} from '../actions/conversations'
 
 const mapStateToProps = ({conversations, usersInConversation}, {match}) => {
-  console.log({usersInConversation});
   return {
     conversation: conversations.find(c => match.params.id == c.id),
     users: usersInConversation

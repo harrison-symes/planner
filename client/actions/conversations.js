@@ -46,7 +46,6 @@ export function postConversationRequest (name) {
 }
 
 export function receiveMessagesAction (messages) {
-  console.log({messages});
   return {
     type: 'RECEIVE_MESSAGES',
     messages

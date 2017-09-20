@@ -23,7 +23,6 @@ export default class Conversation extends React.Component {
   render() {
     let {conversation, users, match} = this.props
     let {showUsers} = this.state
-    console.log("conversation", this.props);
     if (!conversation) {
       this.props.history.push('/my/conversations')
       return <div>Conversation Not Found</div>

@@ -26,7 +26,6 @@ export default class MyConversations extends React.Component {
     e.target.reset()
     this.props.createConversation(this.state.name)
     this.setState({showAddConversation: false, name: ''})
-    console.log(this.state.name);
   }
   render() {
     let {conversations} = this.props

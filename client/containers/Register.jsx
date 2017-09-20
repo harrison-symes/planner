@@ -5,7 +5,6 @@ import {registerUserRequest, registerErrorAction} from '../actions/register'
 import Register from '../components/Register'
 
 const mapStateToProps = ({auth}) => {
-  console.log({auth});
   return {
     auth
   }

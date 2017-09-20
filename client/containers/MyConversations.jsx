@@ -2,10 +2,9 @@ import {connect} from 'react-redux'
 
 import MyConversations from '../components/MyConversations'
 
-import {getConversationsRequest} from '../actions/conversations'
+import {getConversationsRequest, postConversationRequest} from '../actions/conversations'
 
 const mapStateToProps = ({conversations}) => {
-  console.log(conversations);
   return {
     conversations
   }
@@ -13,7 +12,8 @@ const mapStateToProps = ({conversations}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getConversations: () => dispatch(getConversationsRequest())
+    getConversations: () => dispatch(getConversationsRequest()),
+    createConversation: (name) => dispatch(postConversationRequest(name))
   }
 }
 

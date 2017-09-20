@@ -30,5 +30,5 @@ module.exports = {
   createUser,
   userExists,
   getUserByName,
-  getUserById: (db, id) => db.select('user_name', 'first_name', 'last_name', 'id as user_id', 'is_admin').from('users').where('id', id).first()
+  getUserById: (db, id) => db.select('user_name', 'first_name', 'last_name', 'id as user_id', 'about', 'is_admin').from('users').where('id', id).first()
 }

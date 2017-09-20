@@ -29,3 +29,18 @@ export function getUsersInConversationRequest (conversation_id) {
       .catch(err => console.log({err}))
   }
 }
+
+export function receiveConversationAction (conversation) {
+  return {
+    type: 'RECEIVE_CONVERSATION',
+    conversation
+  }
+}
+
+export function postConversationRequest (name) {
+  return (dispatch) => {
+    request('post', 'conversations', {name})
+      .then(res => dispatch(receiveConversationAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}

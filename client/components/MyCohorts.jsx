@@ -25,6 +25,8 @@ export default class MyCohorts extends React.Component {
         <h1>My Cohorts</h1>
         {cohorts.length != 0
           ? <div>
+            <Link to="/find/cohorts">Find a Cohort</Link>
+            <br />
             <input type="text" name="search" onChange={this.updateSearch} value={search} />
             {cohorts.filter(c => c.name.toLowerCase().includes(search)).map(renderCohort)}
           </div>

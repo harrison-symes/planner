@@ -24,10 +24,11 @@ export default class Conversation extends React.Component {
     //get users in conversation
     this.props.getUsers(this.props.conversation.id)
     this.props.getMessages(this.props.conversation.id)
+    // this.props.getUsersToInvite(this.props.conversation.id)
     //get messages in conversation
   }
   render() {
-    let {conversation, users, match, conversation_id} = this.props
+    let {conversation, users, match} = this.props
     let {showUsers, showAddUser} = this.state
     if (!conversation) {
       this.props.history.push('/my/conversations')
@@ -42,7 +43,7 @@ export default class Conversation extends React.Component {
           <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
           {showUsers && users.map(renderUser)}
           <button onClick={this.toggleInviteUsers}>{showAddUser ? "Cancel" : "Invite a User"}</button>
-          {showAddUser && <InviteUserConversation id={conversation_id} /> }
+          {showAddUser && <InviteUserConversation id={conversation.id} /> }
           <Messages conversation_id={match.params.id} {...this.props}/>
         </div>
       </div>

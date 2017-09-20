@@ -2,6 +2,8 @@ import {connect} from 'react-redux'
 
 import InviteUserConversation from '../components/InviteUserConversation'
 
+import {getUsersToInviteRequest} from '../actions/users'
+
 const mapStateToProps = ({usersToInvite}) => {
   return {
     users: usersToInvite
@@ -10,7 +12,7 @@ const mapStateToProps = ({usersToInvite}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    inviteUser: (user_id, conversation_id) => console.log({user_id, conversation_id})
+    getUsersToInvite: (conversation_id) => dispatch(getUsersToInviteRequest(conversation_id))
   }
 }
 

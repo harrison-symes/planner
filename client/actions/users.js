@@ -18,15 +18,16 @@ export function getUserRequest (user_id) {
 }
 
 export function receiveUsersToInviteAction (users) {
+  console.log({users});
   return {
     type: 'RECEIVE_USERS_TO_INVITE',
     users
   }
 }
 
-export function getUsersToInviteRequest () {
+export function getUsersToInviteRequest (conversation_id) {
   return (dispatch) => {
-    request('get', 'users/inviteable')
+    request('get', `users/inviteable/${conversation_id}`)
       .then(res => dispatch(receiveUsersToInviteAction(res.body)))
       .catch(err => console.log(err))
   }

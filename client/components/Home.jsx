@@ -32,7 +32,7 @@ export default class Home extends React.Component {
           <Route exact path="/my/cohorts" component={MyCohorts} />
           <Route exact path="/my/profile" component={MyProfile}/>
           <Route exact path="/my/learning" component={MyLearning}/>
-          {user.is_admin == true && <Route exact path="/my/admin" component={Admin}/>}
+          {user &&  user.is_admin == true && <Route exact path="/my/admin" component={Admin}/>}
           <Route exact path="/my/conversations" component={MyConversations} />
           <Route exact path="/my/conversations/:id" component={(props) => <Conversation {...props} />} />
           <Route exact path="/my/cohorts/:cohort_id" component={(props) => <ViewCohort id={props.match.params.cohort_id} {...props} />} />

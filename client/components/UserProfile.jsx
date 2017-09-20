@@ -6,8 +6,12 @@ export default class UserProfile extends React.Component {
     if (!this.props.user) this.props.getUser()
   }
   render() {
-    let {user, history} = this.props
+    let {user, auth, history} = this.props
     if (!user) return <h1>User not found ;-; <Link to="/my/cohorts">Back</Link></h1>
+    if (user.user_id == auth.user.id) {
+      history.push('/my/profile')
+      return <div>Redirecting to my profile</div>
+    }
     return (
       <div>{user.user_name}{"'s Profile"}</div>
     )

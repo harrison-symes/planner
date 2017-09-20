@@ -44,3 +44,19 @@ export function postConversationRequest (name) {
       .catch(err => console.log(err))
   }
 }
+
+export function receiveMessagesAction (messages) {
+  console.log({messages});
+  return {
+    type: 'RECEIVE_MESSAGES',
+    messages
+  }
+}
+
+export function getMessagesByConversationRequest (id) {
+  return (dispatch) => {
+    request('get', `conversations/${id}/messages`)
+      .then(res => dispatch(receiveMessagesAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}

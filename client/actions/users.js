@@ -16,3 +16,18 @@ export function getUserRequest (user_id) {
       .catch(err => console.log(err))
   }
 }
+
+export function receiveUsersToInviteAction (users) {
+  return {
+    type: 'RECEIVE_USERS_TO_INVITE',
+    users
+  }
+}
+
+export function getUsersToInviteRequest () {
+  return (dispatch) => {
+    request('get', 'users/inviteable')
+      .then(res => dispatch(receiveUsersToInviteAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}

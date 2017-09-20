@@ -2,17 +2,23 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 import Messages from '../containers/MessagesInConversation'
+import InviteUserConversation from '../containers/InviteUserConversation'
 
 export default class Conversation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showUsers: false
+      showUsers: false,
+      showAddUser: false
     }
     this.toggleUsers = this.toggleUsers.bind(this)
+    this.toggleInviteUsers = this.toggleInviteUsers.bind(this)
   }
   toggleUsers() {
     this.setState({showUsers: !this.state.showUsers})
+  }
+  toggleInviteUsers() {
+    this.setState({showAddUser: !this.state.showAddUser})
   }
   componentDidMount() {
     //get users in conversation
@@ -21,8 +27,8 @@ export default class Conversation extends React.Component {
     //get messages in conversation
   }
   render() {
-    let {conversation, users, match} = this.props
-    let {showUsers} = this.state
+    let {conversation, users, match, conversation_id} = this.props
+    let {showUsers, showAddUser} = this.state
     if (!conversation) {
       this.props.history.push('/my/conversations')
       return <div>Conversation Not Found</div>
@@ -35,6 +41,8 @@ export default class Conversation extends React.Component {
         <div>
           <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
           {showUsers && users.map(renderUser)}
+          <button onClick={this.toggleInviteUsers}>{showAddUser ? "Cancel" : "Invite a User"}</button>
+          {showAddUser && <InviteUserConversation id={conversation_id} /> }
           <Messages conversation_id={match.params.id} {...this.props}/>
         </div>
       </div>

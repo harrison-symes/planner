@@ -29,5 +29,6 @@ function getUserByName (user_name, db) {
 module.exports = {
   createUser,
   userExists,
-  getUserByName
+  getUserByName,
+  getUserById: (db, id) => db.select('user_name', 'first_name', 'last_name', 'id as user_id', 'about', 'is_admin').from('users').where('id', id).first()
 }

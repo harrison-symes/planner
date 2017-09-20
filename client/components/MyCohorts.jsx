@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import MyCohortSingle from '../components/MyCohortSingle'
 
 export default class MyCohorts extends React.Component {
@@ -22,8 +23,15 @@ export default class MyCohorts extends React.Component {
     return (
       <div>
         <h1>My Cohorts</h1>
-        <input type="text" name="search" onChange={this.updateSearch} value={search}/>
-        {cohorts.filter(c => c.name.toLowerCase().includes(search)).map(renderCohort)}
+        {cohorts.length != 0
+          ? <div>
+            <input type="text" name="search" onChange={this.updateSearch} value={search} />
+            {cohorts.filter(c => c.name.toLowerCase().includes(search)).map(renderCohort)}
+          </div>
+          : <p>You haven't joined any cohorts yet!
+              <Link to="/find/cohorts"> Click Here </Link>
+            To find one!</p>
+        }
       </div>
     )
   }

@@ -9,7 +9,7 @@ module.exports = {
     .join('usersInCohorts', 'cohorts.id', "usersInCohorts.cohort_id")
     .where('usersInCohorts.user_id', user_id),
   usersInCohorts: (db, cohort_id) => db
-    .select('user_name')
+    .select('user_name', 'first_name', 'last_name', 'is_private', 'about')
     .from('users')
     .join('usersInCohorts', 'users.id', 'usersInCohorts.user_id')
     .select('usersInCohorts.*')

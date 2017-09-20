@@ -1,17 +1,28 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import Messages from '../containers/MessagesInConversation'
+
 export default class Conversation extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      showUsers: false
+    }
+    this.toggleUsers = this.toggleUsers.bind(this)
+  }
+  toggleUsers() {
+    this.setState({showUsers: !this.state.showUsers})
   }
   componentDidMount() {
     //get users in conversation
     this.props.getUsers(this.props.conversation.id)
+    this.props.getMessages(this.props.conversation.id)
     //get messages in conversation
   }
   render() {
     let {conversation, users} = this.props
+    let {showUsers} = this.state
     if (!conversation) {
       this.props.history.push('/my/conversations')
       return <div>Conversation Not Found</div>
@@ -20,9 +31,11 @@ export default class Conversation extends React.Component {
     return (
       <div>
         <h1>Conversation: {conversation.name}</h1>
+        <Link to="/my/conversations">Back</Link>
         <div>
-          <h3>Users in this conversation: </h3>
-          {users.map(renderUser)}
+          <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
+          {showUsers && users.map(renderUser)}
+          <Messages />
         </div>
       </div>
     )

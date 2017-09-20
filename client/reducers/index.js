@@ -6,6 +6,7 @@ import joinedCohorts from './joinedCohorts'
 import usersInCohort from './usersInCohort'
 import conversations from './conversations'
 import usersInConversation from './usersInConversation'
+import messagesInConversation from './messagesInConversation'
 
 export default combineReducers({
   auth,
@@ -13,5 +14,6 @@ export default combineReducers({
   joinedCohorts,
   usersInCohort,
   conversations,
-  usersInConversation
+  usersInConversation,
+  messages: messagesInConversation
 })

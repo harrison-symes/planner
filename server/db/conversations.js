@@ -13,5 +13,11 @@ module.exports = {
     .insert({name}, 'id'),
   getConversationById: (db, conversation_id) => db('conversations')
     .where('id', conversation_id)
-    .first()
+    .first(),
+  getMessagesByConversation: (db, conversation_id) => db('messages')
+    .join('conversations', 'messages.conversation_id', 'conversations.id')
+    .join('usersInConversations', 'messages.user_id', 'usersInConversations.user_id')
+    .join('users', 'usersInConversations.user_id', 'users.id')
+    .where('conversations.id', conversation_id)
+    .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
 }

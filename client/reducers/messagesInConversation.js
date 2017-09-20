@@ -4,6 +4,8 @@ export default function messagesReducer (state = [], action) {
   switch(action.type) {
     case 'RECEIVE_MESSAGES':
       return [...action.messages]
+    case 'CREATE_MESSAGE':
+      return [...state, action.message]
     default:
       return state
   }

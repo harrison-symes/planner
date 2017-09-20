@@ -1,3 +1,10 @@
+const getMessageById = (db, id) => db('messages')
+  .join('conversations', 'messages.conversation_id', 'conversations.id')
+  .join('users', 'messages.user_id', 'users.id')
+  .where('messages.id', id)
+  .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
+  .first()
+
 module.exports = {
   getConversations: (db, user_id) => db('usersInConversations')
     .join('conversations', 'usersInConversations.conversation_id', 'conversations.id')
@@ -16,8 +23,10 @@ module.exports = {
     .first(),
   getMessagesByConversation: (db, conversation_id) => db('messages')
     .join('conversations', 'messages.conversation_id', 'conversations.id')
-    .join('usersInConversations', 'messages.user_id', 'usersInConversations.user_id')
-    .join('users', 'usersInConversations.user_id', 'users.id')
+    .join('users', 'messages.user_id', 'users.id')
     .where('conversations.id', conversation_id)
-    .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
+    .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name'),
+  createMessage: (db, message) => db('messages')
+    .insert(message, 'id')
+    .then(message_id => getMessageById(db, message_id[0]))
 }

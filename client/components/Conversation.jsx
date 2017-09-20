@@ -21,8 +21,9 @@ export default class Conversation extends React.Component {
     //get messages in conversation
   }
   render() {
-    let {conversation, users} = this.props
+    let {conversation, users, match} = this.props
     let {showUsers} = this.state
+    console.log("conversation", this.props);
     if (!conversation) {
       this.props.history.push('/my/conversations')
       return <div>Conversation Not Found</div>
@@ -35,7 +36,7 @@ export default class Conversation extends React.Component {
         <div>
           <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
           {showUsers && users.map(renderUser)}
-          <Messages />
+          <Messages conversation_id={match.params.id} {...this.props}/>
         </div>
       </div>
     )

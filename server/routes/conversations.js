@@ -1,9 +1,14 @@
 var router = require('express').Router()
 
 var {decode} = require('../auth/token')
-var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation} = require('../db/conversations')
+var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation, createMessage} = require('../db/conversations')
 
 var getDb = (req) => req.app.get('db')
+
+router.get('/test', (req, res) => {
+  getMessagesByConversation(getDb(req), 1)
+    .then(messages => res.json(messages))
+})
 
 router.get('/', decode, (req, res) => {
   getConversations(getDb(req), req.user.id)
@@ -38,6 +43,13 @@ router.get('/:conversation_id/messages', decode, (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.post('/:conversation_id/messages', decode, (req, res) => {
+  req.body.conversation_id = req.params.conversation_id
+  req.body.user_id = req.user.id
+  createMessage(getDb(req), req.body)
+    .then(message => res.json(message))
+    .catch(err => console.log(err))
+})
 
 
 module.exports = router

@@ -60,3 +60,19 @@ export function getMessagesByConversationRequest (id) {
       .catch(err => console.log(err))
   }
 }
+
+
+export function createMessageAction (message) {
+  return {
+    type: 'CREATE_MESSAGE',
+    message
+  }
+}
+
+export function postMessageRequest (message, conversation_id) {
+  return (dispatch) => {
+    request('post', `conversations/${conversation_id}/messages`, message)
+    .then(res => dispatch(createMessageAction(res.body)))
+    .catch(err => console.log(err))
+  }
+}

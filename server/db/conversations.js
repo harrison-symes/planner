@@ -13,6 +13,17 @@ const getMessageById = (db, id) => db('messages')
   .where('conversationInvites.id', invite_id)
   .first()
 
+  const addUserToConversation = (db, conversation_id, user_id) => db('usersInConversations')
+    .insert({conversation_id, user_id})
+
+  const getConversationById = (db, conversation_id) => db('conversations')
+    .where('id', conversation_id)
+    .first()
+
+  const deleteInviteById = (db, invite_id) => db('conversationInvites')
+    .where('conversationInvites.id', invite_id)
+    .del()
+
 module.exports = {
   getConversations: (db, user_id) => db('usersInConversations')
     .join('conversations', 'usersInConversations.conversation_id', 'conversations.id')
@@ -22,13 +33,10 @@ module.exports = {
     .from('users')
     .join('usersInConversations', 'users.id', 'usersInConversations.user_id')
     .where('usersInConversations.conversation_id', conversation_id),
-  addUserToConversation: (db, conversation_id, user_id) => db('usersInConversations')
-    .insert({conversation_id, user_id}),
+  addUserToConversation,
   createConversation: (db, name) => db('conversations')
     .insert({name}, 'id'),
-  getConversationById: (db, conversation_id) => db('conversations')
-    .where('id', conversation_id)
-    .first(),
+  getConversationById,
   getMessagesByConversation: (db, conversation_id) => db('messages')
     .join('conversations', 'messages.conversation_id', 'conversations.id')
     .join('users', 'messages.user_id', 'users.id')
@@ -51,6 +59,12 @@ module.exports = {
     .from('users')
     .join('conversationInvites', 'users.id', 'conversationInvites.from_user_id')
     .join('conversations', 'conversationInvites.conversation_id', 'conversations.id')
-    .select('conversationInvites.*', 'conversations.*')
-    .where('conversationInvites.to_user_id', user_id)
+    .select('conversationInvites.*', 'conversations.*', 'conversationInvites.id as conversation_id', 'conversationInvites.id as invite_id')
+    .where('conversationInvites.to_user_id', user_id),
+  acceptConversationInvite: (db, invite_id) => getOutgoingInviteById(db, invite_id)
+    .then(({user_id, conversation_id}) => {
+      return addUserToConversation(db, conversation_id, user_id)
+      .then(() => deleteInviteById(db, invite_id))
+      .then(() => getConversationById(db, conversation_id))
+    })
 }

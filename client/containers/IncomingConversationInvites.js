@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import IncomingConversationInvites from '../components/IncomingConversationInvites'
 
-import {getIncomingInvitesRequest} from '../actions/conversations'
+import {getIncomingInvitesRequest, acceptIncomingInviteRequest} from '../actions/conversations'
 
 const mapStateToProps = ({incomingInvites}) => {
   return {
@@ -12,7 +12,8 @@ const mapStateToProps = ({incomingInvites}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getInvites: () => dispatch(getIncomingInvitesRequest())
+    getInvites: () => dispatch(getIncomingInvitesRequest()),
+    acceptInvite: (invite_id) => dispatch(acceptIncomingInviteRequest(invite_id))
   }
 }
 

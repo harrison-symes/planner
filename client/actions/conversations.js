@@ -123,3 +123,22 @@ export function getIncomingInvitesRequest () {
     .catch(err => console.log(err))
   }
 }
+
+export function deleteIncomingInviteAction (invite_id) {
+  return {
+    type: 'DELETE_INCOMING_INVITE',
+    invite_id
+  }
+}
+
+export function acceptIncomingInviteRequest (invite_id) {
+  return (dispatch) => {
+    console.log({invite_id});
+    request('post', `conversations/invites/${invite_id}`)
+      .then(res => {
+        dispatch(deleteIncomingInviteAction(invite_id))
+        dispatch(receiveConversationAction(res.body))
+      })
+      .catch(err => console.log({err}))
+  }
+}

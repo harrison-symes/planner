@@ -9,7 +9,6 @@ export default class InviteUserConversation extends React.Component {
     this.sendInvite = this.sendInvite.bind(this)
   }
   componentDidMount() {
-    console.log(this.props);
     this.props.getUsersToInvite(this.props.id)
     this.props.getInvites(this.props.id)
   }
@@ -26,7 +25,6 @@ export default class InviteUserConversation extends React.Component {
       }
     </div>
     let {users} = this.props
-    console.log({users});
     return (
       <div>
         <h1>Invite a user</h1>

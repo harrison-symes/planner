@@ -12,7 +12,6 @@ router.get('/inviteable/:conversation_id', decode, (req, res) => {
   const mapId = (cohort) => cohort.id
   const mapIds = (cohorts) => cohorts.map(mapId)
   const purgeDuplicate = (users) => {
-    console.log("duplicate", {users});
     let singles = []
     users.forEach((user) => {
       if (!singles.find(single => single.user_id == user.user_id)) singles.push(user)
@@ -20,7 +19,6 @@ router.get('/inviteable/:conversation_id', decode, (req, res) => {
     return singles
   }
   const filterInvited = (users, usersInConversation) => {
-    console.log({users, usersInConversation});
     return users.filter(user => !usersInConversation.find(convoUser => user.user_id == convoUser.user_id))
   }
   getUserCohorts(getDb(req), req.user.id)

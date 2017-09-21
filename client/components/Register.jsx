@@ -23,10 +23,8 @@ export default class Register extends React.Component {
   }
   submit(e) {
     e.preventDefault()
-    console.log(this.state);
     let {user_name, password, confirm_password, first_name} = this.state
     let flag = false
-    console.log({password, confirm_password});
     if (password != confirm_password) {
       flag = true
       this.props.error('Passwords do not match')

@@ -1,11 +1,9 @@
 export default function incomingInvitesReducer (state = [], action) {
   let newState = [...state]
-  console.log({action});
   switch(action.type){
     case 'RECEIVE_INCOMING_INVITES':
       return [...action.invites]
     case 'DELETE_INCOMING_INVITE':
-      console.log({state, action});
       return [...state].filter(invite => invite.invite_id != action.invite_id)
     default:
       return state

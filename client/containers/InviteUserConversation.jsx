@@ -6,7 +6,6 @@ import {postOutgoingInviteRequest, getOutgoingInvitesRequest} from '../actions/c
 import {getUsersToInviteRequest} from '../actions/users'
 
 const mapStateToProps = ({usersToInvite, outgoingInvites}) => {
-  console.log({outgoingInvites});
   return {
     users: usersToInvite.map(user => {
       if (outgoingInvites.find(outgoing => outgoing.user_id == user.user_id)) user.is_invited = true

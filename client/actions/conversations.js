@@ -77,7 +77,6 @@ export function postMessageRequest (message, conversation_id) {
 }
 
 export function receiveOutgoingInvitesAction(invites) {
-  console.log({invites});
   return {
     type: 'RECEIVE_OUTGOING_INVITES',
     invites
@@ -108,7 +107,6 @@ export function postOutgoingInviteRequest (user_id, conversation_id) {
 }
 
 export function receiveIncomingInvitesAction (invites) {
-  console.log({invites});
   return {
     type: 'RECEIVE_INCOMING_INVITES',
     invites
@@ -117,7 +115,6 @@ export function receiveIncomingInvitesAction (invites) {
 
 export function getIncomingInvitesRequest () {
   return (dispatch) => {
-    console.log("getting invites");
     request('get', 'conversations/invites')
     .then(res => dispatch(receiveIncomingInvitesAction(res.body)))
     .catch(err => console.log(err))
@@ -133,7 +130,6 @@ export function deleteIncomingInviteAction (invite_id) {
 
 export function acceptIncomingInviteRequest (invite_id) {
   return (dispatch) => {
-    console.log({invite_id});
     request('post', `conversations/invites/${invite_id}`)
       .then(res => {
         dispatch(deleteIncomingInviteAction(invite_id))

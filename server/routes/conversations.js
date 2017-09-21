@@ -1,13 +1,18 @@
 var router = require('express').Router()
 
 var {decode} = require('../auth/token')
-var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation, createMessage, createInvite, getOutgoingInvites} = require('../db/conversations')
+var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation, createMessage, createInvite, getOutgoingInvites, getIncomingInvites} = require('../db/conversations')
 
 var getDb = (req) => req.app.get('db')
 
 router.get('/test', (req, res) => {
   getMessagesByConversation(getDb(req), 1)
     .then(messages => res.json(messages))
+})
+
+router.get('/invites', (req, res) => {
+  getIncomingInvites(getDb(req), 3)
+    .then(invites => res.json(invites))
 })
 
 router.get('/', decode, (req, res) => {

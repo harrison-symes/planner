@@ -45,5 +45,12 @@ module.exports = {
     .from('users')
     .join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
     .select("conversationInvites.*")
-    .where('conversation_id', conversation_id)
+    .where('conversation_id', conversation_id),
+  getIncomingInvites: (db, user_id) => db
+    .select('users.first_name', 'users.user_name', 'users.id as user_id')
+    .from('users')
+    .join('conversationInvites', 'users.id', 'conversationInvites.from_user_id')
+    .join('conversations', 'conversationInvites.conversation_id', 'conversations.id')
+    .select('conversationInvites.*', 'conversations.*')
+    .where('conversationInvites.to_user_id', user_id)
 }

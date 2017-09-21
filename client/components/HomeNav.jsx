@@ -27,6 +27,11 @@ export default class HomeNav extends React.Component {
             {" | "}
             <Link to="/my/profile">Profile</Link>
             {" | "}
+            {auth.user.is_admin==true && <span>
+              <Link to="/my/admin">Admin</Link>
+              {" | "}
+            </span>
+            }
             {showConfirmLogout
               ? <span>Are you sure?
                 <button onClick={() => this.toggleLogout(true)}>Yes</button>

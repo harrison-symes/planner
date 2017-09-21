@@ -13,5 +13,5 @@ module.exports = {
     .from('users')
     .join('usersInCohorts', 'users.id', 'usersInCohorts.user_id')
     .select('usersInCohorts.*')
-    .where('usersInCohorts.cohort_id', cohort_id)
+    .where('usersInCohorts.cohort_id', cohort_id),
 }

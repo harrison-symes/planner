@@ -7,6 +7,8 @@ import usersInCohort from './usersInCohort'
 import conversations from './conversations'
 import usersInConversation from './usersInConversation'
 import messagesInConversation from './messagesInConversation'
+import usersToInvite from './usersToInvite'
+import outgoingInvites from './outgoingInvites'
 
 export default combineReducers({
   auth,
@@ -15,5 +17,7 @@ export default combineReducers({
   usersInCohort,
   conversations,
   usersInConversation,
-  messages: messagesInConversation
+  messages: messagesInConversation,
+  usersToInvite,
+  outgoingInvites
 })

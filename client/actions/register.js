@@ -9,12 +9,14 @@ export function registerErrorAction (errorMessage) {
   }
 }
 
-export function registerUserRequest ({user_name, password}) {
+export function registerUserRequest ({user_name, password, first_name, last_name, about}) {
   return (dispatch) => {
     request
       .post('/api/auth/register')
       .send({
-        user_name, password
+        user_name, password,
+        first_name, last_name,
+        about
       })
       .end((err, res) => {
         if (err) {

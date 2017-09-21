@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import IncomingConversationInvites from '../containers/IncomingConversationInvites'
+
 export default class MyConversations extends React.Component {
   constructor(props) {
     super(props)
@@ -45,6 +47,7 @@ export default class MyConversations extends React.Component {
       <div>
         <h1>Conversations</h1>
         <button onClick={this.toggleCreateConversation}>{showAddConversation ? "Cancel" : "Create Conversation"}</button>
+        <IncomingConversationInvites />
         {showAddConversation && createConversation()}
         {conversations.map(renderConversationSingle)}
       </div>

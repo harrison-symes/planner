@@ -23,8 +23,10 @@ export default class Register extends React.Component {
   }
   submit(e) {
     e.preventDefault()
-    let {user_name, password, confirm_password} = this.state
+    console.log(this.state);
+    let {user_name, password, confirm_password, first_name} = this.state
     let flag = false
+    console.log({password, confirm_password});
     if (password != confirm_password) {
       flag = true
       this.props.error('Passwords do not match')
@@ -59,7 +61,7 @@ export default class Register extends React.Component {
           <input type="text" name="first_name" onChange={this.updateDetails}/>
         </label>*<br/>
         <label>About Me:
-          <input type="password" name="confirm_password" onChange={this.updateDetails}/>
+          <input type="text" name="about" onChange={this.updateDetails}/>
         </label><br/>
         <p>* Requied Field</p>
           <input type="submit" />

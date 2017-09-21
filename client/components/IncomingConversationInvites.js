@@ -9,7 +9,7 @@ export default class IncomingConversationInvites extends React.Component {
     console.log(this.props);
     const renderInvite = (invite, i) => <div key={i}>
       <p>{invite.first_name} ({invite.user_name}) wants you to join "{invite.name}"</p>
-      <button>Accept</button>
+      <button onClick={() => this.props.acceptInvite(invite.conversation_id)}>Accept</button>
       <button>Decline</button>
     </div>
     return (

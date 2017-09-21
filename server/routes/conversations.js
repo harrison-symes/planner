@@ -1,7 +1,7 @@
 var router = require('express').Router()
 
 var {decode} = require('../auth/token')
-var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation, createMessage} = require('../db/conversations')
+var {getConversations, getUsersInConversation, createConversation, addUserToConversation, getConversationById, getMessagesByConversation, createMessage, createInvite, getOutgoingInvites} = require('../db/conversations')
 
 var getDb = (req) => req.app.get('db')
 
@@ -48,6 +48,17 @@ router.post('/:conversation_id/messages', decode, (req, res) => {
   createMessage(getDb(req), req.body)
     .then(message => res.json(message))
     .catch(err => console.log(err))
+})
+
+router.get('/:conversation_id/invites', (req, res) => {
+  console.log(req.params);
+  getOutgoingInvites(getDb(req), req.params.conversation_id)
+    .then(invites => res.json(invites))
+})
+
+router.post('/:conversation_id/invites/', decode, (req, res) => {
+  createInvite(getDb(req), {from_user_id: req.user.id, to_user_id: req.body.user_id, conversation_id: req.params.conversation_id})
+    .then(invite => res.json(invite))
 })
 
 

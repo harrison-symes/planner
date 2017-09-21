@@ -8,6 +8,7 @@ import conversations from './conversations'
 import usersInConversation from './usersInConversation'
 import messagesInConversation from './messagesInConversation'
 import usersToInvite from './usersToInvite'
+import outgoingInvites from './outgoingInvites'
 
 export default combineReducers({
   auth,
@@ -17,5 +18,6 @@ export default combineReducers({
   conversations,
   usersInConversation,
   messages: messagesInConversation,
-  usersToInvite
+  usersToInvite,
+  outgoingInvites
 })

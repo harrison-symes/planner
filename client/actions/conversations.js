@@ -75,3 +75,34 @@ export function postMessageRequest (message, conversation_id) {
     .catch(err => console.log(err))
   }
 }
+
+export function receiveOutgoingInvitesAction(invites) {
+  console.log({invites});
+  return {
+    type: 'RECEIVE_OUTGOING_INVITES',
+    invites
+  }
+}
+
+export function getOutgoingInvitesRequest (conversation_id) {
+  return (dispatch) => {
+    request('get', `conversations/${conversation_id}/invites`)
+      .then(res => dispatch(receiveOutgoingInvitesAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}
+
+export function receiveOutgoingInviteAction (invite) {
+  return {
+    type: 'RECEIVE_OUTGOING_INVITE',
+    invite
+  }
+}
+
+export function postOutgoingInviteRequest (user_id, conversation_id) {
+  return (dispatch) => {
+    request('post', `conversations/${conversation_id}/invites`,  {user_id})
+      .then(res => dispatch(receiveOutgoingInviteAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}

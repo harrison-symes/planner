@@ -106,3 +106,20 @@ export function postOutgoingInviteRequest (user_id, conversation_id) {
       .catch(err => console.log(err))
   }
 }
+
+export function receiveIncomingInvitesAction (invites) {
+  console.log({invites});
+  return {
+    type: 'RECEIVE_INCOMING_INVITES',
+    invites
+  }
+}
+
+export function getIncomingInvitesRequest () {
+  return (dispatch) => {
+    console.log("getting invites");
+    request('get', 'conversations/invites')
+    .then(res => dispatch(receiveIncomingInvitesAction(res.body)))
+    .catch(err => console.log(err))
+  }
+}

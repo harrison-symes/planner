@@ -7,7 +7,7 @@ export default class MyProfile extends React.Component {
     super(props)
   }
   componentDidMount() {
-
+    this.props.getCohorts()
   }
   render() {
     let {auth, cohorts} = this.props

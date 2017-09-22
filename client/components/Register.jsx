@@ -53,10 +53,10 @@ export default class Register extends React.Component {
           <input type="password" name="confirm_password" onChange={this.updateDetails}/>
         </label>*<br/>
         <label>First Name:
-          <input type="text" name="last_name" onChange={this.updateDetails}/>
+          <input type="text" name="first_name" onChange={this.updateDetails}/>
         </label>*<br/>
         <label>Last Name:
-          <input type="text" name="first_name" onChange={this.updateDetails}/>
+          <input type="text" name="last_name" onChange={this.updateDetails}/>
         </label>*<br/>
         <label>About Me:
           <input type="text" name="about" onChange={this.updateDetails}/>

@@ -4,7 +4,7 @@ export default class InviteUserConversation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      selectedUser: null
     }
     this.sendInvite = this.sendInvite.bind(this)
   }
@@ -15,13 +15,17 @@ export default class InviteUserConversation extends React.Component {
   sendInvite(user_id) {
     this.props.sendInvite(user_id, this.props.id)
   }
+  selectUser(selectedUser) {
+    this.setState({selectedUser})
+  }
   render() {
-    const renderUserToInvite = (user, i) => <div key={i}>
+    const renderUserToInvite = (user, i) => <div key={i} onClick={() => this.selectUser(user)}>
       <h3>{user.first_name} ({user.user_name})</h3>
-      {user.is_invited
-        ? <p>Invite Sent</p>
-        : <button onClick={() => this.sendInvite(user.user_id)}>Invite</button>
-
+      {!user.is_invited
+        ? user == this.state.selectedUser
+          ? <button onClick={() => this.sendInvite(user.user_id)}>Invite</button>
+          : <div></div>
+        : <p>Invite Sent</p>
       }
     </div>
     let {users} = this.props

@@ -5,7 +5,7 @@ import FindCohort from '../containers/FindCohort'
 import MyCohorts from '../containers/MyCohorts'
 import ViewCohort from '../containers/ViewCohort'
 import MyProfile from '../containers/MyProfile'
-import MyLearning from '../containers/MyLearning'
+import LearningRouter from '../containers/learning/LearningRouter'
 import UserProfile from '../containers/UserProfile'
 import MyConversations from '../containers/conversations/MyConversations'
 import Conversation from '../containers/conversations/Conversation'
@@ -33,7 +33,7 @@ export default class Home extends React.Component {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/my/cohorts" component={MyCohorts} />
           <Route exact path="/my/profile" component={MyProfile}/>
-          <Route exact path={"/my/learning"} component={MyLearning}/>
+          <Route path={"/my/learning"} component={LearningRouter}/>
           {user &&  user.is_admin == true && <Route exact path="/my/admin" component={Admin}/>}
           <Route exact path="/my/conversations" component={MyConversations} />
           <Route exact path="/my/conversations/:id" component={(props) => <Conversation {...props} />} />

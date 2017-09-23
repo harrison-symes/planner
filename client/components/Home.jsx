@@ -9,7 +9,7 @@ import LearningRouter from '../containers/learning/LearningRouter'
 import UserProfile from '../containers/UserProfile'
 import MyConversations from '../containers/conversations/MyConversations'
 import Conversation from '../containers/conversations/Conversation'
-import Admin from '../containers/Admin'
+import Admin from '../containers/admin/Admin'
 import Welcome from '../components/Welcome'
 
 import {HashRouter as Router, Route} from 'react-router-dom'
@@ -34,7 +34,7 @@ export default class Home extends React.Component {
           <Route exact path="/my/cohorts" component={MyCohorts} />
           <Route exact path="/my/profile" component={MyProfile}/>
           <Route path={"/my/learning"} component={LearningRouter}/>
-          {user &&  user.is_admin == true && <Route exact path="/my/admin" component={Admin}/>}
+          {user && user.is_admin == true && <Route path="/my/admin" component={Admin}/>}
           <Route exact path="/my/conversations" component={MyConversations} />
           <Route exact path="/my/conversations/:id" component={(props) => <Conversation {...props} />} />
           <Route exact path="/my/cohorts/:cohort_id" component={(props) => <ViewCohort id={props.match.params.cohort_id} {...props} />} />

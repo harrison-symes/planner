@@ -1,6 +1,6 @@
 import React from 'react'
-import MessageSingle from '../containers/MessageSingle'
-import CreateMessage from '../containers/CreateMessage'
+import MessageSingle from '../../containers/conversations/MessageSingle'
+import CreateMessage from '../../containers/conversations/CreateMessage'
 
 export default function Messages ({messages, conversation_id}) {
   const renderSingleMessage = (message, i) => <MessageSingle key={i} message={message} />

@@ -1,7 +1,6 @@
 import request from '../utils/api'
 
 export function recieveUserAction (user) {
-  console.log(user);
   return {
     type: 'RECEIVE_USER_IN_COHORT',
     user
@@ -17,7 +16,6 @@ export function getUserRequest (user_id) {
 }
 
 export function receiveUsersToInviteAction (users) {
-  console.log({users});
   return {
     type: 'RECEIVE_USERS_TO_INVITE',
     users

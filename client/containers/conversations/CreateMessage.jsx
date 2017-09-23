@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import CreateMessage from '../components/CreateMessage'
+import CreateMessage from '../../components/conversations/CreateMessage'
 
-import {postMessageRequest} from '../actions/conversations'
+import {postMessageRequest} from '../../actions/conversations'
 
 const mapStateToProps = () => {
   return {

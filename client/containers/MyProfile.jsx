@@ -2,6 +2,8 @@ import {connect} from 'react-redux'
 
 import MyProfile from '../components/MyProfile'
 
+import {getCohortsRequest} from '../actions/cohorts'
+
 const mapStateToProps = ({auth, joinedCohorts}) => {
   return {
     auth,
@@ -10,7 +12,9 @@ const mapStateToProps = ({auth, joinedCohorts}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getCohorts: () => dispatch(getCohortsRequest())
+  }
 }
 
-export default connect(mapStateToProps)(MyProfile)
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile)

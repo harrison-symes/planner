@@ -32,7 +32,6 @@ router.post('/', decode, (req, res) => {
 })
 
 router.post('/invites/:invite_id', decode, (req, res) => {
-  console.log(req.params);
   acceptConversationInvite(getDb(req), req.params.invite_id)
   .then((conversation) => res.json(conversation))
   .catch(err => console.log(err))

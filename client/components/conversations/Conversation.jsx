@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import Messages from '../containers/MessagesInConversation'
-import InviteUserConversation from '../containers/InviteUserConversation'
-import IncomingConversationInvites from '../containers/IncomingConversationInvites'
+import Messages from '../../containers/conversations/MessagesInConversation'
+import InviteUserConversation from '../../containers/conversations/InviteUserConversation'
+import IncomingConversationInvites from '../../containers/conversations/IncomingConversationInvites'
 
 export default class Conversation extends React.Component {
   constructor(props) {

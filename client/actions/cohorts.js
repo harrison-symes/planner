@@ -7,20 +7,6 @@ export function receiveCohortsAction (cohorts) {
   }
 }
 
-export function receiveUnjoinedCohortsAction (cohorts) {
-  return {
-    type: 'RECEIVE_UNJOINED_COHORTS',
-    cohorts
-  }
-}
-
-export function joinCohortAction (cohort) {
-  return {
-    type: 'JOIN_COHORT',
-    cohort
-  }
-}
-
 export function getCohortsRequest () {
   return (dispatch) => {
     request('get', 'cohorts')
@@ -29,11 +15,26 @@ export function getCohortsRequest () {
   }
 }
 
+export function receiveUnjoinedCohortsAction (cohorts) {
+  console.log({cohorts});
+  return {
+    type: 'RECEIVE_UNJOINED_COHORTS',
+    cohorts
+  }
+}
+
 export function getUnjoinedCohortsRequest () {
   return (dispatch) => {
     request('get', 'cohorts/find')
     .then(res => dispatch(receiveUnjoinedCohortsAction(res.body)))
     .catch(err => console.log({err}))
+  }
+}
+
+export function joinCohortAction (cohort) {
+  return {
+    type: 'JOIN_COHORT',
+    cohort
   }
 }
 

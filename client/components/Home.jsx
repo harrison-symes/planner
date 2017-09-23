@@ -7,9 +7,10 @@ import ViewCohort from '../containers/ViewCohort'
 import MyProfile from '../containers/MyProfile'
 import MyLearning from '../containers/MyLearning'
 import UserProfile from '../containers/UserProfile'
-import MyConversations from '../containers/MyConversations'
-import Conversation from '../containers/Conversation'
+import MyConversations from '../containers/conversations/MyConversations'
+import Conversation from '../containers/conversations/Conversation'
 import Admin from '../containers/Admin'
+import Welcome from '../components/Welcome'
 
 import {HashRouter as Router, Route} from 'react-router-dom'
 
@@ -29,9 +30,10 @@ export default class Home extends React.Component {
       <HomeNav />
       <Router>
         <div>
+          <Route exact path="/" component={Welcome} />
           <Route exact path="/my/cohorts" component={MyCohorts} />
           <Route exact path="/my/profile" component={MyProfile}/>
-          <Route exact path="/my/learning" component={MyLearning}/>
+          <Route exact path={"/my/learning"} component={MyLearning}/>
           {user &&  user.is_admin == true && <Route exact path="/my/admin" component={Admin}/>}
           <Route exact path="/my/conversations" component={MyConversations} />
           <Route exact path="/my/conversations/:id" component={(props) => <Conversation {...props} />} />

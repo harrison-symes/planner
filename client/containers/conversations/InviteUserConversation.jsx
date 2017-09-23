@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
 
-import InviteUserConversation from '../components/InviteUserConversation'
+import InviteUserConversation from '../../components/conversations/InviteUserConversation'
 
-import {postOutgoingInviteRequest, getOutgoingInvitesRequest} from '../actions/conversations'
-import {getUsersToInviteRequest} from '../actions/users'
+import {postOutgoingInviteRequest, getOutgoingInvitesRequest} from '../../actions/conversations'
+import {getUsersToInviteRequest} from '../../actions/users'
 
 const mapStateToProps = ({usersToInvite, outgoingInvites}) => {
   return {

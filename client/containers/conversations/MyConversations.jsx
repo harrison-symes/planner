@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import MyConversations from '../components/MyConversations'
+import MyConversations from '../../components/conversations/MyConversations'
 
-import {getConversationsRequest, postConversationRequest} from '../actions/conversations'
+import {getConversationsRequest, postConversationRequest} from '../../actions/conversations'
 
 const mapStateToProps = ({conversations}) => {
   return {

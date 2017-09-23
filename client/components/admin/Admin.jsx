@@ -1,6 +1,8 @@
 import React from 'react'
 import {HashRouter as Router, Route} from 'react-router-dom'
+
 import AdminNav from './AdminNav'
+import CreateCohort from '../../containers/admin/CreateCohort'
 
 export default class Admin extends React.Component {
   render() {
@@ -11,7 +13,7 @@ export default class Admin extends React.Component {
           <Router>
             <div>
               <AdminNav />
-              <Route exact path="/my/admin/create/cohort" component={() => <h1>Create Cohort</h1>} />
+              <Route path="/my/admin/cohorts/create" component={CreateCohort} />
             </div>
           </Router>
         }

@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import {getUsersInCohortRequest} from '../actions/cohort'
+import {getUsersInCohortRequest} from '../../actions/cohort'
 
-import ViewCohort from '../components/ViewCohort'
+import ViewCohort from '../../components/cohorts/ViewCohort'
 
 const mapStateToProps = ({joinedCohorts}, props) => {
   return {

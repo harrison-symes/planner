@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 
-import FindCohortSingle from '../components/FindCohortSingle'
-import {joinCohortRequest} from '../actions/cohorts'
+import FindCohortSingle from '../../components/cohorts/FindCohortSingle'
+import {joinCohortRequest} from '../../actions/cohorts'
 
 const mapDispatchToProps = (dispatch) => {
   return {

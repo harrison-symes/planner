@@ -22,7 +22,7 @@ export default class MyProfile extends React.Component {
         <div>
           <h3>My Cohorts:</h3>
           {cohorts.map(renderCohort)}
-          {cohorts.length == 0 && <Link to="/find/cohorts">Find a Cohort</Link>}
+          {cohorts.length == 0 && <Link to="/my/cohorts/find/new">Find a Cohort</Link>}
         </div>
       </div>
     )

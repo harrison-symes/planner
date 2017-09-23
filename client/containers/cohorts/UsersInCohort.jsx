@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 // import {getUsersInCohortRequest} from '../actions/cohort'
 
-import UsersInCohort from '../components/UsersInCohort'
+import UsersInCohort from '../../components/cohorts/UsersInCohort'
 
 const mapStateToProps = ({usersInCohort}) => {
   return {

@@ -1,9 +1,7 @@
 import React from 'react'
 
 import HomeNav from '../containers/HomeNav'
-import FindCohort from '../containers/FindCohort'
-import MyCohorts from '../containers/MyCohorts'
-import ViewCohort from '../containers/ViewCohort'
+import CohortRouter from '../containers/cohorts/CohortRouter'
 import MyProfile from '../containers/MyProfile'
 import LearningRouter from '../containers/learning/LearningRouter'
 import UserProfile from '../containers/UserProfile'
@@ -31,14 +29,12 @@ export default class Home extends React.Component {
       <Router>
         <div>
           <Route exact path="/" component={Welcome} />
-          <Route exact path="/my/cohorts" component={MyCohorts} />
+          <Route path="/my/cohorts" component={CohortRouter} />
           <Route exact path="/my/profile" component={MyProfile}/>
           <Route path={"/my/learning"} component={LearningRouter}/>
           {user && user.is_admin == true && <Route path="/my/admin" component={Admin}/>}
           <Route exact path="/my/conversations" component={MyConversations} />
           <Route exact path="/my/conversations/:id" component={(props) => <Conversation {...props} />} />
-          <Route exact path="/my/cohorts/:cohort_id" component={(props) => <ViewCohort id={props.match.params.cohort_id} {...props} />} />
-          <Route exact path="/find/cohorts" component={FindCohort} />
           <Route path="/users/:id/profile" component={(props) => <UserProfile {...props} /> } />
         </div>
       </Router>

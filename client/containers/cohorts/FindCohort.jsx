@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
-import FindCohort from '../components/FindCohort'
+import FindCohort from '../../components/cohorts/FindCohort'
 
-import {getUnjoinedCohortsRequest} from '../actions/cohorts'
+import {getUnjoinedCohortsRequest} from '../../actions/cohorts'
 
 const mapStateToProps = ({auth, unjoinedCohorts}) => {
   return {

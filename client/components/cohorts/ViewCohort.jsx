@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import UsersInCohort from '../containers/UsersInCohort'
+
+import UsersInCohort from '../../containers/cohorts/UsersInCohort'
 
 export default class ViewCohort extends React.Component {
   constructor(props) {

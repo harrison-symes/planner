@@ -1,5 +1,6 @@
 import React from 'react'
-import FindCohortSingle from '../containers/FindCohortSingle'
+import {Link} from 'react-router-dom'
+import FindCohortSingle from '../../containers/cohorts/FindCohortSingle'
 
 export default class findCohort extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ export default class findCohort extends React.Component {
     return (
       <div>
         <h1>Find a cohort</h1>
-        <input type="text" onChange={this.updateSearch} name="search" value={search}/>
+        <Link to="/my/cohorts">Back</Link>
+        <br />
+        <input type="text" onChange={this.updateSearch} name="search" placeholder="Search Cohorts" value={search}/>
         <div>
           {cohorts.filter(c => c.name.toLowerCase().includes(search)).map(renderCohort)}
         </div>

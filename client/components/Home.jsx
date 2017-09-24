@@ -31,7 +31,9 @@ export default class Home extends React.Component {
   render () {
     let {user} = this.props.auth
     return <div>
-      <HomeNav />
+      <div className="container">
+        <HomeNav />
+      </div>
       <Router>
         <div>
           <Route exact path="/" component={Welcome} />

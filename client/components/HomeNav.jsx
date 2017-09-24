@@ -25,15 +25,16 @@ const navbarStart = (auth) => (
   </div>
 )
 
-const navbarEnd = (isAuthenticated, showConfirmLogout) => (
+const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout) => (
   <div className="navbar-end">
+    {console.log(this)}
     {isAuthenticated
       ? showConfirmLogout
         ? <span>Are you sure?
-          <button onClick={() => this.toggleLogout(true)}>Yes</button>
-          <button onClick={() => this.toggleLogout(false)}>No</button>
+          <button onClick={() => toggleLogout(true)}>Yes</button>
+          <button onClick={() => toggleLogout(false)}>No</button>
         </span>
-        : <Link to="/" onClick={() => this.toggleLogout(false)}>Logout</Link>
+        : <Link to="/" onClick={() => toggleLogout(false)}>Logout</Link>
       : <div>
         <Link to="/login">Login</Link>
         {" | "}
@@ -49,6 +50,7 @@ export default class HomeNav extends React.Component {
     this.state = {
       showConfirmLogout: false
     }
+    this.toggleLogout = this.toggleLogout.bind(this)
   }
   toggleLogout(bool) {
     this.setState({showConfirmLogout: !this.state.showConfirmLogout})
@@ -60,11 +62,10 @@ export default class HomeNav extends React.Component {
     return (
       <nav className="navbar" role="navigation" aria-label="dropdown navigations">
         <div className="navbar-brand">
-          <h1>Hello</h1>
         </div>
         <div className="navbar-menu">
           {auth.isAuthenticated && navbarStart(auth)}
-          {navbarEnd(auth.isAuthenticated, showConfirmLogout)}
+          {navbarEnd(auth.isAuthenticated, showConfirmLogout, this.toggleLogout)}
         </div>
       </nav>
     )

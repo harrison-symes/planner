@@ -51,19 +51,28 @@ export default class HomeNav extends React.Component {
       showConfirmLogout: false
     }
     this.toggleLogout = this.toggleLogout.bind(this)
+    this.burgerToggle = this.burgerToggle.bind(this)
   }
   toggleLogout(bool) {
     this.setState({showConfirmLogout: !this.state.showConfirmLogout})
     if (bool) this.props.logout()
   }
+  burgerToggle () {
+    this.setState({burgerShow: !this.state.burgerShow})
+  }
   render() {
     let {auth, logout} = this.props
-    let {showConfirmLogout} = this.state
+    let {showConfirmLogout, burgerShow} = this.state
     return (
-      <nav className="navbar" role="navigation" aria-label="dropdown navigations">
+      <nav className="navbar" role="navigation" aria-label="main navigations">
         <div className="navbar-brand">
+          <button onClick={this.burgerToggle} className={`button navbar-burger ${burgerShow ? "is-active" : " "}`} data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <div className="navbar-menu">
+        <div className={`navbar-menu ${burgerShow ? "is-active" : " "}`} id="navMenu">
           {auth.isAuthenticated && navbarStart(auth)}
           {navbarEnd(auth.isAuthenticated, showConfirmLogout, this.toggleLogout)}
         </div>

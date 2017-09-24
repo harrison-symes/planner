@@ -8,7 +8,7 @@ import Home from '../containers/Home'
 export default function ({auth}) {
   return (
     <Router>
-      <div className='container'>
+      <div className='app-container'>
         <Route path='/' component={Home} />
         {!auth.isAuthenticated && <h1>Login to see more information</h1>}
         <Route path="/login" component={Login} />

@@ -35,7 +35,7 @@ export default class Home extends React.Component {
         <HomeNav />
       </div>
       <Router>
-        <div>
+        <div className="container has-text-centered">
           <Route exact path="/" component={Welcome} />
           <Route path="/my/cohorts" component={CohortRouter} />
           <Route exact path="/my/profile" component={MyProfile}/>

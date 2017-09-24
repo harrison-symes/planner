@@ -3,24 +3,16 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom'
 
 const navbarStart = (auth) => (
   <div className="navbar-start">
-    <div className="navbar-item">
-      <Link className="navbar-link is-active" to="/my/conversations">Conversations</Link>
-    </div>
+    <Link className="navbar-item is-active" to="/my/conversations">Conversations</Link>
     {" | "}
-    <div className="navbar-item has-dropdown is-hoverable">
-      <Link className="navbar-link is-active" to="/my/cohorts">Cohorts</Link>
-      <div className="navbar-dropdown">
-        <Link className="navbar-item" to="/my/cohorts/find/new">Find Cohort</Link>
-      </div>
-    </div>
+    <Link className="navbar-item" to="/my/cohorts/find/new">Find Cohort</Link>
     {" | "}
     <Link className="navbar-item" to="/my/learning">Learning</Link>
     {" | "}
     <Link className="navbar-item" to="/my/profile">Profile</Link>
-    {" | "}
     {auth.user.is_admin==true && <span>
-      <Link to="/my/admin">Admin</Link>
       {" | "}
+      <Link className="navbar-item" to="/my/admin">Admin</Link>
     </span>}
   </div>
 )
@@ -30,15 +22,16 @@ const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout) => (
     {console.log(this)}
     {isAuthenticated
       ? showConfirmLogout
-        ? <span>Are you sure?
-          <button onClick={() => toggleLogout(true)}>Yes</button>
-          <button onClick={() => toggleLogout(false)}>No</button>
-        </span>
-        : <Link to="/" onClick={() => toggleLogout(false)}>Logout</Link>
+        ? <p className="navbar-item align-items is-level">
+          <p>Logout?</p>
+          <button className="button level-item" onClick={() => toggleLogout(true)}>Yes</button>
+          <button className="button level-item" onClick={() => toggleLogout(false)}>No</button>
+        </p>
+        : <Link className="navbar-item" to="/" onClick={() => toggleLogout(false)}>Logout</Link>
       : <div>
-        <Link to="/login">Login</Link>
+        <Link className="navbar-item" to="/login">Login</Link>
         {" | "}
-        <Link to="/register">Register</Link>
+        <Link className="navbar-item" to="/register">Register</Link>
       </div>
     }
   </div>

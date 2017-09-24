@@ -1,8 +1,8 @@
 import React from 'react'
 import {HashRouter as Router, Route} from 'react-router-dom'
 
-import Login from '../containers/Login'
-import Register from '../containers/Register'
+import Login from '../containers/auth/Login'
+import Register from '../containers/auth/Register'
 import Home from '../containers/Home'
 
 export default function ({auth}) {

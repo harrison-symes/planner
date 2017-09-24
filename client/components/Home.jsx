@@ -1,13 +1,19 @@
 import React from 'react'
 
 import HomeNav from '../containers/HomeNav'
+
 import CohortRouter from '../containers/cohorts/CohortRouter'
-import MyProfile from '../containers/MyProfile'
+
+import MyProfile from '../containers/profiles/MyProfile'
+import UserProfile from '../containers/profiles/UserProfile'
+
 import LearningRouter from '../containers/learning/LearningRouter'
-import UserProfile from '../containers/UserProfile'
+
 import MyConversations from '../containers/conversations/MyConversations'
 import Conversation from '../containers/conversations/Conversation'
+
 import Admin from '../containers/admin/Admin'
+
 import Welcome from '../components/Welcome'
 
 import {HashRouter as Router, Route} from 'react-router-dom'

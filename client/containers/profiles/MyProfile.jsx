@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 
-import MyProfile from '../components/MyProfile'
+import MyProfile from '../../components/profiles/MyProfile'
 
-import {getCohortsRequest} from '../actions/cohorts'
+import {getCohortsRequest} from '../../actions/cohorts'
 
 const mapStateToProps = ({auth, joinedCohorts}) => {
   return {

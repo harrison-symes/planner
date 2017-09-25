@@ -3,8 +3,8 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom'
 
 var buttonClass = "nav-item is-primary is-large"
 
-const navbarStart = (auth) => (
-  <div className="navbar-start">
+const navbarStart = (auth, burgerToggle) => (
+  <div onClick={burgerToggle} className="navbar-start">
 
     <Link className={`${buttonClass} is-primary`} to="/my/conversations">Conversations</Link>
     <Link className={`${buttonClass} is-primary`} to="/my/cohorts/">Cohorts</Link>
@@ -66,7 +66,7 @@ export default class HomeNav extends React.Component {
             <span></span>
             <span></span>
           </div>
-          <div onClick={this.burgerToggle} className={`navbar-menu is-info ${burgerShow ? "is-active" : " "}`} id="navMenu">
+          <div className={`navbar-menu is-info ${burgerShow ? "is-active" : " "}`} id="navMenu">
             {auth.isAuthenticated && navbarStart(auth, this.burgerToggle)}
             {navbarEnd(auth.isAuthenticated, showConfirmLogout, this.toggleLogout)}
           </div>

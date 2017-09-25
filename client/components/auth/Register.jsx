@@ -40,29 +40,31 @@ export default class Register extends React.Component {
     else this.props.error('Please complete all required fields')
   }
   render() {
+    let {user_name, password, confirm_password} = this.state
+    let labelClass = "label is-large control has-icons-left"
+    let inputClass = "input is-medium"
     return (
       <form className="Register" onSubmit={this.submit}>
-        <h1>{this.props.auth.errorMessage}</h1>
-        <label>Username:
-          <input type="text" name="user_name" onChange={this.updateDetails}/>
-        </label>*<br/>
-        <label>Password:
-          <input type="password" name="password" onChange={this.updateDetails}/>
-        </label>*<br/>
-        <label>Confirm:
-          <input type="password" name="confirm_password" onChange={this.updateDetails}/>
-        </label>*<br/>
-        <label>First Name:
-          <input type="text" name="first_name" onChange={this.updateDetails}/>
-        </label>*<br/>
-        <label>Last Name:
-          <input type="text" name="last_name" onChange={this.updateDetails}/>
-        </label>*<br/>
-        <label>About Me:
-          <input type="text" name="about" onChange={this.updateDetails}/>
+        <h1 className="is-danger">{this.props.auth.errorMessage}</h1>
+        <label className={`${labelClass}`}>Username:
+          <input className={`${inputClass} ${user_name.length > 6 ? "is-primary" : "is-danger"}`} type="text" name="user_name" onChange={this.updateDetails}/>
+        </label>
+        <label className={`${labelClass}`}>Password:
+          <input className={`${inputClass} ${password.length >= 8 ? "is-primary" : "is-danger"}`}  type="password" name="password" onChange={this.updateDetails}/>
+        </label>
+        <label className={`${labelClass}`}>Confirm:
+          <input className={`${inputClass} ${password == confirm_password && confirm_password.length >= 8 ? "is-primary" : "is-danger"}`} type="password" name="confirm_password" onChange={this.updateDetails}/>
+        </label>
+        <label className={`${labelClass}`}>First Name:
+          <input className={`${inputClass}`} type="text" name="first_name" onChange={this.updateDetails}/>
+        </label>
+        <label className={`${labelClass}`}>Last Name:
+          <input className={`${inputClass}`}  type="text" name="last_name" onChange={this.updateDetails}/>
+        </label>
+        <label className={`${labelClass}`}>About Me:
+          <input className={`${inputClass} is-dark`} type="textarea" name="about" onChange={this.updateDetails}/>
         </label><br/>
-        <p>* Requied Field</p>
-          <input type="submit" />
+          <input className={`is-large button is-success`} type="submit" />
       </form>
     )
   }

@@ -48,11 +48,11 @@ export default class MyConversations extends React.Component {
         <h1 className="title">Conversations</h1>
         <hr />
         <div className="columns">
-          <div className="column is-4">
+          <div className="column is-3">
             <button className={`button ${showAddConversation ? "is-danger" : "is-info"} is-inverted`} onClick={this.toggleCreateConversation}>{showAddConversation ? "Cancel" : "Create Conversation"}</button>
             {showAddConversation && createConversation()}
           </div>
-          <div className="column is-4">
+          <div className="column is-6 content is-left">
             {conversations.map(renderConversationSingle)}
           </div>
           <IncomingConversationInvites />

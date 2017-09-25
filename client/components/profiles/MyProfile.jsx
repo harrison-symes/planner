@@ -16,6 +16,7 @@ export default class MyProfile extends React.Component {
     return (
       <div className="container">
         <h1 className="title">My Profile</h1>
+        <hr />
         <h1>Hello {first_name}</h1>
         <p>Name: {first_name} {last_name} / ({user_name})</p>
         <p>About Me: {about}</p>

@@ -25,6 +25,7 @@ export default class Login extends React.Component {
     return (
       <div className="container">
         <h1 className="content is-large">Login</h1>
+        <hr />
         <form className="Login" onSubmit={this.submit}>
           <label className="label is-large control has-icons-left">Username:
             <input className="input is-large is-primary" type="text" name="user_name" placeholder='Joshua Vial' onChange={this.updateDetails}/>

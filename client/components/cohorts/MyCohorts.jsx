@@ -24,6 +24,7 @@ export default class MyCohorts extends React.Component {
     return (
       <div className="container">
         <h1 className="title">My Cohorts</h1>
+        <hr />
         {cohorts.length != 0
           ? <div>
             <Link to="/my/cohorts/find/new">Find a Cohort</Link>

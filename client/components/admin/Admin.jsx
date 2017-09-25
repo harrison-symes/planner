@@ -13,6 +13,7 @@ export default class Admin extends React.Component {
           <Router>
             <div>
               <h1 className="title">Admin</h1>
+              <hr />
               <AdminNav />
               <Route path="/my/admin/cohorts/create" component={CreateCohort} />
             </div>

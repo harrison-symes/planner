@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export default function Welcome ({auth}) {
   return (
     <div className="content has-text-centered">
-      <h1 className="title">Welcome To EDA Planner</h1>
+      <h1 className="title is-large">Welcome To EDA Planner</h1>
       <hr ></hr>
       {auth.isAuthenticated
         ? <div>

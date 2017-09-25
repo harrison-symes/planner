@@ -5,10 +5,12 @@ import CreateMessage from '../../containers/conversations/CreateMessage'
 export default function Messages ({messages, conversation_id}) {
   const renderSingleMessage = (message, i) => <MessageSingle key={i} message={message} />
   return (
-    <div>
-      <h3>Messages:</h3>
+    <div className="column is-6">
+      <h3 className="subtitle">Messages:</h3>
       <CreateMessage conversation_id={conversation_id}/>
-      {messages.map(renderSingleMessage)}
+      <div className="" style={{height: "40vh", overflowY: 'scroll'}}>
+        {messages.map(renderSingleMessage)}
+      </div>
     </div>
   )
 }

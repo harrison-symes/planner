@@ -6,10 +6,9 @@ var buttonClass = "navbar-item button is-inverted is-large"
 const navbarStart = (auth) => (
   <div className="navbar-start">
     <Link className={`${buttonClass} is-primary`} to="/my/conversations">Conversations</Link>
-    <Link className={`${buttonClass} is-primary`} to="/my/cohorts/find/new">Find Cohort</Link>
+    <Link className={`${buttonClass} is-primary`} to="/my/cohorts/">Cohorts</Link>
     <Link className={`${buttonClass} is-primary`} to="/my/learning">Learning</Link>
     <Link className={`${buttonClass} is-primary`} to="/my/profile">Profile</Link>
-
     {auth.user.is_admin==true && <Link className={`${buttonClass} is-success is-large`} to="/my/admin">Admin</Link>}
   </div>
 )
@@ -47,6 +46,7 @@ export default class HomeNav extends React.Component {
     if (bool) this.props.logout()
   }
   burgerToggle () {
+    console.log("toggle burger");
     this.setState({burgerShow: !this.state.burgerShow})
   }
   render() {
@@ -65,8 +65,8 @@ export default class HomeNav extends React.Component {
               <span></span>
             </div>
           </div>
-          <div className={`navbar-menu is-info ${burgerShow ? "is-active" : " "}`} id="navMenu">
-            {auth.isAuthenticated && navbarStart(auth)}
+          <div onClick={this.burgerToggle} className={`navbar-menu is-info ${burgerShow ? "is-active" : " "}`} id="navMenu">
+            {auth.isAuthenticated && navbarStart(auth, this.burgerToggle)}
             {navbarEnd(auth.isAuthenticated, showConfirmLogout, this.toggleLogout)}
           </div>
         </header>

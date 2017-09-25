@@ -24,7 +24,7 @@ export default class Login extends React.Component {
     let {username, password} = this.state
     return (
       <div className="container">
-        <h1 className="content is-large">Login</h1>
+        <h1 className="title is-1">Login</h1>
         <hr />
         <form className="Login" onSubmit={this.submit}>
           <label className="label is-large control has-icons-left">Username:

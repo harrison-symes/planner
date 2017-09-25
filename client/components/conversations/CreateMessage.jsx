@@ -6,8 +6,7 @@ export default class CreateMessage extends React.Component {
     this.state = {
       message: {
         content: ''
-      }
-    }
+      }    }
     this.submitMessage = this.submitMessage.bind(this)
     this.updateDetails = this.updateDetails.bind(this)
   }
@@ -23,10 +22,11 @@ export default class CreateMessage extends React.Component {
     this.setState({message})
   }
   render() {
+    let {content} = this.state.message
     return (
-      <form onSubmit={this.submitMessage} >
-        <input onChange={this.updateDetails} type="text" name="content" placeholder="message here :)"/>
-        <input type="submit" />
+      <form className="content" onSubmit={this.submitMessage} >
+        <input className="input is-10" autoComplete="off" onChange={this.updateDetails} type="text" name="content" placeholder="Message"/>
+        <input className={`button is-2 ${content.length < 8 ? " is-danger is-static" : "is-success"}`}  type="submit" />
       </form>
     )
   }

@@ -12,7 +12,6 @@ export default class LearningNav extends React.Component {
   render() {
     return (
       <div>
-        <h1>My Learning Objectives</h1>
         <Link to="/my/learning/">My Learning</Link>
         {" | "}
         <Link to="/my/learning/new">Create LO</Link>

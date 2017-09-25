@@ -22,8 +22,8 @@ export default class MyCohorts extends React.Component {
     let {search} = this.state
     const renderCohort = (cohort, i) => <MyCohortSingle key={i} cohort={cohort} />
     return (
-      <div>
-        <h1>My Cohorts</h1>
+      <div className="container">
+        <h1 className="title">My Cohorts</h1>
         {cohorts.length != 0
           ? <div>
             <Link to="/my/cohorts/find/new">Find a Cohort</Link>

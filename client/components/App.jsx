@@ -35,9 +35,10 @@ export default class Home extends React.Component {
     let {user} = auth
     return <Router>
       <div className="hero is-info is-bold is-fullheight">
+        <Route path='/' component={(props) =>
         <div className="hero-head">
-          <HomeNav />
-        </div>
+          <HomeNav {...props}/>
+        </div>} />
         <div className="hero-body has-text-centered">
           <div className="container">
             <Route path="/login" component={Login} />

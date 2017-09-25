@@ -37,27 +37,32 @@ export default class MyConversations extends React.Component {
     </div>
     const createConversation = () => {
       return (
-        <form className="form" onSubmit={this.submitConversation} >
-          <input className="input " placeholder="Conversation Name" type='text' name="name" onChange={this.updateDetails}/>
-          <input className="button is-success " type="submit"/>
-        </form>
+        <div>
+          <hr />
+          <form className="form" onSubmit={this.submitConversation} >
+            <input className="input " placeholder="Conversation Name" type='text' name="name" onChange={this.updateDetails}/>
+            <input className="button is-success " type="submit"/>
+          </form>
+        </div>
       )
     }
     return (
       <div className="container">
-        <h1 className="title">Conversations</h1>
+        <h1 className="title is-1">Conversations</h1>
         <hr />
         <div className="columns">
           <div className="column is-3">
             <button className={`button ${showAddConversation ? "is-danger" : "is-info is-large"} is-inverted`} onClick={this.toggleCreateConversation}>{showAddConversation ? "Close" : "Create Conversation"}</button>
             {showAddConversation && createConversation()}
           </div>
-          <div className="column is-6 content is-left">
-            {conversations.map(renderConversationSingle)}
+          <div className="column is-6 content">
+          {conversations.length != 0
+            ? conversations.map(renderConversationSingle)
+            : <p className="tag is-large is-warning">You Don't Have Any Current Conversations</p>
+          }
           </div>
           <IncomingConversationInvites />
         </div>
-        <hr />
       </div>
     )
   }

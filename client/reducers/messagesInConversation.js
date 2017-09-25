@@ -4,7 +4,8 @@ export default function messagesReducer (state = [], action) {
     case 'RECEIVE_MESSAGES':
       return [...action.messages]
     case 'CREATE_MESSAGE':
-      return [...state, action.message]
+      newState.unshift(action.message)
+      return newState
     default:
       return state
   }

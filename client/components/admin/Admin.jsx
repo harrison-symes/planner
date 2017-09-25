@@ -12,7 +12,7 @@ export default class Admin extends React.Component {
         {user.is_admin == true &&
           <Router>
             <div>
-              <h1 className="title">Admin</h1>
+              <h1 className="title is-1">Admin</h1>
               <hr />
               <AdminNav />
               <Route path="/my/admin/cohorts/create" component={CreateCohort} />

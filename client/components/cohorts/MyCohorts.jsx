@@ -23,7 +23,7 @@ export default class MyCohorts extends React.Component {
     const renderCohort = (cohort, i) => <MyCohortSingle key={i} cohort={cohort} />
     return (
       <div className="container">
-        <h1 className="title">My Cohorts</h1>
+        <h1 className="title is-1">My Cohorts</h1>
         <hr />
         {cohorts.length != 0
           ? <div>

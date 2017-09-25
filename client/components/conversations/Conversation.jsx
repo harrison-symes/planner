@@ -35,15 +35,18 @@ export default class Conversation extends React.Component {
       this.props.history.push('/my/conversations')
       return <div>Conversation Not Found</div>
     }
-    const renderUser = ({user_id, first_name, user_name}, i) => <h4 key={i}><Link to={`/users/${user_id}/profile`}>{first_name} | ({user_name})</Link></h4>
+    const renderUser = ({user_id, first_name, user_name}, i) => <h4 className="button is-dark is-inverted is-large" key={i}><Link to={`/users/${user_id}/profile`}>{first_name} ({user_name})</Link><br /></h4>
     return (
       <div className="container">
-        <h1 className="title">Conversation: {conversation.name}</h1>
+        <h1 className="title is-3">"{conversation.name}"</h1>
         <Link className="button is-warning" to="/my/conversations">Back</Link>
         <div className="columns">
           <div className="column is-3">
-            <button className={`button is-inverted ${showUsers ? 'is-danger' : 'is-info is-large'}`} onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>
-            {showUsers && users.map(renderUser)}
+            <button className={`button is-inverted ${showUsers ? 'is-danger' : 'is-info is-large'}`} onClick={this.toggleUsers}>{showUsers ? "Hide Members " : `Show ${users.length} Members `} </button>
+            {showUsers && <div>
+              <hr />
+              {users.map(renderUser)}
+            </div>}
           </div>
           <Messages conversation_id={match.params.id} {...this.props}/>
           <div className="column is-3">

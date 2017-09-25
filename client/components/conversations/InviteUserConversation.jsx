@@ -4,7 +4,6 @@ export default class InviteUserConversation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedUser: null
     }
     this.sendInvite = this.sendInvite.bind(this)
   }
@@ -15,23 +14,21 @@ export default class InviteUserConversation extends React.Component {
   sendInvite(user_id) {
     this.props.sendInvite(user_id, this.props.id)
   }
-  selectUser(selectedUser) {
-    this.setState({selectedUser})
-  }
   render() {
-    const renderUserToInvite = (user, i) => <div key={i} onClick={() => this.selectUser(user)}>
-      <h3>{user.first_name} ({user.user_name})</h3>
+    const renderUserToInvite = (user, i) => <div className="level" key={i}>
+      <span className="level-item">
+        <h3 className="subtitle is-5">{user.first_name} <strong>({user.user_name})</strong></h3>
+      </span>
       {!user.is_invited
-        ? user == this.state.selectedUser
-          ? <button onClick={() => this.sendInvite(user.user_id)}>Invite</button>
-          : <div></div>
-        : <p>Invite Sent</p>
+        ? <button className="button is-success level-item" onClick={() => this.sendInvite(user.user_id)}>Invite</button>
+        : <p className="button is-success level-item" disabled="Disabled">Invite Sent</p>
       }
     </div>
     let {users} = this.props
     return (
       <div>
-        <h1>Invite a user</h1>
+        <hr />
+        <h1 className="subtitle is-4">Invite a User</h1>
         {users.map(renderUserToInvite)}
       </div>
     )

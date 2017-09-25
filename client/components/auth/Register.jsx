@@ -51,7 +51,7 @@ export default class Register extends React.Component {
     let inputClass = "input " + (isLoading ? "isloading" : " ")
     return (
       <div className="container">
-        <h1 className="content is-large">Register</h1>
+        <h1 className="title is-1">Register</h1>
         <hr />
         <form className="Register" onSubmit={this.submit}>
           <h1 className="is-danger">{this.props.auth.errorMessage}</h1>

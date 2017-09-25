@@ -9,7 +9,7 @@ export function registerErrorAction (errorMessage) {
   }
 }
 
-export function registerUserRequest ({user_name, password, first_name, last_name, about}) {
+export function registerUserRequest ({user_name, password, first_name, last_name, about}, cb) {
   return (dispatch) => {
     request
       .post('/api/auth/register')
@@ -20,10 +20,11 @@ export function registerUserRequest ({user_name, password, first_name, last_name
       })
       .end((err, res) => {
         if (err) {
-          dispatch(registerErrorAction(err.response.body.message))
+          cb(err.response.body.message)
         }
         else {
           const userInfo = saveUserToken(res.body.token)
+          cb(null)
           dispatch(receiveLogin(userInfo))
           document.location = "/#/"
         }

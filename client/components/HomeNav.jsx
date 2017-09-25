@@ -16,6 +16,7 @@ const navbarStart = (auth, burgerToggle) => (
 
 const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout) => (
   <div className="navbar-end nav-right">
+    <Link className={`${buttonClass} is-success`} to="/">Home</Link>
     {isAuthenticated
       ? showConfirmLogout
         ? <p className="navbar-item align-items is-level">
@@ -25,7 +26,6 @@ const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout) => (
         </p>
         : <Link className={`${buttonClass} is-danger`} to="/" onClick={() => toggleLogout(false)}>Logout</Link>
       : <span className="navbar-item">
-        <Link className={`${buttonClass} is-success`} to="/">Home</Link>
         <Link className={`${buttonClass} is-dark`} to="/login">Login</Link>
         <Link className={`${buttonClass} is-dark`} to="/register">Register</Link>
       </span>

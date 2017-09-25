@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Link} from 'react-router-dom'
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props)
@@ -37,7 +39,8 @@ export default class Login extends React.Component {
             </span>
           </label>
           <br/>
-          <input className="submit button is-large is-success" type="submit" />
+          <Link className="button is-large is-warning" to="/">Back</Link>
+          <input className="submit button is-large is-success" type="submit" value="Login"/>
         </form>
       </div>
     )

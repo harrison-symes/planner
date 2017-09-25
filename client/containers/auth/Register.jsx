@@ -12,7 +12,7 @@ const mapStateToProps = ({auth}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    registerUser: (creds) => dispatch(registerUserRequest(creds)),
+    registerUser: (creds, cb) => dispatch(registerUserRequest(creds, cb)),
     error: (message) => dispatch(registerErrorAction(message))
   }
 }

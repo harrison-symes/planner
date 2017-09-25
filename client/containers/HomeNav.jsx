@@ -4,9 +4,10 @@ import HomeNav from '../components/HomeNav'
 
 import {logoutUser} from '../actions/logout'
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, loading}) => {
   return {
-    auth
+    auth,
+    loading
   }
 }
 

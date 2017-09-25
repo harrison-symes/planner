@@ -32,24 +32,32 @@ export default class MyConversations extends React.Component {
   render() {
     let {conversations} = this.props
     let {showAddConversation, name} = this.state
-    const renderConversationSingle = ({name, id}, i) => <div key={i}>
-      <h3><Link to={`/my/conversations/${id}`}>{name}</Link></h3>
+    const renderConversationSingle = ({name, id}, i) => <div className="subtitle" key={i}>
+      <h3><Link to={`/my/conversations/${id}`}> {name}</Link></h3>
     </div>
     const createConversation = () => {
       return (
-        <form onSubmit={this.submitConversation} >
-          <input type='text' name="name" onChange={this.updateDetails}/>
-          <input type="submit"/>
+        <form className="form" onSubmit={this.submitConversation} >
+          <input className="input " placeholder="Conversation Name" type='text' name="name" onChange={this.updateDetails}/>
+          <input className="button is-success " type="submit"/>
         </form>
       )
     }
     return (
-      <div>
-        <h1>Conversations</h1>
-        <button onClick={this.toggleCreateConversation}>{showAddConversation ? "Cancel" : "Create Conversation"}</button>
-        <IncomingConversationInvites />
-        {showAddConversation && createConversation()}
-        {conversations.map(renderConversationSingle)}
+      <div className="container">
+        <h1 className="title">Conversations</h1>
+        <hr />
+        <div className="columns">
+          <div className="column is-3">
+            <button className={`button ${showAddConversation ? "is-danger" : "is-info"} is-inverted`} onClick={this.toggleCreateConversation}>{showAddConversation ? "Cancel" : "Create Conversation"}</button>
+            {showAddConversation && createConversation()}
+          </div>
+          <div className="column is-6 content is-left">
+            {conversations.map(renderConversationSingle)}
+          </div>
+          <IncomingConversationInvites />
+        </div>
+        <hr />
       </div>
     )
   }

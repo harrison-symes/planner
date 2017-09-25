@@ -37,8 +37,8 @@ export default class Conversation extends React.Component {
     }
     const renderUser = ({user_id, first_name, user_name}, i) => <h4 key={i}><Link to={`/users/${user_id}/profile`}>{first_name} | ({user_name})</Link></h4>
     return (
-      <div>
-        <h1>Conversation: {conversation.name}</h1>
+      <div className="container">
+        <h1 className="title">Conversation: {conversation.name}</h1>
         <Link to="/my/conversations">Back</Link>
         <div>
           <button onClick={this.toggleUsers}>{showUsers ? "Hide Members" : "Show Members"}</button>

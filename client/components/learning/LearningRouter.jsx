@@ -7,8 +7,10 @@ import CreateLearning from '../../containers/learning/CreateLearning'
 
 export default function LearningRouter (props) {
   return (
-    <Router>
+    <Router className="container">
       <div>
+        <h1 className="title">My Learning Objectives</h1>
+        <hr />
         <LearningNav />
         <Route exact path="/my/learning" component={MyLearning} />
         <Route path="/my/learning/new" component={CreateLearning} />

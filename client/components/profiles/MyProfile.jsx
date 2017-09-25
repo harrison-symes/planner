@@ -14,7 +14,9 @@ export default class MyProfile extends React.Component {
     const renderCohort = ({name, id}, i) => <h3 key={i}><Link to={`/my/cohorts/${id}`} >{name}</Link></h3>
 
     return (
-      <div>
+      <div className="container">
+        <h1 className="title">My Profile</h1>
+        <hr />
         <h1>Hello {first_name}</h1>
         <p>Name: {first_name} {last_name} / ({user_name})</p>
         <p>About Me: {about}</p>

@@ -1,6 +1,8 @@
 import request from '../utils/api'
 import { saveUserToken } from '../utils/auth'
 
+import {loadingOnAction, loadingOffAction} from './loading'
+
 function requestLogin () {
   return {
     type: 'LOGIN_REQUEST',
@@ -30,8 +32,10 @@ function loginError (message) {
 export function loginUser (creds) {
   return dispatch => {
     dispatch(requestLogin(creds))
+    dispatch(loadingOnAction())
     return request('post', 'auth/login', creds)
       .then((response) => {
+        dispatch(loadingOffAction())
         if (response.status === 403) {
           alert("Try Again!")
           dispatch(loginError(response.body.message))

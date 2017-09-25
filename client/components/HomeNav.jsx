@@ -14,8 +14,9 @@ const navbarStart = (auth, burgerToggle, path) => (
   </div>
 )
 
-const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout, path) => (
+const navbarEnd = (isAuthenticated, isLoading, showConfirmLogout, toggleLogout, path) => (
   <div className="navbar-end nav-right">
+    {isLoading && <button className="button is-loading is-light">Hello</button>}
     <Link className={`${buttonClass} is-success ${'/' === path ? "is-active" : " "}`} to="/">Home</Link>
     {isAuthenticated
       ? showConfirmLogout
@@ -51,7 +52,7 @@ export default class HomeNav extends React.Component {
     this.setState({burgerShow: !this.state.burgerShow})
   }
   render() {
-    let {auth, logout} = this.props
+    let {auth, logout, loading} = this.props
     console.log(this.props);
     let {showConfirmLogout, burgerShow} = this.state
     return (
@@ -69,7 +70,7 @@ export default class HomeNav extends React.Component {
           </div>
           <div className={`navbar-menu is-info ${burgerShow ? "is-active" : " "}`} id="navMenu">
             {auth.isAuthenticated && navbarStart(auth, this.burgerToggle, this.props.location.pathname)}
-            {navbarEnd(auth.isAuthenticated, showConfirmLogout, this.toggleLogout, this.props.location.pathname)}
+            {navbarEnd(auth.isAuthenticated, loading, showConfirmLogout, this.toggleLogout, this.props.location.pathname)}
           </div>
         </header>
       </section>

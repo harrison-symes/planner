@@ -41,7 +41,6 @@ export default class Register extends React.Component {
       this.setState({isLoading: true})
       this.props.registerUser({...this.state}, (err) => {
         if (err) this.props.error(validation.message)
-        else e.target.reset()
         this.setState({isLoading: false})
       })
     }

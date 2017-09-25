@@ -42,7 +42,7 @@ export default class Home extends React.Component {
           <div className="container">
             <Route path="/login" component={Login} />
             <Route path="/Register" component={Register} />
-            <Route exact path="/" component={Welcome} />
+            <Route exact path="/" component={(props) => <Welcome auth={auth} {...props} />} />
             <Route path="/my/cohorts" component={CohortRouter} />
             <Route exact path="/my/profile" component={MyProfile}/>
             <Route path={"/my/learning"} component={LearningRouter}/>

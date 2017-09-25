@@ -19,8 +19,8 @@ const navbarEnd = (isAuthenticated, showConfirmLogout, toggleLogout) => (
     {isAuthenticated
       ? showConfirmLogout
         ? <p className="navbar-item align-items is-level">
-          <p>Logout?</p>
-          <a className={`${buttonClass} is-warning`} onClick={() => toggleLogout(true)}>Yes</a>
+          <p className="tag is-danger">Logout?</p>
+          <a className={`${buttonClass} is-warning is-hoverable`} onClick={() => toggleLogout(true)}>Yes</a>
           <a className={`${buttonClass} is-danger`} onClick={() => toggleLogout(false)}>No</a>
         </p>
         : <Link className={`${buttonClass} is-danger`} to="/" onClick={() => toggleLogout(false)}>Logout</Link>

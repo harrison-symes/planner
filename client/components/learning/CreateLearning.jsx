@@ -21,7 +21,7 @@ export default class CreateLearning extends React.Component {
   }
   submitPendingObjective () {
     const {pendingObjective} = this.state
-    addObjective(pendingObjective)
+    this.6addObjective(pendingObjective)
     this.setState({pendingObjective: ''})
   }
   updateDetails(e) {
@@ -36,7 +36,7 @@ export default class CreateLearning extends React.Component {
     return (
       <div className="container">
         <h1 className="subtitle is-1">Create Learning Plan</h1>
-        <form onSumbit={this.submit}>
+        <form onSubmit={this.submit}>
         <button className="button is-large is-info is-inverted">See Suggestions</button>
         {viewSuggestions && <LearningSuggestions />}
         <hr />

@@ -44,7 +44,7 @@ export default class MyProfile extends React.Component {
             </div>
             <div className="is-pulled-right column is-one-half">
               <h3 className="subtitle is-3">My Cohorts</h3>
-              <hr />harrison sux
+              <hr />
               {cohorts.map(renderCohort)}
             </div>
           </div>

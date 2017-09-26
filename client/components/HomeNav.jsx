@@ -60,7 +60,8 @@ export default class HomeNav extends React.Component {
         <header className="nav" role="navigation" aria-label="main navigations">
           <div className="navbar-brand ">
             <a className="navbar-item" href="#">
-              <img src="http://bulma.io/images/bulma-logo.png" />
+              <p className="tag is-large is-danger">EDA PLANNER</p>
+              {/* <img src="http://bulma.io/images/bulma-logo.png" /> */}
             </a>
           </div>
           <div onClick={this.burgerToggle} className={`navbar-burger burger button is-success ${burgerShow ? "is-active" : " "}`} data-target="navMenu">

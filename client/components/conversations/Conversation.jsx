@@ -40,6 +40,7 @@ export default class Conversation extends React.Component {
       <div className="container">
         <h1 className="title is-3">"{conversation.name}"</h1>
         <Link className="button is-warning" to="/my/conversations">Back</Link>
+        <hr />
         <div className="columns">
           <div className="column is-3">
             <button className={`button is-inverted ${showUsers ? 'is-danger' : 'is-info is-large'}`} onClick={this.toggleUsers}>{showUsers ? "Hide Members " : `Show ${users.length} Members `} </button>

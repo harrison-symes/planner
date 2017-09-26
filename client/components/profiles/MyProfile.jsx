@@ -12,18 +12,45 @@ export default class MyProfile extends React.Component {
     let {auth, cohorts} = this.props
     let {id, user_name, first_name, last_name, about} = auth.user
     const renderCohort = ({name, id}, i) => <h3 key={i}><Link to={`/my/cohorts/${id}`} >{name}</Link></h3>
-
+    const RenderStats = () => (
+      <div className="tile is-3 is-ancestor has-text-centered">
+        <div className="tile is-vertical is-parent">
+          <span className="tile is-child level is-mobile" >
+            <p className="subtitle is-3 level-item ">Cohorts Joined: </p>
+            <p className="tag is-static is-large is-success level-item">{cohorts.length}</p>
+          </span>
+          <span className="tile is-child level is-mobile" >
+            <p className="subtitle is-3 level-item">Messages Sent: </p>
+            <p className="tag is-static is-large is-success level-item">{cohorts.length}</p>
+          </span>
+          <span className="tile is-child level is-mobile" >
+            <p className="subtitle is-3 level-item">Learning Fufilled: </p>
+            <p className="tag is-static is-large is-success level-item">{cohorts.length}</p>
+          </span>
+        </div>
+      </div>
+    )
     return (
       <div className="container">
         <h1 className="title is-1">My Profile</h1>
         <hr />
-        <h1>Hello {first_name}</h1>
-        <p>Name: {first_name} {last_name} / ({user_name})</p>
-        <p>About Me: {about}</p>
-        <div>
-          <h3>My Cohorts:</h3>
-          {cohorts.map(renderCohort)}
-          {cohorts.length == 0 && <Link to="/my/cohorts/find/new">Find a Cohort</Link>}
+        <div className="columns is-desktop">
+          <div className="column is-6">
+            <p className="subtitle is-2"><strong>{first_name} {last_name} ({user_name})</strong></p>
+            <p className="subtitle is-4">{about}</p>
+            <hr />
+            <div className="is-pulled-left">
+              <RenderStats />
+            </div>
+            <div className="is-pulled-right column is-one-half">
+              <h3 className="subtitle is-3">My Cohorts</h3>
+              <hr />harrison sux
+              {cohorts.map(renderCohort)}
+            </div>
+          </div>
+          <div className="column is-6">
+            Edit Account Here
+          </div>
         </div>
       </div>
     )

@@ -33,7 +33,7 @@ export default class MyCohorts extends React.Component {
         <input className={`input ${filtered.length == 0 ? "is-danger" : "is-primary"} ${search.length > 0 ? "is-focused" : "is-small"}`} type="text" name="search" placeholder="Search My Cohorts" onChange={this.updateSearch} value={search} />
         <hr />
         <div className="content columns">
-          <div className="column">
+          <div className="column is-two-thirds">
             <h1 className="subtitle is-1">My Cohorts</h1>
             <hr />
             {filtered.length > 0 || search.length === 0

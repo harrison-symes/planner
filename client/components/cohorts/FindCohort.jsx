@@ -25,7 +25,7 @@ export default class findCohort extends React.Component {
     const renderCohort = (cohort, i) => <FindCohortSingle selected={cohort === selectedCohort} select={this.selectCohort} cohort={cohort} key={i} />
     if (cohorts.length == 0) return <div></div>
     return (
-      <div className={`column ${selectedCohort ? "is-8" : "is-4"}`}>
+      <div className="column is-one-third">
         <h1 className="subtitle is-1">Find Cohorts</h1>
         <hr />
         <div>
@@ -33,7 +33,6 @@ export default class findCohort extends React.Component {
             ? filtered.map(renderCohort)
             : <p className="tag is-danger is-large">No Matches</p>
           }
-
         </div>
       </div>
     )

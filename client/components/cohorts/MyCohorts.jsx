@@ -36,7 +36,7 @@ export default class MyCohorts extends React.Component {
           <div className="column">
             <h1 className="subtitle is-1">My Cohorts</h1>
             <hr />
-            {filtered.length > 0
+            {filtered.length > 0 || search.length === 0
               ? filtered.map(renderCohort)
               : <p className="tag is-danger is-large">No Matches</p>
             }

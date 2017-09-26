@@ -6,11 +6,11 @@ var buttonClass = "nav-item is-primary is-large"
 const navbarStart = (auth, burgerToggle, path) => (
   <div onClick={burgerToggle} className="navbar-start">
 
-    <Link className={`${buttonClass} is-primary ${'/my/conversations'.includes(path) ? "is-active" : " "}`} to="/my/conversations">Conversations</Link>
-    <Link className={`${buttonClass} is-primary ${'/my/cohorts'.includes(path) ? "is-active" : " "}`} to="/my/cohorts">Cohorts</Link>
-    <Link className={`${buttonClass} is-primary ${'/my/learning'.includes(path) ? "is-active" : " "}`} to="/my/learning">Learning</Link>
-    <Link className={`${buttonClass} is-primary ${'/my/profile'.includes(path) ? "is-active" : " "}`} to="/my/profile">Profile</Link>
-    {auth.user.is_admin==true && <Link className={`${buttonClass} is-success ${'/my/admin'.includes(path) ? "is-active" : " "}`} to="/my/admin">Admin</Link>}
+    <Link className={`${buttonClass} is-primary ${path.includes('/my/conversations') ? "is-active" : " "}`} to="/my/conversations">Conversations</Link>
+    <Link className={`${buttonClass} is-primary ${path.includes('/my/cohorts') ? "is-active" : " "}`} to="/my/cohorts">Cohorts</Link>
+    <Link className={`${buttonClass} is-primary ${path.includes('/my/learning') ? "is-active" : " "}`} to="/my/learning">Learning</Link>
+    <Link className={`${buttonClass} is-primary ${path.includes('/my/profile') ? "is-active" : " "}`} to="/my/profile">Profile</Link>
+    {auth.user.is_admin==true && <Link className={`${buttonClass} is-success ${path.includes('/my/admin') ? "is-active" : " "}`} to="/my/admin">Admin</Link>}
   </div>
 )
 

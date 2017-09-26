@@ -33,10 +33,8 @@ export default class Home extends React.Component {
     let {user} = auth
     return <Router>
       <div className="hero is-info is-bold is-fullheight">
-        <Route path='/' component={(props) =>
-        <div className="hero-head">
-          <HomeNav {...props}/>
-        </div>} />
+        <Route path='/'
+          component={(props) => <div className="hero-head"> <HomeNav {...props}/></div>} />
         <div className="hero-body has-text-centered">
           <div className="container">
             <Route path="/" exact component={(props) => <Welcome auth={auth} {...props} />} />
@@ -47,13 +45,10 @@ export default class Home extends React.Component {
             <Route path="/my/learning" component={LearningRouter}/>
             {user && user.is_admin == true && <Route path="/my/admin" component={Admin}/>}
             <Route path="/my/conversations" component={ConversationRouter} />
-            <Route path="/users/:id/profile" component={(props) => <UserProfile {...props} /> } />
+            <Route path="/users/:id/profile" component={(props) => <UserProfile {...props} /> }/>
           </div>
         </div>
-        <div className="hero-foot">
-          Hello
-        </div>
-    </div>
-  </Router>
+      <div className="hero-foot"> Hello </div> </div>
+    </Router>
   }
 }

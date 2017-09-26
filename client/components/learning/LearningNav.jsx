@@ -12,9 +12,9 @@ export default class LearningNav extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/my/learning/">My Learning</Link>
-        {" | "}
-        <Link to="/my/learning/new">Create LO</Link>
+        {/* <Link to="/my/learning/">My Learning</Link>
+        {" | "} */}
+        {/* <Link to="/my/learning/new">Create LO</Link> */}
       </div>
     )
   }

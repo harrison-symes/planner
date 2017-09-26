@@ -8,8 +8,7 @@ export default class MyCohorts extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      search: '',
-      showFindCohort: false
+      search: ''
     }
     this.updateSearch = this.updateSearch.bind(this)
     this.toggleFindCohort = this.toggleFindCohort.bind(this)
@@ -25,7 +24,7 @@ export default class MyCohorts extends React.Component {
   }
   render() {
     let {cohorts} = this.props
-    let {search, showFindCohort} = this.state
+    let {search} = this.state
     let filtered = cohorts.filter(c => c.name.toLowerCase().includes(search))
     const renderCohort = (cohort, i) => <MyCohortSingle key={i} cohort={cohort} />
     return (
@@ -33,11 +32,8 @@ export default class MyCohorts extends React.Component {
         <h1 className="title is-1">Cohorts</h1>
         <hr />
         <div className="content columns">
-          <div className="column is-6">
-            <button className={`button is-inverted ${showFindCohort ? "is-danger" : 'is-info is-large'}`} onClick={this.toggleFindCohort}>{showFindCohort ? "Close" : "Find a Cohort"}</button>
-            {showFindCohort && <FindCohort />}
-          </div>
-          <div className="column is-6">
+          <FindCohort />
+          <div className="column">
             <h1 className="subtitle is-1">My Cohorts</h1>
             <input className={`input ${filtered.length == 0 ? "is-danger" : "is-primary"} ${search.length > 0 ? "is-focused" : "is-small"}`} type="text" name="search" placeholder="Search My Cohorts" onChange={this.updateSearch} value={search} />
             <hr />

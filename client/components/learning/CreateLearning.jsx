@@ -45,13 +45,8 @@ export default class CreateLearning extends React.Component {
         <h1 className="subtitle is-1">Create Learning Plan</h1>
         <hr />
         <div className="columns">
-          <span className="column">
-            <SelectedSuggestions toggle={this.toggleSuggestions} show={showSuggestions}/>
-          </span>
-          <span className='column'>
-            {/* <p className="subtitle is-3">Selected Objectives:</p> */}
-            <LearningSuggestions toggle={this.toggleSelected} show={showSelected} />
-          </span>
+          <SelectedSuggestions toggle={this.toggleSuggestions} show={showSuggestions}/>
+          <LearningSuggestions toggle={this.toggleSelected} show={showSelected} />
           <span className="column">
             <button onClick={this.toggleAddObjective} className={`button ${showAddObjective ? "is-danger" : "is-info is-large"} is-inverted`}>{showAddObjective ? "Cancel": "Create Objective"}</button>
             {showAddObjective && <label className="label column">New Objective:
@@ -60,6 +55,7 @@ export default class CreateLearning extends React.Component {
             </label>}
           </span>
         </div>
+        <hr />
         <form onSubmit={this.submit}>
           <label className="label">Describe Plan:
             <input className="textarea is-primary has-text-centered" type="textarea" placeholder="Describe your plan" name="plan" />

@@ -2,16 +2,13 @@ import React from 'react'
 
 import LearningSuggestions from '../../containers/learning/LearningSuggestions'
 import SelectedSuggestions from '../../containers/learning/SelectedSuggestions'
+import CreateObjective from '../../containers/learning/CreateObjective'
 
 export default class CreateLearning extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showAddObjective: false,
-      showSuggestions: false,
-      showSelected: false,
       plan: '',
-      pendingObjective: '',
     }
     this.submit = this.submit.bind(this)
     this.updateDetails = this.updateDetails.bind(this)
@@ -39,21 +36,14 @@ export default class CreateLearning extends React.Component {
     console.log(this.state);
   }
   render() {
-    const {showSuggestions, pendingObjective, showAddObjective, showSelected} = this.state
     return (
       <div className="container">
         <h1 className="subtitle is-1">Create Learning Plan</h1>
         <hr />
         <div className="columns">
-          <SelectedSuggestions toggle={this.toggleSuggestions} show={showSuggestions}/>
-          <LearningSuggestions toggle={this.toggleSelected} show={showSelected} />
-          <span className="column">
-            <button onClick={this.toggleAddObjective} className={`button ${showAddObjective ? "is-danger" : "is-info is-large"} is-inverted`}>{showAddObjective ? "Cancel": "Create Objective"}</button>
-            {showAddObjective && <label className="label column">New Objective:
-              <input className="input is-success has-text-centered" type="text" name="pendingObjective" placeholder="New Objective" onChange={this.updateDetails} value={pendingObjective}/>
-              <button className="button is-success" onClick={this.submitPendingObjective}>Add Objective</button>
-            </label>}
-          </span>
+          <SelectedSuggestions />
+          <LearningSuggestions />
+          <CreateObjective />
         </div>
         <hr />
         <form onSubmit={this.submit}>

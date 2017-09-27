@@ -13,7 +13,7 @@ export function cancelLearningSuggestionAction (suggestion) {
   }
 }
 
-export function createLearningSuggestionRequest (suggestion) {
+export function createLearningObjectiveRequest (suggestion) {
   return (dispatch) => {
     request('get', 'learning/suggestions', suggestion)
       .then(res => dispatch(selectLearningSuggestionAction(res.body)))

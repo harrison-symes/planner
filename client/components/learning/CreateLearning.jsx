@@ -1,5 +1,8 @@
 import React from 'react'
 
+import LearningSuggestions from '../../containers/learning/LearningSuggestions'
+import SelectedSuggestions from '../../containers/learning/SelectedSuggestions'
+
 export default class CreateLearning extends React.Component {
   constructor(props) {
     super(props)
@@ -78,15 +81,14 @@ export default class CreateLearning extends React.Component {
         <h1 className="subtitle is-1">Create Learning Plan</h1>
         <hr />
         <div className="columns">
-          {suggestions.length != 0 && <span className="column">
+          <span className="column">
             <button onClick={this.toggleSuggestions} className={`button ${viewSuggestions ? "is-danger" : "is-info is-large"} is-inverted`}>{viewSuggestions ? "Hide Suggestions": "See Suggestions"}</button>
-            {viewSuggestions && renderSuggestions(suggestions, true)}
-          </span>}
-          {suggested.length != 0 && <span className='column'>
+            {viewSuggestions && <SelectedSuggestions />}
+          </span>
+          <span className='column'>
             <p className="subtitle is-3">Selected Objectives:</p>
-            {renderSuggestions(suggested)}
-          </span>}
-          {showAddObjective}
+            <LearningSuggestions />
+          </span>
           <span className="column">
             <button onClick={this.toggleAddObjective} className={`button ${showAddObjective ? "is-danger" : "is-info is-large"} is-inverted`}>{showAddObjective ? "Cancel": "Create Objective"}</button>
             {showAddObjective && <label className="label column">New Objective:

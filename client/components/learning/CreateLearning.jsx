@@ -9,6 +9,7 @@ export default class CreateLearning extends React.Component {
     this.state = {
       showAddObjective: false,
       showSuggestions: false,
+      showSelected: false,
       plan: '',
       pendingObjective: '',
     }
@@ -16,6 +17,7 @@ export default class CreateLearning extends React.Component {
     this.updateDetails = this.updateDetails.bind(this)
     this.submitPendingObjective = this.submitPendingObjective.bind(this)
     this.toggleSuggestions = this.toggleSuggestions.bind(this)
+    this.toggleSelected = this.toggleSelected.bind(this)
     this.toggleAddObjective = this.toggleAddObjective.bind(this)
   }
   toggleAddObjective () {
@@ -23,6 +25,9 @@ export default class CreateLearning extends React.Component {
   }
   toggleSuggestions () {
     this.setState({showSuggestions: !this.state.showSuggestions})
+  }
+  toggleSelected () {
+    this.setState({showSelected: !this.state.showSelected})
   }
   submitPendingObjective () {
     console.log(pendingObjective);
@@ -34,19 +39,18 @@ export default class CreateLearning extends React.Component {
     console.log(this.state);
   }
   render() {
-    const {showSuggestions, pendingObjective, showAddObjective} = this.state
+    const {showSuggestions, pendingObjective, showAddObjective, showSelected} = this.state
     return (
       <div className="container">
         <h1 className="subtitle is-1">Create Learning Plan</h1>
         <hr />
         <div className="columns">
           <span className="column">
-            <button onClick={this.toggleSuggestions} className={`button ${showSuggestions ? "is-danger" : "is-info is-large"} is-inverted`}>{showSuggestions ? "Hide Suggestions": "See Suggestions"}</button>
-            {showSuggestions && <SelectedSuggestions toggle={this.toggleSuggestions} show={showSuggestions}/>}
+            <SelectedSuggestions toggle={this.toggleSuggestions} show={showSuggestions}/>
           </span>
           <span className='column'>
-            <p className="subtitle is-3">Selected Objectives:</p>
-            <LearningSuggestions />
+            {/* <p className="subtitle is-3">Selected Objectives:</p> */}
+            <LearningSuggestions toggle={this.toggleSelected} show={showSelected} />
           </span>
           <span className="column">
             <button onClick={this.toggleAddObjective} className={`button ${showAddObjective ? "is-danger" : "is-info is-large"} is-inverted`}>{showAddObjective ? "Cancel": "Create Objective"}</button>

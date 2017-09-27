@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function ({suggestions, isSelected, selectSuggestion, show, toggle}) {
-  const buttonDisplay = isSelected ? "Selected" : "Suggestions"
+  const buttonDisplay = isSelected ? "Suggestions" : "Selected"
   return suggestions.length != 0
     ? (<span className="column">
       <button onClick={toggle} className={`button ${show ? "is-danger" : "is-info is-large"} is-inverted`}>{show ? `Hide ${buttonDisplay}`: `See ${buttonDisplay}`}</button>

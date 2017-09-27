@@ -61,7 +61,7 @@ export default class CreateLearning extends React.Component {
     console.log({objectives, suggestions});
     const renderSuggestion = (suggestion, i) => {
       return suggestionCount >= (i+1) ?
-      <p onClick={() => this.addSuggested(suggestion)} className="button is-large is-warning ">{suggestion.title}</p>
+      <p key={i} onClick={() => this.addSuggested(suggestion)} className="button is-large is-warning ">{suggestion.title}</p>
       : <p></p>
     }
     const renderSuggestions = (suggestions) => (
@@ -77,15 +77,18 @@ export default class CreateLearning extends React.Component {
           {viewSuggestions && renderSuggestions(suggestions)}
         </span>
         }
-        {renderSuggestions(suggested)}
         <hr />
         <form onSubmit={this.submit}>
         <label className="label">New Objective:
-          <input className="input is-success" type="text" name="pendingObjective" placeholder="New Objective" onChange={this.updateDetails} value={pendingObjective}/>
+          <input className="input is-success has-text-centered" type="text" name="pendingObjective" placeholder="New Objective" onChange={this.updateDetails} value={pendingObjective}/>
           <button className="button is-success" onClick={this.submitPendingObjective}>Add Objective</button>
         </label>
+        {suggested.length != 0 && <span>
+          <p className="subtitle is-3">Selected Objectives:</p>
+          {renderSuggestions(suggested)}
+        </span>}
         <label className="label">Describe Plan:
-          <input className="textarea is-primary" type="textarea" placeholder="Describe your plan" name="plan" />
+          <input className="textarea is-primary has-text-centered" type="textarea" placeholder="Describe your plan" name="plan" />
         </label>
         <input className="button is-success is-large" type="submit" value="Submit Learning Plan"/>
       </form>

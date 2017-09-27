@@ -12,22 +12,6 @@ export default class CreateLearning extends React.Component {
     }
     this.submit = this.submit.bind(this)
     this.updateDetails = this.updateDetails.bind(this)
-    this.submitPendingObjective = this.submitPendingObjective.bind(this)
-    this.toggleSuggestions = this.toggleSuggestions.bind(this)
-    this.toggleSelected = this.toggleSelected.bind(this)
-    this.toggleAddObjective = this.toggleAddObjective.bind(this)
-  }
-  toggleAddObjective () {
-    this.setState({showAddObjective: !this.state.showAddObjective})
-  }
-  toggleSuggestions () {
-    this.setState({showSuggestions: !this.state.showSuggestions})
-  }
-  toggleSelected () {
-    this.setState({showSelected: !this.state.showSelected})
-  }
-  submitPendingObjective () {
-    console.log(pendingObjective);
   }
   updateDetails(e) {
     this.setState({[e.target.name]: e.target.value})

@@ -19,9 +19,9 @@ export default class findCohort extends React.Component {
     this.setState({selectedCohort})
   }
   render() {
-    let {selectedCohort} = this.state
-    let {auth, cohorts, search} = this.props
-    let filtered = cohorts.filter(c => c.name.toLowerCase().includes(search))
+    const {selectedCohort} = this.state
+    const {auth, cohorts, search} = this.props
+    const filtered = cohorts.filter(c => c.name.toLowerCase().includes(search))
     const renderCohort = (cohort, i) => <FindCohortSingle selected={cohort === selectedCohort} select={this.selectCohort} cohort={cohort} key={i} />
     if (cohorts.length == 0) return <div></div>
     return (

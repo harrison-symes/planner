@@ -4,7 +4,7 @@ export default class LearningSuggestion extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: false
+      show: !props.isSelected
     }
     this.toggle = this.toggle.bind(this)
   }

@@ -1,9 +1,8 @@
-const getMessageById = (db, id) => db('messages')
-  .join('conversations', 'messages.conversation_id', 'conversations.id')
-  .join('users', 'messages.user_id', 'users.id')
-  .where('messages.id', id)
-  .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
-  .first()
+const getMessageById = (db, id) => db('messages') .join('conversations',
+'messages.conversation_id', 'conversations.id') .join('users',
+'messages.user_id', 'users.id') .where('messages.id', id)
+.select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
+.first()
 
 const getOutgoingInviteById = (db, invite_id) => db
 .select('users.first_name', 'users.user_name', 'users.id as user_id')

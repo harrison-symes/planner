@@ -28,6 +28,21 @@ export function getLearningSuggestionsRequest () {
   }
 }
 
+export function receiveLearningPlansAction (learningPlans) {
+  return {
+    type: 'RECEIVE_LEARNING_PLANS',
+    learningPlans
+  }
+}
+
+export function getLearningPlansRequest() {
+  return (dispatch) => {
+    request('get', 'learning')
+      .then(res => dispatch(receiveLearningPlansAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}
+
 export function postLearningObjectiveRequest (objective, cb) {
   return (dispatch) => {
     request('post', 'learning/objectives', objective)

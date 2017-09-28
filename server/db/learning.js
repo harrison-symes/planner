@@ -2,6 +2,10 @@ const getLearningObjectiveById = (db, id) => db('learningObjectives')
   .where('id', id)
   .first()
 
+const getLearningPlanById = (db, id) => db('learningPlans')
+  .where('id', id)
+  .first()
+
 module.exports = {
   getLearningObjectiveById,
   insertLearningObjective: (db, objective) => db('learningObjectives')
@@ -19,5 +23,10 @@ module.exports = {
     .where('user_id', user_id),
   getObjectivesByPlanId: (db, learning_plan_id) => db('learningObjectives')
     .join('objectivesInPlans', 'learningObjectives.id', 'objectivesInPlans.objective_id')
-    .join('learningPlans', 'objectivesInPlans.learning_plan_id', 'learningPlans.id')
+    .join('learningPlans', 'objectivesInPlans.learning_plan_id', 'learningPlans.id'),
+  insertLeaningPlan: (db, plan) => db('learningPlans')
+    .insert(plan),
+  insertObjectivesArray: (db, objectives) => db('objectivesInPlans')
+    .insert(objectives),
+  getLearningPlanById
 }

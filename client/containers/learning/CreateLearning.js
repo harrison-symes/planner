@@ -2,17 +2,18 @@ import {connect} from 'react-redux'
 
 import CreateLearning from '../../components/learning/CreateLearning'
 
-import {getLearningSuggestionsRequest} from '../../actions/learningPlan'
+import {getLearningSuggestionsRequest, postLearningPlanRequest} from '../../actions/learningPlan'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({selectedLearningSuggestions}) => {
   return {
-
+    objectives: selectedLearningSuggestions
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    getSuggestions: () => dispatch(getLearningSuggestionsRequest())
+    getSuggestions: () => dispatch(getLearningSuggestionsRequest()),
+    submitPlan: (plan) => dispatch(postLearningPlanRequest(plan))
   }
 }
 

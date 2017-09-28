@@ -6,5 +6,7 @@ module.exports = {
   getLearningObjectiveById,
   insertLearningObjective: (db, objective) => db('learningObjectives')
     .insert(objective, 'id')
-    .then(id => getLearningObjectiveById(db, id[0]))
+    .then(id => getLearningObjectiveById(db, id[0])),
+  getObjectivesByUserIds: (db, user_ids) => db('learningObjectives')
+    .whereIn('user_id', user_ids)
 }

@@ -1,6 +1,7 @@
-export default function (state = [{title: 'Hello'}], action) {
+export default function (state = [], action) {
   switch(action.type) {
     case 'SELECT_LEARNING_SUGGESTION':
+    console.log({state, action});
       return [...state, action.suggestion]
     case 'CANCEL_LEARNING_SUGGESTION':
       return [...state].filter(c => c != action.suggestion)

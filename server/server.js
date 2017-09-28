@@ -16,6 +16,7 @@ server.use('/api/auth', require('./routes/auth'))
 server.use('/api/cohorts', require('./routes/cohorts'))
 server.use('/api/conversations', require('./routes/conversations'))
 server.use('/api/users', require('./routes/users'))
+server.use('/api/learning', require('./routes/learning'))
 
 
 module.exports = server

@@ -15,6 +15,15 @@ const purgeDuplicate = (users) => {
   return singles
 }
 
+const purgeDuplicateObjectives = (objectives) => {
+  let singles = []
+  objectives.forEach((objective) => {
+    if (!singles.find(single => single.id == objective.id)) singles.push(objective)
+  })
+  return singles
+}
+
+
 
 router.get('/', (req, res) => {
   getLearningPlansByUser(getDb(req), 1)
@@ -25,8 +34,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/suggestions', decode, (req, res) => {
-  // getDb(req)('learningObjectives')
-  // .then(objectives => res.json(objectives))
   getUserCohorts(getDb(req), req.user.id)
     .then(cohorts => {
       getUsersToInvite(getDb(req), cohorts.map(c => c.id))
@@ -34,7 +41,10 @@ router.get('/suggestions', decode, (req, res) => {
           users = purgeDuplicate(users).map(u => u.user_id)
           getObjectivesByUserIds(getDb(req), users)
             .then(objectives => {
-              res.json(objectives)
+              getJoinedObjectivesByUserIds(getDb(req), users)
+                .then(joinedObjectives => {
+                  res.json(purgeDuplicateObjectives(objectives.concat(joinedObjectives)))
+                })
             })
         })
     })

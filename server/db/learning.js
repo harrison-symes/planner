@@ -12,7 +12,9 @@ module.exports = {
     .select('learningObjectives.title', 'learningObjectives.id'),
   getJoinedObjectivesByUserIds: (db, user_ids) => db('objectivesInPlans')
     .join('learningPlans', 'objectivesInPlans.learning_plan_id', 'learningPlans.user_id')
-    .whereIn('learningPlans.user_id', user_ids),
+    .join('learningObjectives', 'objectivesInPlans.objective_id', 'learningObjectives.id')
+    .whereIn('learningPlans.user_id', user_ids)
+    .select('learningObjectives.title', "learningObjectives.id"),
   getLearningPlansByUser: (db, user_id) => db('learningPlans')
     .where('user_id', user_id),
   getObjectivesByPlanId: (db, learning_plan_id) => db('learningObjectives')

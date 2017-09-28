@@ -14,7 +14,7 @@ const getMessageById = (db, id) => db('messages')
   .first()
 
   const addUserToConversation = (db, conversation_id, user_id) => db('usersInConversations')
-    .insert({conversation_id, user_id})
+    .insert({conversation_id, user_id},'id')
 
   const getConversationById = (db, conversation_id) => db('conversations')
     .where('id', conversation_id)

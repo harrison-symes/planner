@@ -56,7 +56,7 @@ export default class HomeNav extends React.Component {
     console.log(this.props);
     let {showConfirmLogout, burgerShow} = this.state
     return (
-      <section className="section is-info has-text-centered">
+      <section className=" is-info has-text-centered">
         <header className="nav" role="navigation" aria-label="main navigations">
           <div className="navbar-brand ">
             <a className="navbar-item" href="#">

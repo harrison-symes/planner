@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const {decode} = require('../auth/token')
-const {insertLearningObjective, getObjectivesByUserIds, getJoinedObjectivesByUserIds, getLearningPlansByUser, getObjectivesByPlanId} = require('../db/learning')
+const {insertLearningObjective, getObjectivesByUserIds, getJoinedObjectivesByUserIds, getLearningPlansByUser, getObjectivesByPlanId, insertObjectivesArray, insertLeaningPlan, getLearningPlanById} = require('../db/learning')
 const {getUserCohorts} = require('../db/cohorts')
 const {getUsersToInvite} = require('../db/users')
 
@@ -54,8 +54,19 @@ router.get('/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.post('/', (req, res) => {
-  res.json('posted learning')
+router.post('/', decode, (req, res) => {
+  const plan = {plan: req.body.plan, user_id: req.user.id}
+  insertLeaningPlan(getDb(req), plan)
+    .then(plan_id => {
+      const objectives = (req.body.objectives || []).map(obj =>  ({objective_id: obj.id, learning_plan_id: plan_id[0]}) )
+      console.log({objectives});
+      if (objectives.length != 0) {
+        insertObjectivesArray(getDb(req), objectives)
+        .then(() => getLearningPlanById(getDb(req), plan_id[0])
+        .then(plan => res.json(plan)))
+      } else getLearningPlanById(getDb(req), plan_id[0])
+        .then(plan => res.json(plan))
+    })
 })
 
 router.post('/objectives', decode, (req, res) => {

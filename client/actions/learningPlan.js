@@ -1,7 +1,6 @@
 import request from '../utils/api'
 
 export function selectLearningSuggestionAction (suggestion) {
-  console.log({suggestion});
   return {
     type: 'SELECT_LEARNING_SUGGESTION',
     suggestion
@@ -39,6 +38,18 @@ export function postLearningObjectiveRequest (objective, cb) {
       .catch(err => {
         console.log(err)
         cb(err)
+      })
+  }
+}
+export function postLearningPlanRequest (plan) {
+  return (dispatch) => {
+    request('post', 'learning', plan)
+      .then(res => {
+        console.log({res});
+        // dispatch(selectLearningSuggestionAction(res.body))
+      })
+      .catch(err => {
+        console.log(err)
       })
   }
 }

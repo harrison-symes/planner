@@ -14,6 +14,21 @@ export function cancelLearningSuggestionAction (suggestion) {
   }
 }
 
+export function receiveLearningSuggestionsAction (suggestions) {
+  return {
+    type: 'RECEIVE_LEARNING_SUGGESTIONS',
+    suggestions
+  }
+}
+
+export function getLearningSuggestionsRequest () {
+  return (dispatch) => {
+    request('get', 'learning/suggestions')
+      .then(res => dispatch(receiveLearningSuggestionsAction(res.body)))
+      .catch(err => console.log(err))
+  }
+}
+
 export function postLearningObjectiveRequest (objective, cb) {
   return (dispatch) => {
     request('post', 'learning/objectives', objective)

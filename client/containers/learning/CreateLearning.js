@@ -2,6 +2,8 @@ import {connect} from 'react-redux'
 
 import CreateLearning from '../../components/learning/CreateLearning'
 
+import {getLearningSuggestionsRequest} from '../../actions/learningPlan'
+
 const mapStateToProps = (state) => {
   return {
 
@@ -10,7 +12,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    getSuggestions: () => dispatch(getLearningSuggestionsRequest())
   }
 }
 

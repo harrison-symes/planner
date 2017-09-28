@@ -28,15 +28,9 @@ router.get('/suggestions', (req, res) => {
   // .then(objectives => res.json(objectives))
   getUserCohorts(getDb(req), 1)
     .then(cohorts => {
-      cohorts = cohorts.map(c => c.id)
-      console.log({cohorts});
-      getUsersToInvite(getDb(req), cohorts)
+      getUsersToInvite(getDb(req), cohorts.map(c => c.id))
         .then(users => {
-          users = purgeDuplicate(users)
-          console.log({users});
-
-          users = users.map(u => u.user_id)
-          console.log({users});
+          users = purgeDuplicate(users).map(u => u.user_id)
           getObjectivesByUserIds(getDb(req), users)
             .then(objectives => {
               res.json(objectives)

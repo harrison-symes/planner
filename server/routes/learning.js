@@ -23,8 +23,6 @@ const purgeDuplicateObjectives = (objectives) => {
   return singles
 }
 
-
-
 router.get('/', (req, res) => {
   getLearningPlansByUser(getDb(req), 1)
     .then(plans => {

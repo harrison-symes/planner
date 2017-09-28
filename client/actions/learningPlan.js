@@ -1,6 +1,7 @@
 import request from '../utils/api'
 
 export function selectLearningSuggestionAction (suggestion) {
+  console.log({suggestion});
   return {
     type: 'SELECT_LEARNING_SUGGESTION',
     suggestion
@@ -13,10 +14,16 @@ export function cancelLearningSuggestionAction (suggestion) {
   }
 }
 
-export function createLearningObjectiveRequest (suggestion) {
+export function postLearningObjectiveRequest (objective, cb) {
   return (dispatch) => {
-    request('get', 'learning/suggestions', suggestion)
-      .then(res => dispatch(selectLearningSuggestionAction(res.body)))
-      .catch(err => console.log(err))
+    request('post', 'learning/objectives', objective)
+      .then(res => {
+        dispatch(selectLearningSuggestionAction(res.body))
+        cb(null)
+      })
+      .catch(err => {
+        console.log(err)
+        cb(err)
+      })
   }
 }

@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import CreateObjective from '../../components/learning/CreateObjective'
 
-import {createLearningObjectiveRequest} from '../../actions/learningPlan'
+import {postLearningObjectiveRequest} from '../../actions/learningPlan'
 
 const mapStateToProps = () => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createObjective: (objective) => dispatch(createLearningObjectiveRequest(objective))
+    createObjective: (objective, cb) => dispatch(postLearningObjectiveRequest(objective, cb))
   }
 }
 

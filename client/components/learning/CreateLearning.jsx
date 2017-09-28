@@ -25,8 +25,8 @@ export default class CreateLearning extends React.Component {
         <h1 className="subtitle is-1">Create Learning Plan</h1>
         <hr />
         <div className="columns">
-          <SelectedSuggestions />
           <LearningSuggestions />
+          <SelectedSuggestions />
           <CreateObjective />
         </div>
         <hr />

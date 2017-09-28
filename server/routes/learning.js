@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const {decode} = require('../auth/token')
-const {insertLearningObjective, getObjectivesByUserIds} = require('../db/learning')
+const {insertLearningObjective, getObjectivesByUserIds, getJoinedObjectivesByUserIds, getLearningPlansByUser, getObjectivesByPlanId} = require('../db/learning')
 const {getUserCohorts} = require('../db/cohorts')
 const {getUsersToInvite} = require('../db/users')
 
@@ -15,18 +15,19 @@ const purgeDuplicate = (users) => {
   return singles
 }
 
+
 router.get('/', (req, res) => {
-  res.json('my learning')
+  getLearningPlansByUser(getDb(req), 1)
+    .then(plans => {
+      res.json(plans)
+    })
+    .catch(err => console.log(err))
 })
 
-router.post('/', (req, res) => {
-  res.json('posted learning')
-})
-
-router.get('/suggestions', (req, res) => {
+router.get('/suggestions', decode, (req, res) => {
   // getDb(req)('learningObjectives')
   // .then(objectives => res.json(objectives))
-  getUserCohorts(getDb(req), 1)
+  getUserCohorts(getDb(req), req.user.id)
     .then(cohorts => {
       getUsersToInvite(getDb(req), cohorts.map(c => c.id))
         .then(users => {
@@ -37,6 +38,16 @@ router.get('/suggestions', (req, res) => {
             })
         })
     })
+})
+
+router.get('/:id', (req, res) => {
+  getObjectivesByPlanId(getDb(req), req.params.id)
+    .then(objectives => res.json(objectives))
+    .catch(err => console.log(err))
+})
+
+router.post('/', (req, res) => {
+  res.json('posted learning')
 })
 
 router.post('/objectives', decode, (req, res) => {

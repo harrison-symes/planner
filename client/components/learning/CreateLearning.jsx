@@ -13,6 +13,9 @@ export default class CreateLearning extends React.Component {
     this.submit = this.submit.bind(this)
     this.updateDetails = this.updateDetails.bind(this)
   }
+  componentWillMount() {
+    this.props.getSuggestions()
+  }
   updateDetails(e) {
     this.setState({[e.target.name]: e.target.value})
   }

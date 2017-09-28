@@ -38,7 +38,7 @@ export default class CreateLearning extends React.Component {
         <hr />
         <form onSubmit={this.submit}>
           <label className="label">Describe Plan:
-            <input className="textarea is-primary has-text-centered" onChange={this.updateDetails} type="textarea" placeholder="Describe your plan" name="plan" />
+            <input className="textarea is-primary has-text-centered" onChange={this.updateDetails} type="textarea" autoComplete="off" placeholder="Describe your plan" name="plan" />
           </label>
           <input className="button is-success is-large" type="submit" value="Submit Learning Plan"/>
         </form>

@@ -5,7 +5,6 @@ import {getWeekSpan, getDayName, isThisWeek} from '../../utils/moment'
 
 export default class LearningPlans extends React.Component {
   render() {
-    console.log(this.props);
     const {learningPlans} = this.props
     const renderPlanPreview = (plan, i) => <div className={`button is-large content has-text-centered column is-12 ${isThisWeek(plan.created_at) ? "is-primary": (plan.is_reflected ? (plan.is_reviewed ? "is-success" : "is-warning") : "is-danger")}`} key={i}>
       <p>{getWeekSpan(plan.created_at)}</p>

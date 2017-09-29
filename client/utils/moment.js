@@ -31,3 +31,8 @@ export function getDayName (date) {
 export function isThisWeek (date) {
   return getWeekSpan(date) == getWeekSpan(new Date())
 }
+
+export function getDaysLeft () {
+  const today = new Date()
+  return 7 - (today.getDay() === 0 ? 7 : today.getDay())
+}

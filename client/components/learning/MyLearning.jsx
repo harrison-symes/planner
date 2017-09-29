@@ -12,8 +12,8 @@ export default class MyLearning extends React.Component {
     return (
       <div className="container">
         <h1 className="title is-1">My Learning</h1>
-        <div className="columns section">
-          <p className="tag is-large is-primary column">In Progress  </p>
+        <div className="columns section is-mobile">
+          <p className="tag is-large is-primary column">In Progress</p>
           <p className="tag is-large is-danger column">Needs Reflection</p>
           <p className="tag is-large is-warning column">Reflected</p>
           <p className="tag is-large is-success column">Reviewed + Reflected</p>

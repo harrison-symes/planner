@@ -4,7 +4,7 @@ module.exports = {
     .where('id', id)
     .first(),
   joinCohort: (db, cohort_id, user_id) => db('usersInCohorts')
-    .insert({cohort_id, user_id}),
+    .insert({cohort_id, user_id}, 'id'),
   getUserCohorts: (db, user_id) => db('cohorts')
     .join('usersInCohorts', 'cohorts.id', "usersInCohorts.cohort_id")
     .where('usersInCohorts.user_id', user_id),

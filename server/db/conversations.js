@@ -1,28 +1,27 @@
-const getMessageById = (db, id) => db('messages')
-  .join('conversations', 'messages.conversation_id', 'conversations.id')
-  .join('users', 'messages.user_id', 'users.id')
-  .where('messages.id', id)
-  .select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
+const getMessageById = (db, id) => db('messages') .join('conversations',
+'messages.conversation_id', 'conversations.id') .join('users',
+'messages.user_id', 'users.id') .where('messages.id', id)
+.select('conversations.*', 'messages.*', 'users.user_name', 'users.first_name')
+.first()
+
+const getOutgoingInviteById = (db, invite_id) => db
+.select('users.first_name', 'users.user_name', 'users.id as user_id')
+.from('users')
+.join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
+.select("conversationInvites.*")
+.where('conversationInvites.id', invite_id)
+.first()
+
+const addUserToConversation = (db, conversation_id, user_id) => db('usersInConversations')
+  .insert({conversation_id, user_id},'id')
+
+const getConversationById = (db, conversation_id) => db('conversations')
+  .where('id', conversation_id)
   .first()
 
-  const getOutgoingInviteById = (db, invite_id) => db
-  .select('users.first_name', 'users.user_name', 'users.id as user_id')
-  .from('users')
-  .join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
-  .select("conversationInvites.*")
+const deleteInviteById = (db, invite_id) => db('conversationInvites')
   .where('conversationInvites.id', invite_id)
-  .first()
-
-  const addUserToConversation = (db, conversation_id, user_id) => db('usersInConversations')
-    .insert({conversation_id, user_id})
-
-  const getConversationById = (db, conversation_id) => db('conversations')
-    .where('id', conversation_id)
-    .first()
-
-  const deleteInviteById = (db, invite_id) => db('conversationInvites')
-    .where('conversationInvites.id', invite_id)
-    .del()
+  .del()
 
 module.exports = {
   getConversations: (db, user_id) => db('usersInConversations')

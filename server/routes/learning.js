@@ -22,13 +22,27 @@ const purgeDuplicateObjectives = (objectives) => {
   })
   return singles
 }
+const purgeDuplicateObjectives2 = (objectives) => {
+  let singles = []
+  objectives.forEach((objective) => {
+    if (!singles.find(single => single.objective_id == objective.objective_id)) singles.push(objective)
+  })
+  return singles
+}
 
-router.get('/', (req, res) => {
-  getLearningPlansByUser(getDb(req), 1)
+
+
+router.get('/', decode, (req, res) => {
+  getLearningPlansByUser(getDb(req), req.user.id)
     .then(plans => {
       res.json(plans)
     })
     .catch(err => console.log(err))
+})
+
+router.get('/objectives/:plan_id', decode, (req, res) => {
+  getObjectivesByPlanId(getDb(req), req.params.plan_id)
+    .then(objectives => res.json(purgeDuplicateObjectives2(objectives)))
 })
 
 router.get('/suggestions', decode, (req, res) => {
@@ -59,7 +73,6 @@ router.post('/', decode, (req, res) => {
   insertLeaningPlan(getDb(req), plan)
     .then(plan_id => {
       const objectives = (req.body.objectives || []).map(obj =>  ({objective_id: obj.id, learning_plan_id: plan_id[0]}) )
-      console.log({objectives});
       if (objectives.length != 0) {
         insertObjectivesArray(getDb(req), objectives)
         .then(() => getLearningPlanById(getDb(req), plan_id[0])

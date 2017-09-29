@@ -13,6 +13,7 @@ import incomingInvites from './incomingInvites'
 import loading from './loading'
 import learningSuggestions from './learningSuggestions'
 import selectedLearningSuggestions from './selectedLearningSuggestions'
+import learningPlans from './learningPlans'
 
 export default combineReducers({
   auth,
@@ -27,5 +28,6 @@ export default combineReducers({
   incomingInvites,
   loading,
   learningSuggestions,
-  selectedLearningSuggestions
+  selectedLearningSuggestions,
+  learningPlans
 })

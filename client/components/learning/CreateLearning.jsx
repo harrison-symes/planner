@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Link} from 'react-router-dom'
+
 import LearningSuggestions from '../../containers/learning/LearningSuggestions'
 import SelectedSuggestions from '../../containers/learning/SelectedSuggestions'
 import CreateObjective from '../../containers/learning/CreateObjective'
@@ -28,7 +30,8 @@ export default class CreateLearning extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1 className="subtitle is-1">Create Learning Plan</h1>
+        <h1 className="title is-1">Create Learning Plan</h1>
+        <Link className="button is-warning" to="/my/learning">Back</Link>
         <hr />
         <div className="columns">
           <LearningSuggestions />

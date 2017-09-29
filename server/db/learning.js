@@ -20,13 +20,15 @@ module.exports = {
     .whereIn('learningPlans.user_id', user_ids)
     .select('learningObjectives.title', "learningObjectives.id"),
   getLearningPlansByUser: (db, user_id) => db('learningPlans')
-    .where('user_id', user_id),
-  getObjectivesByPlanId: (db, learning_plan_id) => db('learningObjectives')
-    .join('objectivesInPlans', 'learningObjectives.id', 'objectivesInPlans.objective_id')
-    .join('learningPlans', 'objectivesInPlans.learning_plan_id', 'learningPlans.id'),
+    .where('user_id', user_id)
+    .orderBy('created_at', 'desc'),
+  getObjectivesByPlanId: (db, learning_plan_id) => db('objectivesInPlans')
+    .join('learningObjectives', 'objectivesInPlans.objective_id', 'learningObjectives.id')
+    .select('learningObjectives.title', 'learningObjectives.id as id')
+    .where('objectivesInPlans.learning_plan_id', learning_plan_id),
   insertLeaningPlan: (db, plan) => db('learningPlans')
-    .insert(plan),
+    .insert(plan,'id'),
   insertObjectivesArray: (db, objectives) => db('objectivesInPlans')
-    .insert(objectives),
+    .insert(objectives,'id'),
   getLearningPlanById
 }

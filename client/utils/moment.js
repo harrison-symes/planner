@@ -21,10 +21,13 @@ export function dateMonth (date) {
 export function getWeekSpan (date) {
   const monday = getMonday(date)
   const sunday = getNextSunday(monday)
-  console.log({date, monday});
   return `${dateMonth(monday)} - ${dateMonth(sunday)}`
 }
 
 export function getDayName (date) {
   return moment(date).format('dddd')
+}
+
+export function isThisWeek (date) {
+  return getWeekSpan(date) == getWeekSpan(new Date())
 }

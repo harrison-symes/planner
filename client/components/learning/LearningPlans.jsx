@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
+import {getWeekSpan, getDayName} from '../../utils/moment'
 
 function getMonday(d) {
   d = new Date(d);
@@ -31,9 +32,9 @@ export default class LearningPlans extends React.Component {
   render() {
     const {learningPlans} = this.props
     console.log(getMonday(new Date()));
-    const renderPlanPreview = (plan, i) => <div className={`button ${plan.is_reflected ? (plan.is_reviewed ? "is-success" : "is-warning") : "is-danger"}`} key={i}>
-      {console.log(moment.unix(getMonday(new Date)), moment(plan.created_at))}
-      {moment(getMonday(plan.created_at)).format('MMM Do') + " - " +  moment(getNextSunday(getMonday(plan.created_at))).format('MMM Do')}
+    const isThisWeek = (date) => getWeekSpan(date) == getWeekSpan(new Date())
+    const renderPlanPreview = (plan, i) => <div className={`button ${isThisWeek(plan.created_at) ? "is-primary": (plan.is_reflected ? (plan.is_reviewed ? "is-success" : "is-warning") : "is-danger")}`} key={i}>
+      <p>{getWeekSpan(plan.created_at)} ({getDayName(plan.created_at)}) </p>
     </div>
     return (
       <div className="column">

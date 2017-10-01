@@ -1,4 +1,5 @@
 import moment from 'moment'
+import {tz} from 'moment-timezone'
 
 export function getMonday(d) {
   d = new Date(d);
@@ -19,8 +20,12 @@ export function dateMonth (date) {
 }
 
 export function getWeekSpan (date) {
-  const monday = getMonday(date)
+  console.log({date});
+  const newDate = moment({...date}).tz('Pacific/Auckland')
+  console.log({newDate});
+  const monday = getMonday(newDate)
   const sunday = getNextSunday(monday)
+  console.log({monday, sunday});
   return `${dateMonth(monday)} - ${dateMonth(sunday)}`
 }
 

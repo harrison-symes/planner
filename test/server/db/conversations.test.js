@@ -20,7 +20,6 @@ test.cb('getConversations returns the correct converations for user 1', t => {
     {user_id: 1, conversation_id: 1, name: 'Harrison and Joshua'},
     {user_id: 1, conversation_id: 2, name: "What's for Lunch"}
   ]
-
   const user_id = 1
   conversationsDb.getConversations(t.context.db, user_id)
     .then(actualArr => {

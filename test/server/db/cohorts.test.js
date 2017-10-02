@@ -75,6 +75,20 @@ test.cb('Get Cohort returns null for an id that doesnt exist', t => {
 })
 
 //joinCohort
+test.cb('joinCohort and inserts a row to the correct table', t => {
+  const cohort_id = 2
+  const user_id = 2
+  const expectedLength = 5
+  cohortsDb.joinCohort(t.context.db, cohort_id, user_id)
+    .then(() =>
+      t.context.db('usersInCohorts')
+        .then(usersInCohorts => {
+          t.is(usersInCohorts.length, expectedLength)
+          t.true(usersInCohorts.find(join => join.user_id === user_id) != null)
+          t.end()
+        })
+    )
+})
 
 //getUserCohorts
 test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {

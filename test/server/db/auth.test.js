@@ -70,7 +70,7 @@ test.cb('Create User works for fresh user', t => {
   const expected = 4
   usersDb.createUser(fakeUser, t.context.db)
     .then( actual => {
-      t.equal(actual[0], expected, 'Creates a user with an id of 4')
+      t.is(actual[0], expected, 'Creates a user with an id of 4')
       t.end()
     })
     .catch(err => {

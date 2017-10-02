@@ -102,6 +102,23 @@ test.cb('getUsersInConversation returns the correct users for conversation 3', t
 
 //getConversationById
 
+test.cb('getConversationById returns the correct data / keys for convo 1', t => {
+  const expected = {
+    id: 1,
+    name: 'Harrison and Joshua'
+  }
+  const conversation_id = 1
+  conversationsDb.getConversationById(t.context.db, conversation_id)
+    .then(actual => {
+      console.log({actual});
+      t.true(actual != null)
+      for (let key in expected) {
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
+
 //createConversation
 
 //addUserToConversation

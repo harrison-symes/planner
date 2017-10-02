@@ -68,7 +68,6 @@ test.cb('getUsersToInvite returns correct network of users', t => {
   ]
   usersDb.getUsersToInvite(t.context.db, cohort_ids)
     .then(actualArr => {
-      console.log({actualArr})
       actualArr.forEach((actual, idx) => {
         let expected = expectedArr.find(expected => expected.user_id === actual.user_id)
         t.true(expected !== null)
@@ -79,6 +78,36 @@ test.cb('getUsersToInvite returns correct network of users', t => {
           t.true(actual[key] === expected[key])
         }
       })
+      t.end()
+    })
+})
+
+test.cb('getUsersToInvite returns one user for cohort 2', t => {
+  const cohort_ids = [2]
+  const expectedLength = 1
+  const expected = {
+    user_id: 1,
+    user_name: 'symeshjb'
+  }
+  usersDb.getUsersToInvite(t.context.db, cohort_ids)
+    .then(actualArr => {
+      t.is(actualArr.length, expectedLength)
+      for (let key in expected) {
+        t.true(actualArr[0].hasOwnProperty(key))
+        t.is(actualArr[0][key], expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('getUsersToInvite for all 3 cohorts returns 2 copies of user 1 (duplicate expected checking)', t => {
+  const cohort_ids = [1, 2, 3]
+  const expectedLength = 4
+  const expectedFilterLength = 2
+  usersDb.getUsersToInvite(t.context.db, cohort_ids)
+    .then(actualArr => {
+      t.is(actualArr.length, expectedLength)
+      t.is(actualArr.filter(actual => actual.user_id == 1).length, expectedFilterLength)
       t.end()
     })
 })

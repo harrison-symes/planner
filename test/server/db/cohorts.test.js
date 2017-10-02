@@ -104,5 +104,34 @@ test.cb('getUserCohorts returns an empty array for a non-existing user_id / no u
 })
 
 //usersInCohorts
+test.cb('usersInCohorts returns correct users by cohort_id', t => {
+  const expectedKeys = [
+    'user_name',
+    'first_name',
+    'last_name',
+    'about',
+    'is_private',
+    'user_id',
+    'cohort_id'
+  ]
+  cohortsDb.usersInCohorts(t.context.db, 1)
+    .then(actualArr => {
+      t.is(actualArr.length, 3)
+      actualArr.forEach(actual => {
+        expectedKeys.forEach(expected => {
+          t.true(actual.hasOwnProperty(expected))
+        })
+      })
+      t.end()
+    })
+})
+
+test.cb('usersInCohorts has only one user in cohort_id: 2', t => {
+  cohortsDb.usersInCohorts(t.context.db, 2)
+    .then(actualArr => {
+      t.is(actualArr.length, 1)
+      t.end()
+    })
+})
 
 // tess

@@ -136,6 +136,19 @@ test.cb('getConversationById returns the correct data / keys for convo 3', t => 
 
 //createConversation
 
+test.cb('createConversation inserts a new row to the conversations table', t => {
+  const name = 'test convo'
+  const expected = 4
+  conversationsDb.createConversation(t.context.db, name)
+    .then(actual => {
+      t.is(actual[0], expected)
+      t.context.db('conversations')
+        .then(actualArr => {
+          t.is(actualArr.length, expected)
+          t.end()
+        })
+    })
+})
 
 //addUserToConversation
 

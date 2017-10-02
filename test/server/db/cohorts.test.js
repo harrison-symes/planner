@@ -13,7 +13,7 @@ test('Cohorts Db Tests Working', t => {
 })
 
 //getCohorts
-test.cb('Get Cohorts returns correct number of overall cohorts', t => {
+test.cb('Get Cohorts returns all cohorts', t => {
   var expected = 5
    cohortsDb.getCohorts(t.context.db)
     .then(actual => {
@@ -27,6 +27,47 @@ test.cb('Get Cohorts returns correct number of overall cohorts', t => {
 })
 
 //getCohort
+test.cb('Get Cohort returns a single cohort by an id (1)', t => {
+  var expected = {
+    id: 1,
+    name: 'Tech_Gym',
+    is_private: true,
+    description: 'Dummy'
+  }
+  cohortsDb.getCohort(t.context.db, expected.id)
+    .then(actual => {
+      t.true(actual != null)
+      for(var key in expected) {
+        t.true(actual[key] == expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('Get Cohort returns a single cohort by an id (2)', t => {
+  var expected = {
+    id: 2,
+    name: 'Miromiro-2017',
+    is_private: false,
+    description: 'Dummy'
+  }
+  cohortsDb.getCohort(t.context.db, expected.id)
+    .then(actual => {
+      t.true(actual != null)
+      for(var key in expected) {
+        t.true(actual[key] == expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('Get Cohort returns null for an id that doesnt exist', t => {
+  cohortsDb.getCohort(t.context.db, 9001)
+    .then(actual => {
+      t.true(actual == null)
+      t.end()
+    })
+})
 
 //joinCohort
 

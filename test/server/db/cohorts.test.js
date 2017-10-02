@@ -75,6 +75,20 @@ test.cb('Get Cohort returns null for an id that doesnt exist', t => {
 })
 
 //joinCohort
+test.cb('joinCohort and inserts a row to the correct table', t => {
+  const cohort_id = 2
+  const user_id = 2
+  const expectedLength = 5
+  cohortsDb.joinCohort(t.context.db, cohort_id, user_id)
+    .then(() =>
+      t.context.db('usersInCohorts')
+        .then(usersInCohorts => {
+          t.is(usersInCohorts.length, expectedLength)
+          t.true(usersInCohorts.find(join => join.user_id === user_id) != null)
+          t.end()
+        })
+    )
+})
 
 //getUserCohorts
 test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
@@ -95,6 +109,43 @@ test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
 
 })
 
+test.cb('getUserCohorts returns an empty array for a non-existing user_id / no user/cohort relationship', t => {
+  cohortsDb.getUserCohorts(t.context.db, 9001)
+    .then(actual => {
+      t.is(actual.length, 0)
+      t.end()
+    })
+})
+
 //usersInCohorts
+test.cb('usersInCohorts returns correct users by cohort_id', t => {
+  const expectedKeys = [
+    'user_name',
+    'first_name',
+    'last_name',
+    'about',
+    'is_private',
+    'user_id',
+    'cohort_id'
+  ]
+  cohortsDb.usersInCohorts(t.context.db, 1)
+    .then(actualArr => {
+      t.is(actualArr.length, 3)
+      actualArr.forEach(actual => {
+        expectedKeys.forEach(expected => {
+          t.true(actual.hasOwnProperty(expected))
+        })
+      })
+      t.end()
+    })
+})
+
+test.cb('usersInCohorts has only one user in cohort_id: 2', t => {
+  cohortsDb.usersInCohorts(t.context.db, 2)
+    .then(actualArr => {
+      t.is(actualArr.length, 1)
+      t.end()
+    })
+})
 
 // tess

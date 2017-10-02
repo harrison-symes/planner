@@ -36,6 +36,26 @@ test.cb('getConversations returns the correct converations for user 1', t => {
     })
 })
 
+
+test.cb('getConversations returns the correct converations for user 3', t => {
+  const expectedArr = [
+    {user_id: 3, conversation_id: 3, name: 'Teacher Secret'}
+  ]
+  const user_id = 3
+  conversationsDb.getConversations(t.context.db, user_id)
+    .then(actualArr => {
+      t.is(actualArr.length, expectedArr.length)
+      actualArr.forEach(actual => {
+        let expected = expectedArr.find(exp => exp.conversation_id === actual.conversation_id)
+        t.true(expected !== null)
+        for (let key in expected) {
+          t.true(actual.hasOwnProperty(key))
+          t.is(actual[key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
 //getUsersInConversation
 
 //getConversationById

@@ -110,7 +110,22 @@ test.cb('getConversationById returns the correct data / keys for convo 1', t => 
   const conversation_id = 1
   conversationsDb.getConversationById(t.context.db, conversation_id)
     .then(actual => {
-      console.log({actual});
+      t.true(actual != null)
+      for (let key in expected) {
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('getConversationById returns the correct data / keys for convo 3', t => {
+  const expected = {
+    id: 3,
+    name: 'Teacher Secret'
+  }
+  const conversation_id = 3
+  conversationsDb.getConversationById(t.context.db, conversation_id)
+    .then(actual => {
       t.true(actual != null)
       for (let key in expected) {
         t.is(actual[key], expected[key])
@@ -120,6 +135,7 @@ test.cb('getConversationById returns the correct data / keys for convo 1', t => 
 })
 
 //createConversation
+
 
 //addUserToConversation
 

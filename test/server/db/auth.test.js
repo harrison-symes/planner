@@ -31,7 +31,6 @@ test.cb('User Exists for non-existing user', t => {
 })
 
 
-//createUser
 
 
 //getUserByName
@@ -57,5 +56,24 @@ test.cb('Get User By Name for non-existing user', t => {
       t.true(!user)
       t.end()
     })
-    .catch(() => t.fail())
+    .catch((err) => {
+      t.faiL()
+      t.end()
+    })
+})
+
+
+//createUser
+
+test.cb('Create User works for fresh user', t => {
+  const fakeUser = {user_name: 'lilTibbs', password: 'memeMan', first_name: 'Harrison', last_name: 'Symes', about: 'NOTHING'}
+  const expected = 4
+  usersDb.createUser(fakeUser, t.context.db)
+    .then( actual => {
+      t.equal(actual[0], expected, 'Creates a user with an id of 4')
+      t.end()
+    })
+    .catch(err => {
+      t.end()
+    })
 })

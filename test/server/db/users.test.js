@@ -52,3 +52,33 @@ test.cb('getUserById can get second user', t => {
 })
 
 //getUsersToInvite
+
+test.cb('getUsersToInvite returns correct network of users', t => {
+  const cohort_ids = [1]
+  const expectedArr = [
+    {user_id: 1, user_name: 'symeshjb'},
+    {user_id: 2, user_name: 'joshua'},
+    {user_id: 3, user_name: 'don'}
+  ]
+  const expectedKeys = [
+    'user_name',
+    'first_name',
+    'last_name',
+    'user_id'
+  ]
+  usersDb.getUsersToInvite(t.context.db, cohort_ids)
+    .then(actualArr => {
+      console.log({actualArr})
+      actualArr.forEach((actual, idx) => {
+        let expected = expectedArr.find(expected => expected.user_id === actual.user_id)
+        t.true(expected !== null)
+        expectedKeys.forEach(key => {
+          t.true(actual.hasOwnProperty(key))
+        })
+        for (let key in expected) {
+          t.true(actual[key] === expected[key])
+        }
+      })
+      t.end()
+    })
+})

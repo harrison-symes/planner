@@ -24,6 +24,11 @@ const deleteInviteById = (db, invite_id) => db('conversationInvites')
   .del()
 
 module.exports = {
+  getMessageById,
+  getOutgoingInviteById,
+  addUserToConversation,
+  getConversationById,
+  deleteInviteById,
   getConversations: (db, user_id) => db('usersInConversations')
     .join('conversations', 'usersInConversations.conversation_id', 'conversations.id')
     .where('user_id', user_id),
@@ -32,10 +37,8 @@ module.exports = {
     .from('users')
     .join('usersInConversations', 'users.id', 'usersInConversations.user_id')
     .where('usersInConversations.conversation_id', conversation_id),
-  addUserToConversation,
   createConversation: (db, name) => db('conversations')
     .insert({name}, 'id'),
-  getConversationById,
   getMessagesByConversation: (db, conversation_id) => db('messages')
     .join('conversations', 'messages.conversation_id', 'conversations.id')
     .join('users', 'messages.user_id', 'users.id')

@@ -75,22 +75,24 @@ test.cb('Get Cohort returns null for an id that doesnt exist', t => {
 })
 
 //joinCohort
+
+//getUserCohorts
 test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
   const expectedArray = [{...testCohort1}, {...testCohort2}]
-  cohortsDb.getUserCohorts(t.context.db, 1)
+  const expected_id = 1
+  cohortsDb.getUserCohorts(t.context.db, expected_id)
     .then(actual => {
       t.is(actual.length, expectedArray.length)
       expectedArray.forEach((expected, i) => {
         for(var key in expected) {
           t.true(actual[i][key] == expected[key])
         }
+        t.true(actual[i].hasOwnProperty('user_id'))
+        t.is(actual[i].user_id, expected_id)
       })
       t.end()
     })
 
 })
-
-
-//getUserCohorts
 
 //usersInCohorts

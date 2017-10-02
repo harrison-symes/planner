@@ -1,3 +1,5 @@
+var moment = require('moment')
+var {tz} = require('moment-timezone')
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTableIfNotExists('learningPlans', table => {
@@ -6,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.text('plan')
     table.boolean('is_reflected').defaultTo(false)
     table.boolean('is_reviewed').defaultTo(false)
-    table.timestamp('created_at').defaultTo(knex.fn.now())
+    table.timestamp('created_at').defaultTo(moment(knex.fn.now()).tz('Pacific/Auckland').format())
   })
 };
 

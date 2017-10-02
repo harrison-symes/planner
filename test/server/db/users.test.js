@@ -34,4 +34,21 @@ test.cb('getUserById returns the correct user without hash', t => {
     })
 })
 
+test.cb('getUserById can get second user', t => {
+  const expected = {
+    user_id: 2,
+    user_name: 'joshua'
+  }
+  usersDb.getUserById(t.context.db, expected.user_id)
+    .then(actual => {
+      t.false(actual.hasOwnProperty('hash'))
+      t.false(actual.hasOwnProperty('password'))
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
+
 //getUsersToInvite

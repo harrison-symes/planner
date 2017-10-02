@@ -95,6 +95,14 @@ test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
 
 })
 
+test.cb('getUserCohorts returns an empty array for a non-existing user_id / no user/cohort relationship', t => {
+  cohortsDb.getUserCohorts(t.context.db, 9001)
+    .then(actual => {
+      t.is(actual.length, 0)
+      t.end()
+    })
+})
+
 //usersInCohorts
 
 // tess

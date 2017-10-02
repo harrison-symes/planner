@@ -138,19 +138,35 @@ test.cb('getConversationById returns the correct data / keys for convo 3', t => 
 
 test.cb('createConversation inserts a new row to the conversations table', t => {
   const name = 'test convo'
-  const expected = 4
+  const expectedLength = 4
   conversationsDb.createConversation(t.context.db, name)
     .then(actual => {
-      t.is(actual[0], expected)
+      t.is(actual[0], expectedLength)
       t.context.db('conversations')
         .then(actualArr => {
-          t.is(actualArr.length, expected)
+          t.is(actualArr.length, expectedLength)
+          t.true(actualArr.find(act => act.name == name) != null)
           t.end()
         })
     })
 })
 
 //addUserToConversation
+test.cb('addUserToConversation inserts a new row to the usersInConversations table', t => {
+  const user_id = 1
+  const conversation_id = 3
+  const expectedLength = 7
+  conversationsDb.addUserToConversation(t.context.db, conversation_id, user_id)
+    .then(actual => {
+      t.is(actual[0], expectedLength)
+      t.context.db('usersInConversations')
+        .then(actualArr => {
+          t.is(actualArr.length, expectedLength)
+          t.true(actualArr.find(act => act.user_id == user_id) != null)
+          t.end()
+        })
+    })
+})
 
 
 //MESSAGES ---

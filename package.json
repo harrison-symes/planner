@@ -8,7 +8,7 @@
     "postinstall": "webpack",
     "dev": "nodemon --watch server server/index & webpack --watch",
     "start": "node server/index",
-    "test": "ava  -v  --serial 'test/**/**/*.test.js'",
+    "test": "ava  -v 'test/**/**/*.test.js'",
     "test:db": "ava -v 'test/server/db/*.test.js'",
     "test:routes": "ava --serial 'test/server/routes/*.test.js'",
     "test:server": "ava --serial 'test/server/**/*.test.js'",

@@ -76,7 +76,7 @@ test.cb('getObjectivesByUserIds (2)', t => {
 })
 
 //getJoinedObjectivesByUserIds
-test.only.cb('getJoinedObjectivesByUserIds', t => {
+test.cb('getJoinedObjectivesByUserIds', t => {
   const user_ids = [1]
   const expectedArr = [
     {title:  'Full Stack Project', id: 1},
@@ -99,6 +99,34 @@ test.only.cb('getJoinedObjectivesByUserIds', t => {
        }, {})
        actualArr = Object.keys(hash).map(id => actualArr.find(act => act.id == id))
 
+      //check that there are now no duplicates
+      expectedArr.forEach(expected => {
+        let copies = actualArr.filter(actual => actual.id == expected.id)
+        t.is(copies.length, 1, 'no duplicates after purging')
+        for (let key in expected) {
+          t.true(copies[0].hasOwnProperty(key))
+          t.is(copies[0][key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
+
+test.cb('getJoinedObjectivesByUserIds (2)', t => {
+  const user_ids = [2, 3]
+  const expectedArr = [
+    {title: 'Use Postgresql locally', id: 2},
+    {title: 'Vue.js', id: 3}
+  ]
+  learningDb.getJoinedObjectivesByUserIds(t.context.db, user_ids)
+    .then(actualArr => {
+      //purge duplicates
+      const hash = actualArr.reduce((table, item) => {
+        table[item.id] = item
+        return table
+      }, {})
+        actualArr = Object.keys(hash).map(id => actualArr.find(act => act.id == id))
+      //check that there are now no duplicates
       expectedArr.forEach(expected => {
         let copies = actualArr.filter(actual => actual.id == expected.id)
         t.is(copies.length, 1, 'no duplicates after purging')
@@ -112,6 +140,43 @@ test.only.cb('getJoinedObjectivesByUserIds', t => {
 })
 
 //getObjectivesByPlanId
+test.cb('getObjectivesByPlanId', t => {
+  const plan_id = 1
+  const expectedArr = [
+    {title:  'Full Stack Project', id: 1},
+    {title: 'Use Postgresql locally', id: 2},
+    {title: 'Vue.js', id: 3}
+  ]
+  learningDb.getObjectivesByPlanId(t.context.db, plan_id)
+    .then(actualArr => {
+      expectedArr.forEach(expected => {
+        const actual = actualArr.find(actual => actual.id == expected.id)
+        for (let key in expected) {
+          t.true(actual.hasOwnProperty(key))
+          t.is(actual[key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
+
+test.cb('getObjectivesByPlanId (2)', t => {
+  const plan_id = 2
+  const expectedArr = [
+    {title: 'Use Postgresql locally', id: 2}
+  ]
+  learningDb.getObjectivesByPlanId(t.context.db, plan_id)
+    .then(actualArr => {
+      expectedArr.forEach(expected => {
+        const actual = actualArr.find(actual => actual.id == expected.id)
+        for (let key in expected) {
+          t.true(actual.hasOwnProperty(key))
+          t.is(actual[key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
 
 //insertLearningObjective
 

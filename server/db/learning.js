@@ -25,7 +25,7 @@ module.exports = {
   getObjectivesByPlanId: (db, learning_plan_id) => db('objectivesInPlans')
     .join('learningObjectives', 'objectivesInPlans.objective_id', 'learningObjectives.id')
     .select('learningObjectives.title', 'learningObjectives.id as id')
-    .where('objectivesInPlans.learning_plan_id', learning_plan_id),
+    .where('objectivesInPlans.learning_plan_id',learning_plan_id),
   insertLeaningPlan: (db, plan) => db('learningPlans')
     .insert(plan,'id'),
   insertObjectivesArray: (db, objectives) => db('objectivesInPlans')

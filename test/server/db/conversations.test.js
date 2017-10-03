@@ -337,7 +337,30 @@ test.cb('getOutgoingInviteById returns the correct data / format', t => {
 })
 
 //createInvite
-
-//acceptConversationInvite
+test.cb('createInvite adds a row to the conversationInvites table', t => {
+  const invite = {
+    from_user_id: 3,
+    to_user_id: 1,
+    conversation_id: 3
+  }
+  const expected = {
+    ...invite,
+    user_id: invite.to_user_id,
+    first_name: 'Harrison',
+    user_name: 'symeshjb',
+    invite_id: 2
+  }
+  conversationsDb.createInvite(t.context.db, invite)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
 
 //deleteInviteById
+
+//acceptConversationInvite

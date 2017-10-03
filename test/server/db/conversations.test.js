@@ -172,8 +172,58 @@ test.cb('addUserToConversation inserts a new row to the usersInConversations tab
 //MESSAGES ---
 
 //getMessagesByConversation
+test.cb('getMessagesByConversation returns the correct messages', t => {
+  const conversation_id = 1
+  const expectedKeys = [
+    'content',
+    'user_name',
+    'first_name',
+    'message_id',
+    'conversation_id',
+    'user_id'
+  ]
+  const expectedLength = 2
+  conversationsDb.getMessagesByConversation(t.context.db, conversation_id)
+    .then(actualArr => {
+      t.is(actualArr.length, expectedLength)
+      actualArr.forEach(actual => {
+        expectedKeys.forEach(key => {
+          t.true(actual.hasOwnProperty(key))
+        })
+      })
+      t.end()
+    })
+})
 
 //createMessage
+test.cb('createMessage inserts a new row to the messages table', t => {
+  const message = {
+    user_id: 1,
+    conversation_id: 1,
+    content: "Hello Sir"
+  }
+  const expectedLength = 4
+  const expected = {
+    ...message,
+    id: expectedLength,
+  }
+  conversationsDb.createMessage(t.context.db, message)
+    .then(actual => {
+      t.is(actual.id, expectedLength)
+      t.context.db('messages')
+        .then(actualArr => {
+          t.is(actualArr.length, expectedLength)
+          let addedMessage = actualArr.find(message => message.id === actual.id)
+          t.true(addedMessage != null)
+          for (let key in expected) {
+            t.true(addedMessage.hasOwnProperty(key))
+            t.is(addedMessage[key], expected[key])
+          }
+
+          t.end()
+        })
+    })
+})
 
 //getMessageById
 

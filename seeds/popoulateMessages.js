@@ -6,7 +6,8 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('messages').insert([
         {id: 1, user_id: 1, conversation_id: 1, content: 'hello josh'},
-        {id: 2, user_id: 1, conversation_id: 2, content: 'hello lunch'}
+        {id: 2, user_id: 1, conversation_id: 2, content: 'hello lunch'},
+        {id: 3, user_id: 2, conversation_id: 1, content: 'hello sir'}
       ]);
     });
 };

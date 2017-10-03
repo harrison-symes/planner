@@ -76,6 +76,40 @@ test.cb('getObjectivesByUserIds (2)', t => {
 })
 
 //getJoinedObjectivesByUserIds
+test.only.cb('getJoinedObjectivesByUserIds', t => {
+  const user_ids = [1]
+  const expectedArr = [
+    {title:  'Full Stack Project', id: 1},
+    {title: 'Use Postgresql locally', id: 2},
+    {title: 'Vue.js', id: 3}
+  ]
+  const expectedDuplicates = 4
+  learningDb.getJoinedObjectivesByUserIds(t.context.db, user_ids)
+    .then(actualArr => {
+      //expecting exponential double ups due to many to manys, should be 4 instances of each object here
+      expectedArr.forEach(expected => {
+        let copies = actualArr.filter(actual => actual.id == expected.id)
+        t.is(copies.length, expectedDuplicates, 'expecting duplicates')
+      })
+
+      //purge duplicates
+      const hash = actualArr.reduce((table, item) => {
+       table[item.id] = item
+       return table
+       }, {})
+       actualArr = Object.keys(hash).map(id => actualArr.find(act => act.id == id))
+
+      expectedArr.forEach(expected => {
+        let copies = actualArr.filter(actual => actual.id == expected.id)
+        t.is(copies.length, 1, 'no duplicates after purging')
+        for (let key in expected) {
+          t.true(copies[0].hasOwnProperty(key))
+          t.is(copies[0][key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
 
 //getObjectivesByPlanId
 

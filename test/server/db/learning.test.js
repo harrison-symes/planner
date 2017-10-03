@@ -179,6 +179,30 @@ test.cb('getObjectivesByPlanId (2)', t => {
 })
 
 //insertLearningObjective
+test.cb('insertLearningObjective', t => {
+  const objective = {
+    title: 'test objective',
+    user_id: 1
+  }
+  const expected = {
+    ...objective,
+    id: 4,
+  }
+  const expectedLength = expected.id
+  learningDb.insertLearningObjective(t.context.db, objective)
+    .then(actual => {
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.context.db('learningObjectives')
+        .then(actualArr => {
+          t.true(actualArr.length, expectedLength)
+        })
+        t.end()
+    })
+
+})
 
 //insertObjectivesArray
 

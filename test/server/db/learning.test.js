@@ -205,10 +205,21 @@ test.cb('insertLearningObjective', t => {
 })
 
 //insertObjectivesArray
-
-
-
-
+test.cb('insertLearningObjectivesArray', t => {
+  const objectiveArray = [
+    {title: 'test objective', user_id: 1},
+    {title: 'test 2', user_id: 1}
+  ]
+  const expectedArr = [4, 5]
+  learningDb.insertLearningObjective(t.context.db, objectiveArray)
+    .then(actualArr => {
+      t.context.db('learningObjectives')
+        .then(actualArr => {
+          t.is(actualArr.length, 3 + expectedArr.length)
+          t.end()
+        })
+    })
+})
 
 
 //Plans

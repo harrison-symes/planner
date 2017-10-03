@@ -408,3 +408,20 @@ test.cb('acceptConversationInvite deletes a row from conversationInvites, and cr
         })
     })
 })
+
+test.cb('acceptConversationInvite does nothing for a false invite id', t => {
+  const invite_id = 9001
+  conversationsDb.acceptConversationInvite(t.context.db, invite_id)
+    .then(actual => {
+      t.true(!actual);
+      t.context.db('conversationInvites')
+        .then(invites => {
+          t.is(invites.length, 1)
+          t.context.db('usersInConversations')
+            .then(users => {
+              t.is(users.length, 6)
+              t.end()
+            })
+        })
+    })
+})

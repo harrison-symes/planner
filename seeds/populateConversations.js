@@ -6,7 +6,8 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('conversations').insert([
         {id: 1, name: 'Harrison and Joshua'},
-        {id: 2, name: "What's for Lunch"}
+        {id: 2, name: "What's for Lunch"},
+        {id: 3, name: 'Teacher Secret'}
       ]);
     });
 };

@@ -337,7 +337,91 @@ test.cb('getOutgoingInviteById returns the correct data / format', t => {
 })
 
 //createInvite
-
-//acceptConversationInvite
+test.cb('createInvite adds a row to the conversationInvites table', t => {
+  const invite = {
+    from_user_id: 3,
+    to_user_id: 1,
+    conversation_id: 3
+  }
+  const expected = {
+    ...invite,
+    user_id: invite.to_user_id,
+    first_name: 'Harrison',
+    user_name: 'symeshjb',
+    invite_id: 2
+  }
+  conversationsDb.createInvite(t.context.db, invite)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
 
 //deleteInviteById
+test.cb('deleteInviteById removes row from the conversationInvites table', t => {
+  const invite_id = 1
+  t.context.db('conversationInvites')
+    .where('id', invite_id)
+    .first()
+    .then(invite => {
+      t.true(invite !== null)
+      conversationsDb.deleteInviteById(t.context.db, invite_id)
+        .then(actual => {
+          t.context.db('conversationInvites')
+            .where('id', invite_id)
+            .first()
+            .then(invite => {
+              t.true(invite == null)
+              t.end()
+            })
+        })
+    })
+
+})
+
+//acceptConversationInvite
+test.cb('acceptConversationInvite deletes a row from conversationInvites, and creates a join row in usersInConversations', t => {
+  const expected = {
+    id: 2,
+    name: "What's for Lunch"
+  }
+  const invite_id = 1
+  conversationsDb.acceptConversationInvite(t.context.db, invite_id)
+    .then(actual => {
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.context.db('conversationInvites')
+        .then(invites => {
+          t.is(invites.length, 0)
+          t.context.db('usersInConversations')
+            .where('conversation_id', expected.id)
+            .then(users => {
+              t.is(users.length, 3)
+              t.end()
+            })
+        })
+    })
+})
+
+test.cb('acceptConversationInvite does nothing for a false invite id', t => {
+  const invite_id = 9001
+  conversationsDb.acceptConversationInvite(t.context.db, invite_id)
+    .then(actual => {
+      t.true(!actual);
+      t.context.db('conversationInvites')
+        .then(invites => {
+          t.is(invites.length, 1)
+          t.context.db('usersInConversations')
+            .then(users => {
+              t.is(users.length, 6)
+              t.end()
+            })
+        })
+    })
+})

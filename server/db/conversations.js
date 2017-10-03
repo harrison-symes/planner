@@ -64,7 +64,9 @@ module.exports = {
     .select('conversationInvites.*', 'conversations.*', 'conversations.id as conversation_id', 'conversationInvites.id as invite_id', 'conversationInvites.id as invite_id')
     .where('conversationInvites.to_user_id', user_id),
   acceptConversationInvite: (db, invite_id) => getOutgoingInviteById(db, invite_id)
-    .then(({user_id, conversation_id}) => {
+    .then(invite => {
+      if (!invite) return null
+      let {user_id, conversation_id} = invite
       return addUserToConversation(db, conversation_id, user_id)
       .then(() => deleteInviteById(db, invite_id))
       .then(() => getConversationById(db, conversation_id))

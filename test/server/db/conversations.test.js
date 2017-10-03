@@ -269,7 +269,7 @@ test.cb('getMessageById returns the correct object and format (2)', t => {
 //INVITES ---
 
 //getOutgoingInvites
-test.only.cb('getOutgoingInvites returns the correct length / format', t => {
+test.cb('getOutgoingInvites returns the correct length / format', t => {
   const expected = [{
     first_name: 'virtual',
     user_id: 3,
@@ -277,11 +277,10 @@ test.only.cb('getOutgoingInvites returns the correct length / format', t => {
     from_user_id: 1,
     to_user_id: 3,
     conversation_id: 2,
-    id: 1
+    message_id: 1
   }]
   conversationsDb.getOutgoingInvites(t.context.db, expected[0].conversation_id)
     .then(actualArr => {
-      console.log({actualArr});
       t.is(actualArr.length, expected.length)
       for (let key in expected[0]) {
         t.true(actualArr[0].hasOwnProperty(key))
@@ -293,6 +292,27 @@ test.only.cb('getOutgoingInvites returns the correct length / format', t => {
 })
 
 //getIncomingInvites
+test.only.cb('getIncomingInvites returns the correct data / format', t => {
+  const expected = [{
+    first_name: 'Harrison',
+    user_id: 1,
+    user_name: 'symeshjb',
+    from_user_id: 1,
+    to_user_id: 3,
+    conversation_id: 2,
+    invite_id: 1
+  }]
+  conversationsDb.getIncomingInvites(t.context.db, expected[0].to_user_id)
+    .then(actualArr => {
+      t.is(actualArr.length, expected.length)
+      for (let key in expected[0]) {
+        t.true(actualArr[0].hasOwnProperty(key))
+        t.is(actualArr[0][key], expected[0][key], `${key}`)
+      }
+      t.is(actualArr[0].from_user_id, actualArr[0].user_id)
+      t.end()
+    })
+})
 
 //getOutgoingInviteById
 

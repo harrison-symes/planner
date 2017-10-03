@@ -362,5 +362,25 @@ test.cb('createInvite adds a row to the conversationInvites table', t => {
 })
 
 //deleteInviteById
+test.only.cb('deleteInviteById removes row from the conversationInvites table', t => {
+  const invite_id = 1
+  t.context.db('conversationInvites')
+    .where('id', invite_id)
+    .first()
+    .then(invite => {
+      t.true(invite !== null)
+      conversationsDb.deleteInviteById(t.context.db, invite_id)
+        .then(actual => {
+          t.context.db('conversationInvites')
+            .where('id', invite_id)
+            .first()
+            .then(invite => {
+              t.true(invite == null)
+              t.end()
+            })
+        })
+    })
+
+})
 
 //acceptConversationInvite

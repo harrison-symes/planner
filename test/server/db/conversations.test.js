@@ -227,6 +227,44 @@ test.cb('createMessage inserts a new row to the messages table', t => {
 
 //getMessageById
 
+test.cb('getMessageById returns the correct object and format', t => {
+  const expected = {
+    id: 1,
+    user_id: 1,
+    conversation_id: 1,
+    content: 'hello josh',
+    first_name: 'Harrison',
+    user_name: 'symeshjb'
+  }
+  conversationsDb.getMessageById(t.context.db,expected.id)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key],expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('getMessageById returns the correct object and format (2)', t => {
+  const expected = {
+    id: 3,
+    user_id: 2,
+    conversation_id: 1,
+    content: 'hello sir',
+    user_name: 'joshua'
+  }
+  conversationsDb.getMessageById(t.context.db,expected.id)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key],expected[key])
+      }
+      t.end()
+    })
+})
 
 //INVITES ---
 

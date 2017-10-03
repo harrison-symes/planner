@@ -362,7 +362,7 @@ test.cb('createInvite adds a row to the conversationInvites table', t => {
 })
 
 //deleteInviteById
-test.only.cb('deleteInviteById removes row from the conversationInvites table', t => {
+test.cb('deleteInviteById removes row from the conversationInvites table', t => {
   const invite_id = 1
   t.context.db('conversationInvites')
     .where('id', invite_id)
@@ -384,3 +384,27 @@ test.only.cb('deleteInviteById removes row from the conversationInvites table', 
 })
 
 //acceptConversationInvite
+test.cb('acceptConversationInvite deletes a row from conversationInvites, and creates a join row in usersInConversations', t => {
+  const expected = {
+    id: 2,
+    name: "What's for Lunch"
+  }
+  const invite_id = 1
+  conversationsDb.acceptConversationInvite(t.context.db, invite_id)
+    .then(actual => {
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.context.db('conversationInvites')
+        .then(invites => {
+          t.is(invites.length, 0)
+          t.context.db('usersInConversations')
+            .where('conversation_id', expected.id)
+            .then(users => {
+              t.is(users.length, 3)
+              t.end()
+            })
+        })
+    })
+})

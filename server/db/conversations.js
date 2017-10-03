@@ -8,7 +8,7 @@ const getOutgoingInviteById = (db, invite_id) => db
 .select('users.first_name', 'users.user_name', 'users.id as user_id')
 .from('users')
 .join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
-.select("conversationInvites.*")
+.select("conversationInvites.*", 'conversationInvites.id as invite_id')
 .where('conversationInvites.id', invite_id)
 .first()
 

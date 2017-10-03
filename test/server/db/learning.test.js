@@ -35,12 +35,32 @@ test.cb('getLearningObjectiveById', t => {
 })
 
 //getObjectivesByUserIds
-test.only.cb('getObjectivesByUserIds', t => {
+test.cb('getObjectivesByUserIds', t => {
   const expectedArr = [
     {title: 'Use Postgresql locally', id: 2},
     {title: 'Vue.js', id: 3}
   ]
   const user_ids = [2, 3]
+  learningDb.getObjectivesByUserIds(t.context.db, user_ids)
+    .then(actualArr => {
+      actualArr.forEach(actual => {
+        let expected = expectedArr.find(exp => exp.id == actual.id)
+        t.true(expected != null)
+        for (let key in expected) {
+          t.true(actual.hasOwnProperty(key))
+          t.is(actual[key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
+
+test.cb('getObjectivesByUserIds (2)', t => {
+  const expectedArr = [
+    {title: 'Full Stack Project', id: 1},
+    {title: 'Vue.js', id: 3}
+  ]
+  const user_ids = [1, 3]
   learningDb.getObjectivesByUserIds(t.context.db, user_ids)
     .then(actualArr => {
       actualArr.forEach(actual => {

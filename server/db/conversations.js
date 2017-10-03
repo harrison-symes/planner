@@ -8,7 +8,7 @@ const getOutgoingInviteById = (db, invite_id) => db
 .select('users.first_name', 'users.user_name', 'users.id as user_id')
 .from('users')
 .join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
-.select("conversationInvites.*")
+.select("conversationInvites.*", 'conversationInvites.id as invite_id')
 .where('conversationInvites.id', invite_id)
 .first()
 
@@ -54,14 +54,14 @@ module.exports = {
     .select('users.first_name', 'users.user_name', 'users.id as user_id')
     .from('users')
     .join('conversationInvites', 'users.id', 'conversationInvites.to_user_id')
-    .select("conversationInvites.*")
+    .select("conversationInvites.*", 'conversationInvites.id as invite_id')
     .where('conversation_id', conversation_id),
   getIncomingInvites: (db, user_id) => db
     .select('users.first_name', 'users.user_name', 'users.id as user_id')
     .from('users')
     .join('conversationInvites', 'users.id', 'conversationInvites.from_user_id')
     .join('conversations', 'conversationInvites.conversation_id', 'conversations.id')
-    .select('conversationInvites.*', 'conversations.*', 'conversationInvites.id as conversation_id', 'conversationInvites.id as invite_id')
+    .select('conversationInvites.*', 'conversations.*', 'conversations.id as conversation_id', 'conversationInvites.id as invite_id', 'conversationInvites.id as invite_id')
     .where('conversationInvites.to_user_id', user_id),
   acceptConversationInvite: (db, invite_id) => getOutgoingInviteById(db, invite_id)
     .then(({user_id, conversation_id}) => {

@@ -31,7 +31,7 @@ test.cb('Register Route for new user', t => {
   request(server)
     .post('/api/auth/register')
     .send(newUser)
-    .expect(201)
+    .expect(200)
     .end((err, res) => {
       t.is(err, null)
       t.is(res.body.message, expectedMessage)
@@ -63,6 +63,24 @@ test.cb('Register fails for existing username', t => {
     .expect(400)
     .end((err, res) => {
       t.is(err, null)
+      t.is(res.body.message, expectedMessage)
+      t.end()
+    })
+})
+
+test.cb('Login returns token for existing user', t => {
+  const user = {
+    user_name: 'symeshjb',
+    password: 'password'
+  }
+  const expectedMessage = 'Authentication successful'
+  request(server)
+    .post('/api/auth/login')
+    .send(user)
+    .expect(200)
+    .end((err, res) => {
+      t.is(err, null)
+      t.true(res.body.hasOwnProperty('token'))
       t.is(res.body.message, expectedMessage)
       t.end()
     })

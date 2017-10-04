@@ -28,7 +28,7 @@ const testCohort2 = {
 }
 
 //getCohorts
-test.cb('Get Cohorts returns all cohorts', t => {
+test.cb('getCohorts', t => {
   var expected = 5
    cohortsDb.getCohorts(t.context.db)
     .then(actual => {
@@ -42,7 +42,7 @@ test.cb('Get Cohorts returns all cohorts', t => {
 })
 
 //getCohort
-test.cb('Get Cohort returns a single cohort by an id (1)', t => {
+test.cb('GetCohort (1)', t => {
   var expected = {...testCohort1}
   cohortsDb.getCohort(t.context.db, expected.id)
     .then(actual => {
@@ -54,7 +54,7 @@ test.cb('Get Cohort returns a single cohort by an id (1)', t => {
     })
 })
 
-test.cb('Get Cohort returns a single cohort by an id (2)', t => {
+test.cb('getCohort (2)', t => {
   var expected = {...testCohort2}
   cohortsDb.getCohort(t.context.db, expected.id)
     .then(actual => {
@@ -66,7 +66,7 @@ test.cb('Get Cohort returns a single cohort by an id (2)', t => {
     })
 })
 
-test.cb('Get Cohort returns null for an id that doesnt exist', t => {
+test.cb('getCohort (fails)', t => {
   cohortsDb.getCohort(t.context.db, 9001)
     .then(actual => {
       t.true(actual == null)
@@ -75,7 +75,7 @@ test.cb('Get Cohort returns null for an id that doesnt exist', t => {
 })
 
 //joinCohort
-test.cb('joinCohort and inserts a row to the correct table', t => {
+test.cb('joinCohort', t => {
   const cohort_id = 2
   const user_id = 2
   const expectedLength = 5
@@ -91,7 +91,7 @@ test.cb('joinCohort and inserts a row to the correct table', t => {
 })
 
 //getUserCohorts
-test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
+test.cb('getUserCohorts (success)', t => {
   const expectedArray = [{...testCohort1}, {...testCohort2}]
   const expected_id = 1
   cohortsDb.getUserCohorts(t.context.db, expected_id)
@@ -109,7 +109,7 @@ test.cb('Get User Cohorts by user id gets cohorts joined by user', t => {
 
 })
 
-test.cb('getUserCohorts returns an empty array for a non-existing user_id / no user/cohort relationship', t => {
+test.cb('getUserCohorts (fails)', t => {
   cohortsDb.getUserCohorts(t.context.db, 9001)
     .then(actual => {
       t.is(actual.length, 0)
@@ -118,7 +118,7 @@ test.cb('getUserCohorts returns an empty array for a non-existing user_id / no u
 })
 
 //usersInCohorts
-test.cb('usersInCohorts returns correct users by cohort_id', t => {
+test.cb('usersInCohorts (1)', t => {
   const expectedKeys = [
     'user_name',
     'first_name',
@@ -140,12 +140,10 @@ test.cb('usersInCohorts returns correct users by cohort_id', t => {
     })
 })
 
-test.cb('usersInCohorts has only one user in cohort_id: 2', t => {
+test.cb('usersInCohorts (2)', t => {
   cohortsDb.usersInCohorts(t.context.db, 2)
     .then(actualArr => {
       t.is(actualArr.length, 1)
       t.end()
     })
 })
-
-// tess

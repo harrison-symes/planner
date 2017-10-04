@@ -13,7 +13,7 @@ test('Users Db Tests Working', t => {
 })
 
 //getUserById
-test.cb('getUserById returns the correct user without hash', t => {
+test.cb('getUserById (1)', t => {
   const expected = {
     user_id: 1,
     user_name: 'symeshjb',
@@ -34,7 +34,7 @@ test.cb('getUserById returns the correct user without hash', t => {
     })
 })
 
-test.cb('getUserById can get second user', t => {
+test.cb('getUserById (2)', t => {
   const expected = {
     user_id: 2,
     user_name: 'joshua'
@@ -53,7 +53,7 @@ test.cb('getUserById can get second user', t => {
 
 //getUsersToInvite
 
-test.cb('getUsersToInvite returns correct network of users', t => {
+test.cb('getUsersToInvite (1)', t => {
   const cohort_ids = [1]
   const expectedArr = [
     {user_id: 1, user_name: 'symeshjb'},
@@ -82,7 +82,7 @@ test.cb('getUsersToInvite returns correct network of users', t => {
     })
 })
 
-test.cb('getUsersToInvite returns one user for cohort 2', t => {
+test.cb('getUsersToInvite (2)', t => {
   const cohort_ids = [2]
   const expectedLength = 1
   const expected = {
@@ -100,7 +100,7 @@ test.cb('getUsersToInvite returns one user for cohort 2', t => {
     })
 })
 
-test.cb('getUsersToInvite for all 3 cohorts returns 2 copies of user 1 (duplicate expected checking)', t => {
+test.cb('getUsersToInvite (3)', t => {
   const cohort_ids = [1, 2, 3]
   const expectedLength = 4
   const expectedFilterLength = 2

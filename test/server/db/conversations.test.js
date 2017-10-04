@@ -15,7 +15,7 @@ test('Conversations Db Tests Working', t => {
 //CONVERSATIONS ---
 
 //getConversations
-test.cb('getConversations returns the correct converations for user 1', t => {
+test.cb('getConversations (1)', t => {
   const expectedArr = [
     {user_id: 1, conversation_id: 1, name: 'Harrison and Joshua'},
     {user_id: 1, conversation_id: 2, name: "What's for Lunch"}
@@ -37,7 +37,7 @@ test.cb('getConversations returns the correct converations for user 1', t => {
 })
 
 
-test.cb('getConversations returns the correct converations for user 3', t => {
+test.cb('getConversations (2)', t => {
   const expectedArr = [
     {user_id: 3, conversation_id: 3, name: 'Teacher Secret'}
   ]
@@ -58,7 +58,7 @@ test.cb('getConversations returns the correct converations for user 3', t => {
 })
 
 //getUsersInConversation
-test.cb('getUsersInConversation returns the correct users for conversation 1', t => {
+test.cb('getUsersInConversation (1)', t => {
   const expectedArr = [
     {user_id: 1, user_name: 'symeshjb'},
     {user_id: 2, user_name: 'joshua'}
@@ -79,7 +79,7 @@ test.cb('getUsersInConversation returns the correct users for conversation 1', t
     })
 })
 
-test.cb('getUsersInConversation returns the correct users for conversation 3', t => {
+test.cb('getUsersInConversation (2)', t => {
   const expectedArr = [
     {user_id: 2, user_name: 'joshua'},
     {user_id: 3, user_name: 'don'}
@@ -102,7 +102,7 @@ test.cb('getUsersInConversation returns the correct users for conversation 3', t
 
 //getConversationById
 
-test.cb('getConversationById returns the correct data / keys for convo 1', t => {
+test.cb('getConversationById (1)', t => {
   const expected = {
     id: 1,
     name: 'Harrison and Joshua'
@@ -118,7 +118,7 @@ test.cb('getConversationById returns the correct data / keys for convo 1', t => 
     })
 })
 
-test.cb('getConversationById returns the correct data / keys for convo 3', t => {
+test.cb('getConversationById (2)', t => {
   const expected = {
     id: 3,
     name: 'Teacher Secret'
@@ -136,7 +136,7 @@ test.cb('getConversationById returns the correct data / keys for convo 3', t => 
 
 //createConversation
 
-test.cb('createConversation inserts a new row to the conversations table', t => {
+test.cb('createConversation', t => {
   const name = 'test convo'
   const expectedLength = 4
   conversationsDb.createConversation(t.context.db, name)
@@ -152,7 +152,7 @@ test.cb('createConversation inserts a new row to the conversations table', t => 
 })
 
 //addUserToConversation
-test.cb('addUserToConversation inserts a new row to the usersInConversations table', t => {
+test.cb('addUserToConversation', t => {
   const user_id = 1
   const conversation_id = 3
   const expectedLength = 7
@@ -172,7 +172,7 @@ test.cb('addUserToConversation inserts a new row to the usersInConversations tab
 //MESSAGES ---
 
 //getMessagesByConversation
-test.cb('getMessagesByConversation returns the correct messages', t => {
+test.cb('getMessagesByConversation', t => {
   const conversation_id = 1
   const expectedKeys = [
     'content',
@@ -196,7 +196,7 @@ test.cb('getMessagesByConversation returns the correct messages', t => {
 })
 
 //createMessage
-test.cb('createMessage inserts a new row to the messages table', t => {
+test.cb('createMessage', t => {
   const message = {
     user_id: 1,
     conversation_id: 1,
@@ -227,7 +227,7 @@ test.cb('createMessage inserts a new row to the messages table', t => {
 
 //getMessageById
 
-test.cb('getMessageById returns the correct object and format', t => {
+test.cb('getMessageById (1)', t => {
   const expected = {
     id: 1,
     user_id: 1,
@@ -247,7 +247,7 @@ test.cb('getMessageById returns the correct object and format', t => {
     })
 })
 
-test.cb('getMessageById returns the correct object and format (2)', t => {
+test.cb('getMessageById (2)', t => {
   const expected = {
     id: 3,
     user_id: 2,
@@ -269,7 +269,7 @@ test.cb('getMessageById returns the correct object and format (2)', t => {
 //INVITES ---
 
 //getOutgoingInvites
-test.cb('getOutgoingInvites returns the correct length / format', t => {
+test.cb('getOutgoingInvites', t => {
   const expected = [{
     first_name: 'virtual',
     user_id: 3,
@@ -292,7 +292,7 @@ test.cb('getOutgoingInvites returns the correct length / format', t => {
 })
 
 //getIncomingInvites
-test.cb('getIncomingInvites returns the correct data / format', t => {
+test.cb('getIncomingInvites', t => {
   const expected = [{
     first_name: 'Harrison',
     user_id: 1,
@@ -315,7 +315,7 @@ test.cb('getIncomingInvites returns the correct data / format', t => {
 })
 
 //getOutgoingInviteById
-test.cb('getOutgoingInviteById returns the correct data / format', t => {
+test.cb('getOutgoingInviteById', t => {
   const expected = {
     first_name: 'virtual',
     user_id: 3,
@@ -337,7 +337,7 @@ test.cb('getOutgoingInviteById returns the correct data / format', t => {
 })
 
 //createInvite
-test.cb('createInvite adds a row to the conversationInvites table', t => {
+test.cb('createInvite', t => {
   const invite = {
     from_user_id: 3,
     to_user_id: 1,
@@ -362,7 +362,7 @@ test.cb('createInvite adds a row to the conversationInvites table', t => {
 })
 
 //deleteInviteById
-test.cb('deleteInviteById removes row from the conversationInvites table', t => {
+test.cb('deleteInviteById', t => {
   const invite_id = 1
   t.context.db('conversationInvites')
     .where('id', invite_id)
@@ -384,7 +384,7 @@ test.cb('deleteInviteById removes row from the conversationInvites table', t => 
 })
 
 //acceptConversationInvite
-test.cb('acceptConversationInvite deletes a row from conversationInvites, and creates a join row in usersInConversations', t => {
+test.cb('acceptConversationInvite (success)', t => {
   const expected = {
     id: 2,
     name: "What's for Lunch"
@@ -409,7 +409,7 @@ test.cb('acceptConversationInvite deletes a row from conversationInvites, and cr
     })
 })
 
-test.cb('acceptConversationInvite does nothing for a false invite id', t => {
+test.cb('acceptConversationInvite (fails)', t => {
   const invite_id = 9001
   conversationsDb.acceptConversationInvite(t.context.db, invite_id)
     .then(actual => {

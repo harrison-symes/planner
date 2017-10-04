@@ -85,3 +85,40 @@ test.cb('Login returns token for existing user', t => {
       t.end()
     })
 })
+
+test.cb('Login fails with incorrect password', t => {
+  const user = {
+    user_name: 'symeshjb',
+    password: 'wrongpassword'
+  }
+  const expectedMessage = 'Password is incorrect'
+  request(server)
+    .post('/api/auth/login')
+    .send(user)
+    .expect(400)
+    .end((err, res) => {
+      t.is(err, null)
+      t.true(!res.body.hasOwnProperty('token'))
+      t.is(res.body.message, expectedMessage)
+      t.end()
+    })
+})
+
+test.cb('Login fails with incorrect username', t => {
+  const user = {
+    user_name: 'symemeshjb',
+    password: 'password'
+  }
+  const expectedMessage = 'User does not exist'
+  request(server)
+    .post('/api/auth/login')
+    .send(user)
+    .expect(400)
+    .end((err, res) => {
+      t.is(err, null)
+      console.log(res.body);
+      t.true(!res.body.hasOwnProperty('token'))
+      t.is(res.body.message, expectedMessage)
+      t.end()
+    })
+})

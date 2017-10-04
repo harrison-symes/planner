@@ -116,7 +116,6 @@ test.cb('Login fails with incorrect username', t => {
     .expect(400)
     .end((err, res) => {
       t.is(err, null)
-      console.log(res.body);
       t.true(!res.body.hasOwnProperty('token'))
       t.is(res.body.message, expectedMessage)
       t.end()

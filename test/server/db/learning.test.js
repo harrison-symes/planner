@@ -241,7 +241,7 @@ test.cb('getLearningPlanById', t => {
     })
 })
 
-test.cb('getLearningPlanById', t => {
+test.cb('getLearningPlanById (2)', t => {
   const expected = {
     id: 5, user_id: 1, plan: "I want to practice the EDA stack by building a project in the tech we teach", is_reflected: 1, is_reviewed: 1, created_at: "2017-09-13 01:40:22"
   }
@@ -258,5 +258,27 @@ test.cb('getLearningPlanById', t => {
 })
 
 //getLearningPlansByUser
+test.only.cb('getLearningPlansByUser', t => {
+  const user_id = 1
+  const expectedArr = [
+    {id: 1, user_id: 1, plan: "I wanna make tech gym", created_at: "2017-10-2 01:40:22", is_reflected: 0, is_reviewed: 0},
+    {id: 4, user_id: 1, plan: "I want to practice the EDA stack by building a project in the tech we teach", is_reflected: 1, is_reviewed: 0, created_at: "2017-09-21 01:40:22"},
+    {id: 5, user_id: 1, plan: "I want to practice the EDA stack by building a project in the tech we teach", is_reflected: 1, is_reviewed: 1, created_at: "2017-09-13 01:40:22"},
+    {id: 6, user_id: 1, plan: "I want to practice the EDA stack by building a project in the tech we teach", is_reflected: 0, is_reviewed: 0, created_at: "2017-08-30 01:40:22"}
+  ]
+  learningDb.getLearningPlansByUser(t.context.db, user_id)
+    .then(actualArr => {
+      actualArr.forEach(actual => {
+        t.true(actual != null)
+        const expected = expectedArr.find(exp => exp.id == actual.id)
+        t.true(expected != null)
+        for (let key in expected) {
+          t.true(actual.hasOwnProperty(key))
+          t.is(actual[key], expected[key])
+        }
+      })
+      t.end()
+    })
+})
 
 //insertLeaningPlan

@@ -31,6 +31,7 @@ test.cb('Register Route for new user', t => {
   request(server)
     .post('/api/auth/register')
     .send(newUser)
+    .expect(201)
     .end((err, res) => {
       t.is(err, null)
       t.is(res.body.message, expectedMessage)
@@ -59,6 +60,7 @@ test.cb('Register fails for existing username', t => {
   request(server)
     .post('/api/auth/register')
     .send(newUser)
+    .expect(400)
     .end((err, res) => {
       t.is(err, null)
       t.is(res.body.message, expectedMessage)

@@ -258,7 +258,7 @@ test.cb('getLearningPlanById (2)', t => {
 })
 
 //getLearningPlansByUser
-test.only.cb('getLearningPlansByUser', t => {
+test.cb('getLearningPlansByUser', t => {
   const user_id = 1
   const expectedArr = [
     {id: 1, user_id: 1, plan: "I wanna make tech gym", created_at: "2017-10-2 01:40:22", is_reflected: 0, is_reviewed: 0},
@@ -282,3 +282,36 @@ test.only.cb('getLearningPlansByUser', t => {
 })
 
 //insertLeaningPlan
+test.cb('insertLeaningPlan', t => {
+  const plan = {
+    user_id: 1,
+    plan: "I want to practice the EDA stack by building a project in the tech we teach"
+  }
+  const expected = {
+    ...plan,
+    id: 7,
+    is_reflected: 0,
+    is_reviewed: 0
+  }
+  const expectedLength = 7
+  learningDb.insertLeaningPlan(t.context.db, plan)
+    .then(actual => {
+      t.true(actual != null)
+      t.is(actual[0], expected.id)
+      t.context.db('learningPlans')
+      .then(actualArr => {
+        t.is(actualArr.length, expectedLength)
+        t.context.db('learningPlans')
+          .where('id', expected.id)
+          .first()
+          .then(actual => {
+            for (let key in expected) {
+              t.true(actual.hasOwnProperty(key))
+              t.is(actual[key], expected[key])
+            }
+            t.end()
+
+          })
+      })
+    })
+})

@@ -3,6 +3,7 @@ var request = require('supertest')
 
 var server = require('../../../server/server')
 var setupDb = require('../setup-db')
+const decode = require('jwt-decode')
 
 setupDb(test,server)
 
@@ -18,6 +19,14 @@ test.cb('Register Route for new user', t => {
     password: 'empathy',
     about: 'I Dive Deep into emotions'
   }
+  const expected = {
+    ...newUser,
+    user_name: "s-jane",
+    id: 4,
+    is_private: 0,
+    is_admin: 0
+  }
+  delete expected.password
   const expectedMessage = "Authentication successful"
   request(server)
     .post('/api/auth/register')
@@ -25,6 +34,16 @@ test.cb('Register Route for new user', t => {
     .end((err, res) => {
       t.is(res.body.message, expectedMessage)
       t.true(res.body.hasOwnProperty('token'))
+      const user = decode(res.body.token)
+      for (let key in expected) {
+        t.true(user.hasOwnProperty(key))
+        t.is(user[key], expected[key])
+      }
+      t.true(user.hasOwnProperty('hash'))
+      t.true(user.hasOwnProperty('iat'))
+      t.true(user.hasOwnProperty('exp'))
+
+
       t.end()
     })
 })

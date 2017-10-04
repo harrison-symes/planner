@@ -225,6 +225,37 @@ test.cb('insertLearningObjectivesArray', t => {
 //Plans
 
 //getLearningPlanById
+test.cb('getLearningPlanById', t => {
+  const expected = {
+    id: 1, user_id: 1, plan: "I wanna make tech gym", created_at: "2017-10-2 01:40:22", is_reflected: 0, is_reviewed: 0
+  }
+
+  learningDb.getLearningPlanById(t.context.db, expected.id)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
+
+test.cb('getLearningPlanById', t => {
+  const expected = {
+    id: 5, user_id: 1, plan: "I want to practice the EDA stack by building a project in the tech we teach", is_reflected: 1, is_reviewed: 1, created_at: "2017-09-13 01:40:22"
+  }
+
+  learningDb.getLearningPlanById(t.context.db, expected.id)
+    .then(actual => {
+      t.true(actual !== null)
+      for (let key in expected) {
+        t.true(actual.hasOwnProperty(key))
+        t.is(actual[key], expected[key])
+      }
+      t.end()
+    })
+})
 
 //getLearningPlansByUser
 

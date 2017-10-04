@@ -37,7 +37,7 @@ router.get('/inviteable/:conversation_id', decode, (req, res) => {
 
 router.get('/:id', decode, (req, res) => {
   getUserById(getDb(req), req.params.id)
-    .then(user => res.json(user))
+    .then(user => res.status(200).json(user))
     .catch(err => console.log(err))
 })
 

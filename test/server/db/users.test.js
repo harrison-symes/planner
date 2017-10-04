@@ -18,7 +18,7 @@ test.cb('getUserById (1)', t => {
     user_name: 'symeshjb',
     first_name: 'Harrison',
     last_name: 'Symes',
-    'is_admin': 1,
+    is_admin: 1,
     about: 'I made dis'
   }
   usersDb.getUserById(t.context.db, expected.user_id)

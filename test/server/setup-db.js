@@ -4,6 +4,7 @@ var config = require('../../knexfile').test
 module.exports = (test, createServer) => {
   // Create a separate in-memory database before each test.
   // In our tests, we can get at the database as `t.context.db`.
+  process.env.JWT_SECRET = "TEST_SECRET"
   test.beforeEach(function (t) {
     t.context.db = knex(config)
     if (createServer) {

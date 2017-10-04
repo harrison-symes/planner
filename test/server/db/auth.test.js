@@ -1,5 +1,4 @@
 var test = require('ava')
-var request = require('supertest')
 
 var createServer = require('../../../server/server')
 var setupDb = require('../setup-db')
@@ -13,7 +12,7 @@ test('Auth Db Tests Working', t => {
 })
 
 //userExists
-test.cb('User Exists for existing user', t => {
+test.cb('userExists (success)', t => {
    usersDb.userExists('symeshjb', t.context.db)
     .then(exists => {
       t.true(exists)
@@ -21,7 +20,7 @@ test.cb('User Exists for existing user', t => {
     })
 })
 
-test.cb('User Exists for non-existing user', t => {
+test.cb('userExists (fails)', t => {
    usersDb.userExists('mrMemeMan', t.context.db)
     .then(exists => {
       t.false(exists)
@@ -34,7 +33,7 @@ test.cb('User Exists for non-existing user', t => {
 
 
 //getUserByName
-test.cb('Get User By Name for existing user', t => {
+test.cb('getUserByName (success)', t => {
    usersDb.getUserByName('symeshjb', t.context.db)
     .then(user => {
       t.true(user.hasOwnProperty('user_name'))
@@ -50,7 +49,7 @@ test.cb('Get User By Name for existing user', t => {
     .catch(() => t.fail())
 })
 
-test.cb('Get User By Name for non-existing user', t => {
+test.cb('getUserByName (fails)', t => {
    usersDb.getUserByName('mrMemeMan', t.context.db)
     .then(user => {
       t.true(!user)
@@ -65,7 +64,7 @@ test.cb('Get User By Name for non-existing user', t => {
 
 //createUser
 
-test.cb('Create User works for fresh user', t => {
+test.cb('createUser (success)', t => {
   const fakeUser = {user_name: 'lilTibbs', password: 'memeMan', first_name: 'Harrison', last_name: 'Symes', about: 'NOTHING'}
   const expected = 4
   usersDb.createUser(fakeUser, t.context.db)

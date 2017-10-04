@@ -6,12 +6,13 @@ var {compare} = require('./hash')
 function issue (req, res) {
   getUserByName(req.body.user_name.toLowerCase(), req.app.get('db'))
     .then(user => {
-      compare(req.body.password, user.hash, (err, match) => {
+      if (!user) res.status(400).json({message: 'User does not exist'})
+      else compare(req.body.password, user.hash, (err, match) => {
         if (err) res.status(500).json({message: err.message})
-        else if (!match) res.status(400).json({message: 'password is incorrect'})
+        else if (!match) res.status(400).json({message: 'Password is incorrect'})
         else {
           var token = createToken(user, process.env.JWT_SECRET)
-          res.json({
+          res.status(200).json({
             message: 'Authentication successful',
             token
           })

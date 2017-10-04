@@ -1,5 +1,7 @@
 # A starter webpack project for React, Redux, Express and Knex
 
+#Watch one, do one, teach one
+
 This is a rad base for starting a new full-stack project, or just as reference for how to do things the Harrison way (which is with absolutely no test folder, I'll leave that one to Alan)
 
 * Fork this repo to your github

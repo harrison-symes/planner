@@ -32,6 +32,7 @@ test.cb('Register Route for new user', t => {
     .post('/api/auth/register')
     .send(newUser)
     .end((err, res) => {
+      t.is(err, null)
       t.is(res.body.message, expectedMessage)
       t.true(res.body.hasOwnProperty('token'))
       const user = decode(res.body.token)
@@ -42,8 +43,25 @@ test.cb('Register Route for new user', t => {
       t.true(user.hasOwnProperty('hash'))
       t.true(user.hasOwnProperty('iat'))
       t.true(user.hasOwnProperty('exp'))
+      t.end()
+    })
+})
 
-
+test.cb('Register fails for existing username', t => {
+  const newUser = {
+    user_name: 'symeshjb',
+    first_name: "Doesn't",
+    last_name: 'Matter',
+    about: 'I forgot that I already Registered',
+    password: 'illforgetthistoo'
+  }
+  const expectedMessage = "Username already taken!"
+  request(server)
+    .post('/api/auth/register')
+    .send(newUser)
+    .end((err, res) => {
+      t.is(err, null)
+      t.is(res.body.message, expectedMessage)
       t.end()
     })
 })

@@ -28,7 +28,7 @@ router.get('/inviteable/:conversation_id', decode, (req, res) => {
         .then(users => {
           getUsersInConversation(getDb(req), req.params.conversation_id)
             .then(usersInConversation => {
-              res.json(filterInvited(purgeDuplicate(users), usersInConversation))
+              res.status(200).json(filterInvited(purgeDuplicate(users), usersInConversation))
             })
           // res.json(users)
         })

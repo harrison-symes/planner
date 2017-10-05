@@ -58,7 +58,7 @@ test.cb('GET /users/inviteable/:conversation_id', t => {
     })
 })
 
-test.only.cb('GET /users/inviteable/:conversation_id (2)', t => {
+test.cb('GET /users/inviteable/:conversation_id (2)', t => {
   const expected = {
     user_name: 'symeshjb',
     first_name: 'Harrison',

@@ -32,7 +32,10 @@ function getSecret(req, payload, done) {
 }
 
 function decode (req, res, next) {
-  verifyJwt({secret: getSecret})(req, res, next)
+  verifyJwt({
+    secret: getSecret,
+    credentialsRequired: true
+  })(req, res, next)
 }
 
 module.exports = {

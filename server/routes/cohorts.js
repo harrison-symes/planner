@@ -4,6 +4,14 @@ var {decode} = require('../auth/token')
 
 const getDb = (req) => req.app.get('db')
 
+router.get('/', decode, (req, res) => {
+  getUserCohorts(getDb(req), req.user.id)
+  .then(userCohorts => {
+    res.status(200).json(userCohorts)
+  })
+  .catch(err => console.error(err))
+})
+
 router.get('/find', decode, (req, res) => {
   getUserCohorts(getDb(req), req.user.id)
   .then(userCohorts => {
@@ -17,12 +25,9 @@ router.get('/find', decode, (req, res) => {
   .catch(err => console.log(err))
 })
 
-router.get('/', decode, (req, res) => {
-  getUserCohorts(getDb(req), req.user.id)
-  .then(userCohorts => {
-    res.status(200).json(userCohorts)
-  })
-  .catch(err => console.error(err))
+router.get('/:cohort_id/users', (req, res) => {
+  usersInCohorts(getDb(req), req.params.cohort_id)
+    .then(users => res.json(users))
 })
 
 router.post('/:cohort_id', decode, (req, res) => {
@@ -32,11 +37,6 @@ router.post('/:cohort_id', decode, (req, res) => {
       else joinCohort(getDb(req), req.params.cohort_id, req.user.id)
         .then(() => res.status(201).json(cohort))
     })
-})
-
-router.get('/:cohort_id/users', (req, res) => {
-  usersInCohorts(getDb(req), req.params.cohort_id)
-    .then(users => res.json(users))
 })
 
 module.exports = router

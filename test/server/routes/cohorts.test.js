@@ -63,7 +63,7 @@ test.cb('/cohorts/find', t => {
 
 })
 
-test.only.cb('/cohorts/:cohort_id/users', t=> {
+test.cb('/cohorts/:cohort_id/users', t=> {
   const cohort_id = 1
   const expectedArr = [
     {user_id: 1, user_name: 'symeshjb', first_name: 'Harrison', last_name: 'Symes', about: 'I made dis', is_admin: 0, is_private: 0, cohort_id },

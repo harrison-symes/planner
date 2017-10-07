@@ -11,7 +11,7 @@ test('Cohorts Routes Tests Working', t => {
   t.pass()
 })
 
-test.cb('/cohorts', t => {
+test.cb('GET /cohorts', t => {
   const expectedArr = [
     {id: 1, name: 'Tech_Gym', description: 'Dummy', is_private: 1},
     {id: 2, name: 'Miromiro-2017', description: 'Dummy', is_private: 0}
@@ -36,7 +36,7 @@ test.cb('/cohorts', t => {
     })
 })
 
-test.cb('/cohorts/find', t => {
+test.cb('GET /cohorts/find', t => {
   const expectedArr = [
     {id: 3, name: 'Kahu-2018', description: 'Dummy', is_private: 0},
     {id: 4, name: 'Harakeke-2018', description: 'Dummy', is_private: 0},
@@ -63,7 +63,7 @@ test.cb('/cohorts/find', t => {
 
 })
 
-test.cb('/cohorts/:cohort_id/users', t=> {
+test.cb('GET /cohorts/:cohort_id/users', t=> {
   const cohort_id = 1
   const expectedArr = [
     {user_id: 1, user_name: 'symeshjb', first_name: 'Harrison', last_name: 'Symes', about: 'I made dis', is_admin: 0, is_private: 0, cohort_id },
@@ -86,6 +86,28 @@ test.cb('/cohorts/:cohort_id/users', t=> {
           t.is(actual[key], expected[key])
         }
       })
+      t.end()
+    })
+})
+
+test.cb('POST /cohorts/:cohort_id', t => {
+  const expected = {
+    id: 3,
+    name: 'Kahu-2018',
+    description: 'Dummy',
+    is_private: 0
+  }
+  request(server)
+    .post(`/api/cohorts/${expected.id}`)
+    .set(headers)
+    .expect(201)
+    .end((err, res) => {
+      t.true(err == null)
+      t.true(res.body != null)
+      for (let key in expected) {
+        t.true(res.body.hasOwnProperty(key))
+        t.is(res.body[key], expected[key])
+      }
       t.end()
     })
 })

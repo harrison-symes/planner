@@ -25,6 +25,10 @@ router.get('/find', decode, (req, res) => {
   .catch(err => console.log(err))
 })
 
+router.get('/:cohort_id/users', (req, res) => {
+  usersInCohorts(getDb(req), req.params.cohort_id)
+    .then(users => res.json(users))
+})
 
 router.post('/:cohort_id', decode, (req, res) => {
   getCohort(getDb(req), req.params.cohort_id)
@@ -33,11 +37,6 @@ router.post('/:cohort_id', decode, (req, res) => {
       else joinCohort(getDb(req), req.params.cohort_id, req.user.id)
         .then(() => res.status(201).json(cohort))
     })
-})
-
-router.get('/:cohort_id/users', (req, res) => {
-  usersInCohorts(getDb(req), req.params.cohort_id)
-    .then(users => res.json(users))
 })
 
 module.exports = router

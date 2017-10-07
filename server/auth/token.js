@@ -23,7 +23,7 @@ function issue (req, res) {
 
 function createToken (user, secret) {
   return jwt.sign(user, secret, {
-    expiresIn: '24h'
+    expiresIn: 60 * 60 * 24 * 7
   })
 }
 

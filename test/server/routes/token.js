@@ -1,4 +1,10 @@
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl9uYW1lIjoic3ltZXNoamIiLCJmaXJzdF9uYW1lIjoiSGFycmlzb24iLCJsYXN0X25hbWUiOiJTeW1lcyIsImFib3V0IjoiSSBtYWRlIGRpcyIsImhhc2giOiIkMmEkMTIkOGd5VkM3SVhGRExrMUUuQVpTbGVBZWMxWUJmc1ljdFNGajcuejAvYnVHb3hRUks4Q2JEenUiLCJpc19wcml2YXRlIjowLCJpc19hZG1pbiI6MSwiaWF0IjoxNTA3MTUwMzU2LCJleHAiOjE1MDcyMzY3NTZ9.0TXioMyqbbDMJr07xpukdE23oc5ht1bTadZvxGz1aZE"
+const {createToken} = require('../../../server/auth/token')
+
+const user = {
+  id: 1, user_name: 'symeshjb', first_name: 'Harrison', last_name: 'Symes', about: 'I made dis', is_admin: true
+}
+
+let token = createToken(user, "TEST_SECRET")
 module.exports = {
   Authorization: `Bearer ${token}`,
   Accept: 'application/json'

@@ -10,7 +10,7 @@ router.get('/find', decode, (req, res) => {
     getCohorts(getDb(req), req.user.id)
     .then(cohorts => {
       let notJoined = cohorts.filter(cohort => !userCohorts.find(({id}) => cohort.id==id))
-      res.json(notJoined)
+      res.status(200).json(notJoined)
     })
     .catch(err => console.error(err))
   })

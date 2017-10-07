@@ -4,6 +4,14 @@ var {decode} = require('../auth/token')
 
 const getDb = (req) => req.app.get('db')
 
+router.get('/', decode, (req, res) => {
+  getUserCohorts(getDb(req), req.user.id)
+  .then(userCohorts => {
+    res.status(200).json(userCohorts)
+  })
+  .catch(err => console.error(err))
+})
+
 router.get('/find', decode, (req, res) => {
   getUserCohorts(getDb(req), req.user.id)
   .then(userCohorts => {
@@ -17,13 +25,6 @@ router.get('/find', decode, (req, res) => {
   .catch(err => console.log(err))
 })
 
-router.get('/', decode, (req, res) => {
-  getUserCohorts(getDb(req), req.user.id)
-  .then(userCohorts => {
-    res.status(200).json(userCohorts)
-  })
-  .catch(err => console.error(err))
-})
 
 router.post('/:cohort_id', decode, (req, res) => {
   getCohort(getDb(req), req.params.cohort_id)

@@ -1,4 +1,4 @@
-module.export = (arr, key) => {
+module.exports = (arr, key) => {
   const reduced = arr.reduce((table, item) => {
    table[item[key]] = item
    return table
